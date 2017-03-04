@@ -7,6 +7,8 @@ package fr.rentOWeb.clientServer;
  * Interface regroupant les méthodes métiers.
  *
  */
-public interface IServiceMetierAgence {
+public interface IServiceFacadeMetierAgence {
+	
+	
 
 }
