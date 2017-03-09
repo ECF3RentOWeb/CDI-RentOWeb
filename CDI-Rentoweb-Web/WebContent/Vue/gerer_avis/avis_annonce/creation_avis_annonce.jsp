@@ -5,7 +5,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	
+
 	<!-- IMPORT CSS/JS -->
 	<link href="../../../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 	<link href="../../../CSS/gerer_avis/avis_annonce/star-rating.css" rel="stylesheet" type="text/css"/>
