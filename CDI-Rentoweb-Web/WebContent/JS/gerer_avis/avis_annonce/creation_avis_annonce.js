@@ -72,7 +72,7 @@ function controleAvisComplet(){
 		//console.log("Attention attention vous n'avez pas tout renseigner c'est pas bien le lapin devoreur de monde va venir vous mangez")
 		
 		retour = false;
-		var messageInformatif = "Vous avez oublié de renseigner les champs suivant : ";
+		var messageInformatif = "Vous avez oubli\351 de renseigner les champs suivant : ";
 		
 		if(bruit_ext.value == ""){
 			

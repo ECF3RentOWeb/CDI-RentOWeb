@@ -1,22 +1,39 @@
 @CHARSET "ISO-8859-1";
-<!-- Un style des plus épurer -->
-
-.labelNote{
-	
-	position: fixed;
-	top: 20px;
-	left: 105px; 
-	width: 150px;
-	height: 230px;
-	margin-left: 25%;
-	
-}
 
 .note{
 	
 	position: fixed;
+	top: 10px;
+	left: 30%;
+	height: 270px;
+	width: 647px;
+	
+	-moz-box-shadow: 0px 0px 2px 0px #000000;
+	-webkit-box-shadow: 0px 0px 2px 0px #000000;
+	-o-box-shadow: 0px 0px 2px 0px #000000;
+	box-shadow: 0px 0px 2px 0px #000000;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=NaN, Strength=2);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	
+}
+
+.labelNote{
+	
+	position: fixed;
+	top: 25px;
+	left: 32%;
+	width: 150px;
+	height: 230px;
+	
+}
+
+.starsNote{
+	
+	position: fixed;
 	top: 20px;
-	left: 255px;
+	left: 52%;
 	height: 230px;
 	
 }
@@ -25,6 +42,7 @@
 	
 	position: fixed;
 	top: 290px;
+	left: 30%;
 	overflow: auto;
 	resize: none;
 	
@@ -34,14 +52,78 @@
 	
 	position: fixed;
 	top: 635px;
-	left: 517px;
+	left: 55%;
 	
 }
 
 #messageInformatif{
 	
 	position: fixed;
-	top: 535px;
+	top: 615px;
 	color: red;
+	left: 10%;
 	
+}
+
+.rating-container.rating-xs.rating-animate{
+	
+	padding-bottom: 5px;
+	
+}
+
+.label_bruit_ext{
+	
+	width: 243.717px;
+	height: 30.2px;
+	margin: 0px;
+	
+}
+
+.label_bruit_int{
+	
+	width: 243.717px;
+	height: 30.2px;
+	margin: 0px;
+}
+
+.label_isole_froid{
+	
+	width: 243.717px;
+	height: 30.2px;
+	margin: 0px;
+}
+
+.label_isole_chaud{
+	
+	width: 243.717px;
+	height: 30.2px;
+	margin: 0px;
+}
+
+.label_humidite{
+	
+	width: 243.717px;
+	height: 30.2px;
+	margin: 0px;
+}
+
+.label_luminosite{
+	
+	width: 243.717px;
+	height: 30.2px;
+	margin: 0px;
+}
+
+.label_etat_gene{
+	
+	width: 243.717px;
+	height: 30.2px;
+	margin: 0px;
+}
+
+.label_relation_bailleur{
+	
+	width: 243.717px;
+	height:  30.2px;
+	margin: 0px;
 }
