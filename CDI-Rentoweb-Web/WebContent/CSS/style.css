@@ -1,0 +1,163 @@
+html {
+    font-family: 'Lato', 'Arial', 'sans-serif';
+
+}
+
+
+.hero-text-box {
+
+    margin-top: 50px;
+    font-size: 32px;
+    text-align: center
+    color: aliceblue;
+    background-image: url('img/marseille_1.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    
+    
+}
+
+.section-picture {
+    
+    position: absolute;
+    width: 1140px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+
+   
+}
+
+.section-feature2 {
+        
+    position: absolute;
+    width: 1140px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 250px;
+    margin-top: 228px;
+   
+}
+
+h1 {
+    word-spacing: 2px;
+    text-align: center;
+}
+
+
+h2 {
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+}
+
+h2:after {
+    display: block;
+    height: 2px;
+    background-color: aliceblue;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+
+
+
+
+/*---------------------------------------------------*/
+/* HEADER */
+/*---------------------------------------------------*/
+
+
+header {
+    background-color: #2980b9;
+    background-position: center;
+    padding: 100px;
+   
+}
+
+.logo {
+   width:auto; /* you can use % */
+   height: 130px;
+    float: auto;
+}
+
+.main-nav {
+    float: right;
+    list-style: none;
+    margin-right: 40px;
+    
+    
+}
+
+.main-nav li {
+    display: inline-block;
+    
+}
+
+.main-nav ul {
+    
+    margin-right: 60px;
+}
+
+
+/*---------------------------------------------------*/
+/* GRID */
+/*---------------------------------------------------*/
+
+
+
+/*  SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+
+
+/*  GRID OF THREE  */
+.span_3_of_3 { width: 100%; }
+.span_2_of_3 { width: 66.13%; }
+.span_1_of_3 { width: 32.26%; }
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.col {  margin: 1% 0 1% 0%; }
+	.span_3_of_3, .span_2_of_3, .span_1_of_3 { width: 100%; }
+}
+
+
+/* --------------------------------------------------------- */
+/* CITIES */
+/* ---------------------------------------------------------*/
+
+.box img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.cities-feature {
+    margin-bottom: 5px;
+    
+}
+
