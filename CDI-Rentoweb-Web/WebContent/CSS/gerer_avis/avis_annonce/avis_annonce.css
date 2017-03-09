@@ -1,1 +1,47 @@
 @CHARSET "ISO-8859-1";
+<!-- Un style des plus épurer -->
+
+.labelNote{
+	
+	position: fixed;
+	top: 20px;
+	left: 105px; 
+	width: 150px;
+	height: 230px;
+	margin-left: 25%;
+	
+}
+
+.note{
+	
+	position: fixed;
+	top: 20px;
+	left: 255px;
+	height: 230px;
+	
+}
+
+.commentaire{
+	
+	position: fixed;
+	top: 290px;
+	overflow: auto;
+	resize: none;
+	
+}
+
+.action{
+	
+	position: fixed;
+	top: 635px;
+	left: 517px;
+	
+}
+
+#messageInformatif{
+	
+	position: fixed;
+	top: 535px;
+	color: red;
+	
+}
