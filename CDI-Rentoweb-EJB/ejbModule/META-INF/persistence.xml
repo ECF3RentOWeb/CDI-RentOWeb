@@ -1,14 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-	version="2.0">
-	<persistence-unit name="A1Persistence">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
-		<properties>
-			<property name="hibernate.dialect" 			value="org.hibernate.dialect.H2Dialect" />
-			<property name="hibernate.hbm2ddl.auto" 	value="update" />
-		</properties>
-	</persistence-unit>
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+   <persistence-unit name="RentOWeb" transaction-type="JTA">
+   <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+   <jta-data-source>java:jboss/datasources/OracleDS</jta-data-source>
+   	<properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+         <property name="hibernate.default_schema" value="rentoweb"/>
+         <property name="hibernate.max_fetch_depth" value="3"/>
+         <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+         <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@junon:1521:afpa"/>
+         <property name="javax.persistence.jdbc.user" value="rentoweb"/>
+         <property name="javax.persistence.jdbc.password" value="rentowebpw"/>
+         
+         <!-- alternatively to <class> and <property> declarations, you can use a regular hibernate.cfg.xml file -->
+         <!-- property name="hibernate.ejb.cfgfile" value="/org/hibernate/ejb/test/hibernate.cfg.xml"/ -->
+         
+         <!--  Pool de connexion c3p0 -->
+         <property name="hibernate.c3p0.min_size" value="5" />
+		 <property name="hibernate.c3p0.max_size" value="20" />
+		 <property name="hibernate.c3p0.timeout" value="300" />
+		 <property name="hibernate.c3p0.max_statements" value="50" />
+		 <property name="hibernate.c3p0.idle_test_period" value="3000" />
+         
+      </properties>
+   </persistence-unit>
 </persistence>
