@@ -18,38 +18,37 @@
 	
 	<!-- Titre de la page -->
 	<title>Création avis utilisateur</title>
-
 </head>
 
 <body>
 
 <!-- Formulaire de creation d'un avis utilisateur -->
 	<form method="get" action="#" onsubmit="return controleAvisComplet()">
-	
+<!-- Note -->
+<div class="note">
 <!-- Label Note -->
 		<div class="labelNote">
-			<label for="bruit_ext" class="control-label">Bruit Extérieur :</label>
+			<label class="label_bruit_ext">Bruit Extérieur :</label>
 			<br>
-			<label for="bruit_int" class="control-label">Bruit Intérieur :</label>
+			<label class="label_bruit_int">Bruit Intérieur :</label>
 			<br>
-			<label for="isole_froid" class="control-label">Isolation au froid :</label>
+			<label class="label_isole_froid">Isolation au froid :</label>
 			<br>
-			<label for="isole_chaud" class="control-label">Isolation au chaud :</label>
+			<label class="label_isole_chaud">Isolation au chaud :</label>
 			<br>
-			<label for="humidite" class="control-label">Humidité :</label>
+			<label class="label_humidite">Humidité :</label>
 			<br>
-			<label for="luminosite" class="control-label">Luminosité :</label>
+			<label class="label_luminosite">Luminosité :</label>
 			<br>
-			<label for="etat_gene" class="control-label">État général :</label>
+			<label class="label_etat_gene">État général :</label>
 			<br>
-			<label for="relation_bailleur" class="control-label">Relation Bailleur :</label>
-			<br>
+			<label class="label_relation_bailleur">Relation Bailleur :</label>
 		</div>
 		
-<!-- Note -->
+<!-- Stars Note -->
 <!-- Gerer grace a Boostrap/JQuery/krajee voir http://plugins.krajee.com/star-rating -->
-		<div class="note">
-   			<label for="bruit_ext" class="control-label">Bruit Extérieur :<input id="bruit_ext" name="bruit_ext" class="rating rating-loading"  data-min="0" data-max="5" data-step="1" data-size="xs"></label>
+		<div class="starsNote">
+   			<input id="bruit_ext" name="bruit_ext" class="rating rating-loading"  data-min="0" data-max="5" data-step="1" data-size="xs">
    			<input id="bruit_int" name="bruit_int" class="rating rating-loading"  data-min="0" data-max="5" data-step="1" data-size="xs">
    			<input id="isole_froid" name="isole_froid" class="rating rating-loading"  data-min="0" data-max="5" data-step="1" data-size="xs">
    			<input id="isole_chaud" name="isole_chaud" class="rating rating-loading"  data-min="0" data-max="5" data-step="1" data-size="xs">
@@ -58,12 +57,13 @@
    			<input id="etat_gene" name="etat_gene" class="rating rating-loading"  data-min="0" data-max="5" data-step="1" data-size="xs">
    			<input id="relation_bailleur" name="relation_bailleur" class="rating rating-loading"  data-min="0" data-max="5" data-step="1" data-size="xs">
 		</div>
-		
+</div>
+	
 <!-- Commentaire -->
 		<div class="commentaire">
 			<textarea rows="15" cols="100" name="commentaire" onfocus="cleanCommentaire(this)">Votre commentaire...</textarea>
 		</div>
-		
+
 <!-- Message information utilisateur -->
 <p id="messageInformatif" ></p>
 
