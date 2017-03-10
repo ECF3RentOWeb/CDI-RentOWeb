@@ -1,7 +1,7 @@
 /**
  * Package principal du projet RentOWeb.
  * 
- * @author Aurelien
+ * @author Aurélien
  * @version 1
  * @since 06/03/2017
  */
