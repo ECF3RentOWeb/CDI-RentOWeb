@@ -10,7 +10,7 @@ html {
     font-size: 32px;
     text-align: center
     color: aliceblue;
-    background-image: url('img/marseille_1.jpg');
+    background-image: url('/IMG/marseille_1.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;
