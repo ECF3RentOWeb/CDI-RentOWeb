@@ -6,4 +6,4 @@
  * @since 06/03/2017
  *
  */
-package rtw.controler;
+package rtw.controller;
