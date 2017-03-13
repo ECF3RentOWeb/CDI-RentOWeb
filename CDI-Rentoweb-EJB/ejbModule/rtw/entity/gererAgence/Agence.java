@@ -5,6 +5,7 @@ package rtw.entity.gererAgence;
  */
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ public class Agence implements Serializable{
 	@GeneratedValue
 	private int idAgence;
 	
+	@Column(name="Agence")
 	private String nomAgence;
 	@ManyToOne
 	private Adresse adresse;
