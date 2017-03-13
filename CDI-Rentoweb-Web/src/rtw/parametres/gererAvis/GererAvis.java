@@ -1,4 +1,4 @@
-package parametres.gererAvis;
+package rtw.parametres.gererAvis;
 
 /**
  * Contient les paramètres utiliser par la servlet gérer avis.

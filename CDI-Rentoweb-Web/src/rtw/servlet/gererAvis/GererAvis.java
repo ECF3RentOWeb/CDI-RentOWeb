@@ -1,4 +1,4 @@
-package servlet.gererAvis;
+package rtw.servlet.gererAvis;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
