@@ -1,5 +1,5 @@
 /**
- * Package contenant les servlet du projet RentOWeb.
+ * Package principal du projet RentOWeb.
  * 
  * @author Aurélien
  * @version 1
