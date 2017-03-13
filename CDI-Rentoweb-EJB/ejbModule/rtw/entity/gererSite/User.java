@@ -17,7 +17,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="user")
+@Table(name=rtw.util.gererSite.utilBdD.UtilBdD.ENTITY_USER)
 public class User implements Serializable{
 	/**
 	 * @serial Numéro auto généré

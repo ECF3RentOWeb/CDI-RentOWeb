@@ -9,6 +9,6 @@ package rtw.util.gererSite.utilBdD;
  */
 public class UtilBdD {
 	
-	public static final String PERSISTANCE_UNITNAME = "A1Persistence";
-	public static final String ENTITY_USER 			= "user";
+	public static final String PERSISTANCE_UNITNAME = "rentoweb";
+	public static final String ENTITY_USER 			= "inscriptionUser";
 }
