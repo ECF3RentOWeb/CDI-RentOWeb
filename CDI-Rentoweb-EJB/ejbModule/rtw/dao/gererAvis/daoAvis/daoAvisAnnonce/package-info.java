@@ -6,4 +6,4 @@
  * @since 13/03/2017
  *
  */
-package rtw.dao.gererAvis.daoAvisAnnonce;
+package rtw.dao.gererAvis.daoAvis.daoAvisAnnonce;

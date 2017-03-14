@@ -1,5 +1,5 @@
 /**
- * Contient toute les classe de la fonctionnalité gérer avis.
+ * Contient toute les classe de la DAO de la fonctionnalité gérer avis.
  * 
  * @author Aurélien
  * @version 1

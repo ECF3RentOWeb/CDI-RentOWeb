@@ -53,7 +53,6 @@ public class GererAvis extends HttpServlet {
 		System.out.println(info);
 		
 		
-		
 	}
 
 	/**

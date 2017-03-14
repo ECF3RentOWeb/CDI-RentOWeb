@@ -1,5 +1,11 @@
 package rtw.entity.gererAvis.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+
 import rtw.entity.gererAvis.interfaces.IAvis;
 
 /**
@@ -10,7 +16,28 @@ import rtw.entity.gererAvis.interfaces.IAvis;
  * @since 13/03/2017
  *
  */
-public abstract class Avis implements IAvis{
+@Entity
+public abstract class Avis implements IAvis,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
+	@Embeddable
+	private static class IdAvis implements Serializable{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		
+		
+		
+		
+		
+	}
+	
+	@EmbeddedId
+	private IdAvis id = new IdAvis();
 }

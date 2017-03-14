@@ -17,9 +17,7 @@ import rtw.entity.gererAvis.interfaces.IAvisAgence;
 @Entity
 public class AvisAgence extends Avis implements IAvisAgence{
 	
-	//TODO Voir construction double ID + Recuperation table externe fonctio
-	@Id
-	IDAvisAgence idAvisAgence;
+
 	@Column(nullable=false)
 	Note note;
 	@Column(nullable=false)
@@ -40,7 +38,7 @@ public class AvisAgence extends Avis implements IAvisAgence{
 	 * @param note {@link Note}
 	 * @param commentaire {@link Commentaire}
 	 */
-	public AvisAgence(IDAvisAgence idAvisAgence,Note note,Commentaire commentaire){
+	public AvisAgence(Note note,Commentaire commentaire){
 		
 		
 	}

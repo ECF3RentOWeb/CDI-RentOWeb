@@ -15,8 +15,7 @@ import rtw.entity.gererAvis.interfaces.IAvisAnnonceGlobal;
  */
 public class AvisAnnonceGlobal extends AvisGlobal implements IAvisAnnonceGlobal {
 
-	@Id
-	IDAvisAnnonceGlobal idAvisAnnonceGlobal;
+
 	@Column(nullable=false)
 	Note note;
 	
