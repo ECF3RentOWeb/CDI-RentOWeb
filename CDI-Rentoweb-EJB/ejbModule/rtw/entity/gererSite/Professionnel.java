@@ -3,10 +3,15 @@
  */
 package rtw.entity.gererSite;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * @author Afpa
  *
  */
+@Entity
+@Table(name="professionnel")
 public class Professionnel extends User{
 
 	/**
@@ -19,7 +24,7 @@ public class Professionnel extends User{
 	 */
 	public Professionnel() {
 		super();
-		// Voir la classe mère User
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -34,7 +39,7 @@ public class Professionnel extends User{
 	public Professionnel(int identifier, String email, String password, String resetPassword, String firstName,
 			String lastName, int phoneNumber) {
 		super(identifier, email, password, resetPassword, firstName, lastName, phoneNumber);
-		// Voir la classe mère User
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -51,6 +56,6 @@ public class Professionnel extends User{
 	public String toString() {
 		return "Professionnel [toString()=" + super.toString() + "]";
 	}
-	
 
+	
 }

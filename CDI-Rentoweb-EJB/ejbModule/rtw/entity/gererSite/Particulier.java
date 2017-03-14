@@ -3,14 +3,18 @@
  */
 package rtw.entity.gererSite;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * @author Afpa
  *
  */
 @Entity
-public class Particulier extends User{
+@Table(name="particulier")
+public class Particulier extends User implements Serializable{
 
 	/**
 	 * @serial Numéro auto généré
@@ -22,7 +26,7 @@ public class Particulier extends User{
 	 */
 	public Particulier() {
 		super();
-		// Voir la classe mère User
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -37,7 +41,6 @@ public class Particulier extends User{
 	public Particulier(int identifier, String email, String password, String resetPassword, String firstName,
 			String lastName, int phoneNumber) {
 		super(identifier, email, password, resetPassword, firstName, lastName, phoneNumber);
-		// voir la classe mère User
 	}
 
 	/**
@@ -54,6 +57,10 @@ public class Particulier extends User{
 	public String toString() {
 		return "Particulier [toString()=" + super.toString() + "]";
 	}
+	
+	
+	
+
 	
 
 }

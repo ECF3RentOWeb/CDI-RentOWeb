@@ -5,8 +5,11 @@ package rtw.entity.gererSite;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 /**
@@ -17,23 +20,29 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name=rtw.util.gererSite.utilBdD.UtilBdD.ENTITY_USER)
-public class User implements Serializable{
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name="user")
+public abstract class User implements Serializable{
 	/**
 	 * @serial Numéro auto généré
 	 */
 	private static final long serialVersionUID = 2782130596881117904L;
 	@Id
 	private int identifier;
+	@Column(name = "email",length=30, nullable = false)
 	private String email;
+	@Column(name = "password",length=20, nullable = false)
 	private String password;
+	@Column(name = "resetPassword",length=20, nullable = false)
 	private String resetPassword;
+	@Column(name = "firstName",length=30, nullable = false)
 	private String firstName;
-	private String LastName;
+	@Column(name = "LastName",length=30, nullable = false)
+	private String lastName;
+	@Column(name = "phoneNumber",length=10, nullable = false)
 	private int phoneNumber;
 	/**
-	 * Le constructeur par défaut,
-	 * Aucun paramètre
+	 * 
 	 */
 	public User() {
 		super();
@@ -51,13 +60,12 @@ public class User implements Serializable{
 	 */
 	public User(int identifier, String email, String password, String resetPassword, String firstName, String lastName,
 			int phoneNumber) {
-		super();
 		this.identifier = identifier;
 		this.email = email;
 		this.password = password;
 		this.resetPassword = resetPassword;
 		this.firstName = firstName;
-		LastName = lastName;
+		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 	}
 	/**
@@ -124,13 +132,13 @@ public class User implements Serializable{
 	 * @return the lastName
 	 */
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 	/**
 	 * @param lastName the lastName to set
 	 */
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 	/**
 	 * @return the phoneNumber
@@ -144,17 +152,20 @@ public class User implements Serializable{
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "User [identifier=" + identifier + ", email=" + email + ", password=" + password + ", resetPassword="
-				+ resetPassword + ", firstName=" + firstName + ", LastName=" + LastName + ", phoneNumber=" + phoneNumber
+				+ resetPassword + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber
 				+ "]";
 	}
-	
-	
-	
 
 }
