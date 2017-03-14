@@ -57,6 +57,20 @@
    			<input id="etat_gene" name="etat_gene" class="rating rating-loading"  data-min="0" data-max="5" data-step="1" data-size="xs">
    			<input id="relation_bailleur" name="relation_bailleur" class="rating rating-loading"  data-min="0" data-max="5" data-step="1" data-size="xs">
 		</div>
+		
+<!-- Help tooltip  -->
+	<div class="helpTooltip">
+		<!-- TODO -->
+		<img id="icon_bruit_ext" src="../../../IMG/grey-information-icon-24x24.png" onmouseover="afficheTooltips(this)" onmouseout="cacheTooltips(this)"/>
+		<img id="icon_bruit_int" src="../../../IMG/grey-information-icon-24x24.png" onmouseover="afficheTooltips(this)" onmouseout="cacheTooltips(this)" />
+		<img id="icon_isole_froid" src="../../../IMG/grey-information-icon-24x24.png" onmouseover="afficheTooltips(this)" onmouseout="cacheTooltips(this)" />
+		<img id="icon_isole_chaud" src="../../../IMG/grey-information-icon-24x24.png" onmouseover="afficheTooltips(this)" onmouseout="cacheTooltips(this)" />
+		<img id="icon_humidite" src="../../../IMG/grey-information-icon-24x24.png" onmouseover="afficheTooltips(this)" onmouseout="cacheTooltips(this)" />
+		<img id="icon_luminosite" src="../../../IMG/grey-information-icon-24x24.png" onmouseover="afficheTooltips(this)" onmouseout="cacheTooltips(this)" />
+		<img id="icon_etat_gene" src="../../../IMG/grey-information-icon-24x24.png" onmouseover="afficheTooltips(this)" onmouseout="cacheTooltips(this)" />
+		<img id="icon_relation_bailleur" src="../../../IMG/grey-information-icon-24x24.png" onmouseover="afficheTooltips(this)" onmouseout="cacheTooltips(this)" />
+	</div>
+	
 </div>
 	
 <!-- Commentaire -->

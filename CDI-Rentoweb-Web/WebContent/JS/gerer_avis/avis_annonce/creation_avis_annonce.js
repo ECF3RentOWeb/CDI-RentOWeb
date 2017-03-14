@@ -7,6 +7,85 @@
  * 
  */
 
+
+/**
+ * 
+ */
+function afficheTooltips(element){
+
+	 //console.log(element.getAttribute("id"));
+	 
+	 var parent = element.parentElement;
+	 var sibling = element.nextSibling;
+	 
+	 var idElement = element.getAttribute("id");
+	 var arrowStyle = "visibility: visible; width: 120px; background-color: black; color: #fff; text-align: center; border-radius: 6px; padding: 5px 0; position: absolute; z-index: 1; top: -5px; left: 85%;"
+	 
+	 if(idElement == "icon_bruit_ext"){
+		 
+		 messageAide = "icon_bruit_ext";	
+		 
+	 }else if(idElement == "icon_bruit_int"){
+		 
+		 messageAide = "icon_bruit_int";	
+		 
+	 }else if(idElement == "icon_isole_froid"){
+		 
+		 messageAide = "icon_isole_froid";	
+		 
+	 }else if(idElement == "icon_isole_chaud"){
+		 
+		 messageAide = "icon_isole_chaud";	
+		 
+	 }else if(idElement == "icon_humidite"){
+		 
+		 messageAide = "icon_humidite";	
+		 
+	 }else if(idElement == "icon_luminosite"){
+		 
+		 messageAide = "icon_luminosite";	
+		 
+	 }else if(idElement == "icon_etat_gene"){
+		 
+		 messageAide = "icon_etat_gene";	
+		 
+	 }else if(idElement == "icon_relation_bailleur"){
+		 
+		 messageAide = "icon_relation_bailleur";	
+		 
+	 }
+	 
+	 var textNode = document.createTextNode(messageAide);
+	 
+	 var divTooltips = document.createElement("div");
+	 divTooltips.setAttribute("class", "divTooltips");
+
+	 var spanTooltips = document.createElement("span");
+	 spanTooltips.setAttribute("class", "spanTooltips");
+	 
+	 divTooltips.appendChild(spanTooltips);
+	 spanTooltips.appendChild(textNode);
+	 
+	 divTooltips.setAttribute("style", arrowStyle);
+	 
+	 parent.insertBefore(divTooltips, sibling);
+	 
+	 //Style
+	 
+	// console.log("Domination de la tooltips full js terminer");
+	 
+}
+
+/**
+ * 
+ */
+function cacheTooltips(element){
+	
+	sibling = element.nextSibling;
+	sibling.style.visibility = "hidden";
+	
+}
+
 /**
  * Vide le textarea commentaire du texte qui s'y trouve par defaut.
  * 
