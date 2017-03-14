@@ -5,7 +5,9 @@ package rtw.entity.gererSite;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Souleymane
@@ -14,6 +16,8 @@ import javax.persistence.Id;
  * Tous les utilisateurs devrons avoir au moins ces attributs
  *
  */
+@Entity
+@Table(name=rtw.util.gererSite.utilBdD.UtilBdD.ENTITY_USER)
 public class User implements Serializable{
 	/**
 	 * @serial Numéro auto généré
