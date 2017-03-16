@@ -1,15 +1,15 @@
 /**
  * 
  */
-package rtw.dao.gererSite.daoInscription;
+package rtw.dao.gererSite.inscription;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import rtw.clientServer.gererSite.IUser;
 import rtw.entity.gererSite.User;
+
 
 /**
  * @author Afpa
@@ -18,24 +18,23 @@ import rtw.entity.gererSite.User;
 @LocalBean
 @Singleton
 public class DaoInscription {
-	@PersistenceContext(unitName=rtw.util.gererSite.utilBdD.UtilBdD.PERSISTANCE_UNITNAME)
+	@PersistenceContext(unitName="SNHibernate")
 	private EntityManager em;
 	
-	public void addUser(IUser user) {
+	public User addUser(User user) {
 		em.persist(user);
+		return user;
 	}
 	
-	public void updateUser(IUser user) {
+	public User updateUser(User user) {
 		em.merge(user);
+		return user;
 	}
-	
-	public void delUser(IUser user) {
-		delUser(user.getIdentifierUser());
-	}
-	
+		
 	public void delUser(int identifier) {
 		User user = em.find(User.class, identifier);
 		em.remove(user);
 	}
 	
+
 }
