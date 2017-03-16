@@ -35,7 +35,7 @@ public class Profil implements Serializable{
 	private int id;
 	@Column(name = "nomProfil",length=30, nullable = false)
 	private String nomProfil;
-	@OneToMany (cascade = { CascadeType.ALL }, fetch=FetchType.EAGER)
+	@OneToMany (mappedBy ="profil", cascade = { CascadeType.ALL }, fetch=FetchType.EAGER)
 	private Collection<Droit> droits = new ArrayList<Droit>();
 	/**
 	 * 
