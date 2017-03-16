@@ -1,13 +1,34 @@
 @CHARSET "ISO-8859-1";
 
+html {
+	
+    font-family: 'Lato', 'Arial', 'sans-serif';
+	
+}
+
+body{
+	
+	min-height: 778px;
+	min-width: 647px;
+	overflow: visible;
+	
+}
+
+h2{
+	
+	background-color: #2980b9;
+	
+}
+
 .note{
 	
 	position: fixed;
+	left: 516.5px;
 	top: 10px;
-	left: 30%;
-	height: 270px;
-	width: 647px;
 	
+	height: 305px;
+	width: 647px;
+
 	-moz-box-shadow: 0px 0px 2px 0px #000000;
 	-webkit-box-shadow: 0px 0px 2px 0px #000000;
 	-o-box-shadow: 0px 0px 2px 0px #000000;
@@ -20,29 +41,29 @@
 }
 
 .labelNote{
-	
-	position: fixed;
-	top: 25px;
-	left: 34%;
+
 	width: 150px;
 	height: 230px;
+	
+	margin-left: 2.5%;
 	
 }
 
 .starsNote{
 	
 	position: fixed;
-	top: 20px;
-	left: 48%;
+	top: 70px;
+	left: 855px;
 	height: 240px;
 	
 }
 
 .helpTooltip{
-	
+
 	position: fixed;
-	top: 23px;
-	left: 65%;
+	left: 1130px;
+	top: 72px;
+
 	width: 45px;
 	height: 230px;
 	
@@ -59,27 +80,147 @@
 .commentaire{
 	
 	position: fixed;
-	top: 290px;
-	left: 30%;
+	left: 516.5px;
+	top: 317px;
+	
+	width: 647px;
+	height: 350px;
+
+	
+	-moz-box-shadow: 0px 0px 2px 0px #000000;
+	-webkit-box-shadow: 0px 0px 2px 0px #000000;
+	-o-box-shadow: 0px 0px 2px 0px #000000;
+	box-shadow: 0px 0px 2px 0px #000000;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=NaN, Strength=2);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	
+}
+
+.caractereRestant{
+	
+	position: fixed;
+	left: 519px;
+	top: 377px;
+
+	width: 643px;
+	height: 30px;
+	
+	-moz-box-shadow: 0px 0px 2px 0px #000000;
+	-webkit-box-shadow: 0px 0px 2px 0px #000000;
+	-o-box-shadow: 0px 0px 2px 0px #000000;
+	box-shadow: 0px 0px 2px 0px #000000;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=NaN, Strength=2);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+
+	
+}
+
+#label_nombre_caractere_restant{
+	
+	margin: 5px;
+}
+
+#nombre_Caractere_Restant{
+	
+	position: fixed;
+	left: 730px;
+	top: 377px;
+	
+	width: 35px;
+	height: 22px;
+	margin: 5px;
+	color: rgb(0,255,0);
+	
+}
+
+#commentaire{
+	
+	position: fixed;
+	left: 521px;
+	top: 415px;
+	
+	width: 640px;
+	height: 250px;
+	padding: 0px;
+	
 	overflow: auto;
 	resize: none;
 	
+	-moz-box-shadow: inset 0px 0px 2px 0px #000000;
+	-webkit-box-shadow: inset 0px 0px 2px 0px #000000;
+	-o-box-shadow: inset 0px 0px 2px 0px #000000;
+	box-shadow: inset 0px 0px 2px 0px #000000;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=NaN, Strength=2);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+		
 }
 
 .action{
 	
 	position: fixed;
-	top: 635px;
-	left: 55%;
+	left: 516.5px;
+	top: 669px;
+	
+	width: 647px;
+	height: 35px;
+	
+	-moz-box-shadow: 0px 0px 2px 0px #000000;
+	-webkit-box-shadow: 0px 0px 2px 0px #000000;
+	-o-box-shadow: 0px 0px 2px 0px #000000;
+	box-shadow: 0px 0px 2px 0px #000000;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=NaN, Strength=2);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	
+}
+
+#valider{
+	
+	position: fixed;
+	margin: 5px;
+	padding: 0px;
+	width: 67px;
+	left: 60%;
+}
+
+#annuler{
+	
+	position: fixed;
+	margin: 5px;
+	padding: 0px;
+	width: 67px;
+	left: 64%;
+}
+
+.messageInformatif{
+	
+	position: fixed;
+	top: 706px;
+	left: 516.5px;
+	
+	width: 647px;
+	
+	-moz-box-shadow: 0px 0px 2px 0px #000000;
+	-webkit-box-shadow: 0px 0px 2px 0px #000000;
+	-o-box-shadow: 0px 0px 2px 0px #000000;
+	box-shadow: 0px 0px 2px 0px #000000;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=NaN, Strength=2);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
 	
 }
 
 #messageInformatif{
 	
-	position: fixed;
-	top: 615px;
 	color: red;
-	left: 10%;
 	
 }
 

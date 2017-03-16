@@ -9,7 +9,26 @@
 
 
 /**
- * 
+ * Affiche le nombre de caractère restant pour le commentaire et le passe de vert a rouge.
+ */
+function calculCaractereRestant(){
+
+	var element = document.getElementsByClassName('commentaire')[0].getElementsByTagName('textarea')[0];
+	var nombreCharaRestant = 4000 - element.value.length;
+	var pNombreCharaRestant = document.getElementById('nombre_Caractere_Restant');
+
+	var red =  255 - Math.trunc((nombreCharaRestant/15.68627450980392));
+	var green = Math.trunc((nombreCharaRestant/15.68627450980392));
+	
+	var plusRougeTueLeRouge = "color:rgb(" + red + ","+ green +",0)";
+	
+	pNombreCharaRestant.setAttribute("style", plusRougeTueLeRouge); 
+	pNombreCharaRestant.innerHTML = nombreCharaRestant;
+	
+}
+
+/**
+ * Affiche une bulle informative sur les notes.
  */
 function afficheTooltips(element){
 
@@ -77,10 +96,11 @@ function afficheTooltips(element){
 }
 
 /**
- * 
+ * Cache les tooltips quand la souris quitte l'icon d'aide.
  */
 function cacheTooltips(element){
 	
+	//TODO delete
 	sibling = element.nextSibling;
 	sibling.style.visibility = "hidden";
 	
@@ -204,6 +224,12 @@ function controleAvisComplet(){
 		if(commentaire.value == ""){
 			
 			messageInformatif = messageInformatif + "le commentaire ";
+			
+		}
+		
+		if(commentaire.value.length > 4000){
+			
+			messageInformatif = messageInformatif + "le commentaire est trop long ";
 			
 		}
 		
