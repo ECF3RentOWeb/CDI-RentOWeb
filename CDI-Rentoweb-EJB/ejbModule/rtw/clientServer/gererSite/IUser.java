@@ -8,9 +8,5 @@ package rtw.clientServer.gererSite;
  *
  */
 public interface IUser {
-	public int getIdentifierUser();
-	
-	@Override
-	public String toString();
 
 }

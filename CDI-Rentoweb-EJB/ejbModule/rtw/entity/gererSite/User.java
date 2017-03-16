@@ -5,11 +5,15 @@ package rtw.entity.gererSite;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -41,6 +45,11 @@ public abstract class User implements Serializable{
 	private String lastName;
 	@Column(name = "phoneNumber",length=10, nullable = false)
 	private int phoneNumber;
+	
+	// RG: Un utilisateur a forcément un profil
+	@OneToOne( cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name = "idProfil", unique = true, nullable = false)
+	private Profil profil;
 	/**
 	 * 
 	 */
