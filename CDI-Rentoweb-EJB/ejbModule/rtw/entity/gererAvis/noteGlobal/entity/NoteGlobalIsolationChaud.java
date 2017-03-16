@@ -1,4 +1,4 @@
-package rtw.entity.gererAvis.note.entity;
+package rtw.entity.gererAvis.noteGlobal.entity;
 
 import javax.persistence.Entity;
 
@@ -11,7 +11,7 @@ import javax.persistence.Entity;
  *
  */
 @Entity
-public class NoteIsolationChaud extends Note{
+public class NoteGlobalIsolationChaud extends NoteGlobal{
 
 	/**
 	 * TODO

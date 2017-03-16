@@ -3,7 +3,6 @@ package rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity;
 import rtw.entity.gererAvis.avisGlobal.entity.AvisGlobal;
 import rtw.entity.gererAvis.avisGlobal.interfaces.IAvisGlobal;
 
-
 /**
  * Entity {@link AvisGlobalAgence} class fille de {@link AvisGlobal} contient la moyen des notes des avis utilisateur sur une agence.
  * 

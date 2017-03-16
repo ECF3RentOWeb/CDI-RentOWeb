@@ -3,7 +3,7 @@ package rtw.entity.gererAvis.note.entity;
 import javax.persistence.Entity;
 
 /**
- * Entity {@link NoteLuminite} class fille de {@link Note} contient la note sur l'humidite.
+ * Entity {@link NoteGlobalLuminite} class fille de {@link Note} contient la note sur l'humidite.
  * 
  * @author Aurélien
  * @version 1

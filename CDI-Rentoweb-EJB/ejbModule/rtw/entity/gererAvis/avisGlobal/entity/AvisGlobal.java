@@ -1,16 +1,22 @@
 package rtw.entity.gererAvis.avisGlobal.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonce;
 import rtw.entity.gererAvis.avisGlobal.interfaces.IAvisGlobal;
+import rtw.entity.gererAvis.noteGlobal.entity.NoteGlobal;
 import rtw.entity.gererAvis.noteGlobal.entity.NotesGlobal;
 
 /**
@@ -21,6 +27,8 @@ import rtw.entity.gererAvis.noteGlobal.entity.NotesGlobal;
  * @since 13/03/2017
  *
  */
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class AvisGlobal implements IAvisGlobal,Serializable {
 	
 	/**
@@ -55,7 +63,7 @@ public abstract class AvisGlobal implements IAvisGlobal,Serializable {
 	@EmbeddedId
 	private IdAvisGlobal idAvisGlobal;
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	private NotesGlobal notesGlobal;
+	private Collection<NoteGlobal> notesGlobal = new ArrayList<NoteGlobal>();
 	
 	/*TODO Récupération d'un utilisateur/Annonce
 	 * 
@@ -86,7 +94,7 @@ public abstract class AvisGlobal implements IAvisGlobal,Serializable {
 	 * 
 	 * @return notesGlobal {@link NotesGlobal}
 	 */
-	public NotesGlobal getNotesGlobal() {
+	public Collection<NoteGlobal> getNotesGlobal() {
 		return notesGlobal;
 	}
 	

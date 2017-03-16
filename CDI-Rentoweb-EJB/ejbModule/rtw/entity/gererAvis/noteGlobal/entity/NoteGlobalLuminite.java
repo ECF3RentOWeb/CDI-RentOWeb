@@ -1,9 +1,9 @@
-package rtw.entity.gererAvis.note.entity;
+package rtw.entity.gererAvis.noteGlobal.entity;
 
 import javax.persistence.Entity;
 
 /**
- * Entity {@link NoteGlobalHumidite} class fille de {@link Note} contient la note sur l'humidite.
+ * Entity {@link NoteGlobalLuminite} class fille de {@link Note} contient la note sur l'humidite.
  * 
  * @author Aurélien
  * @version 1
@@ -11,7 +11,7 @@ import javax.persistence.Entity;
  *
  */
 @Entity
-public class NoteHumidite extends Note{
+public class NoteGlobalLuminite extends NoteGlobal{
 
 	/**
 	 * TODO

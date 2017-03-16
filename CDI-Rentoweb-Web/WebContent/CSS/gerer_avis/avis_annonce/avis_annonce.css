@@ -10,7 +10,7 @@ body{
 	
 	min-height: 778px;
 	min-width: 647px;
-	overflow: visible;
+	overflow: auto;
 	
 }
 
@@ -19,6 +19,13 @@ h2{
 	background-color: #2980b9;
 	
 }
+
+.formulaire{
+	
+	height: 720px;
+	
+}
+
 
 .note{
 	

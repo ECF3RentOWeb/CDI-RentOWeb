@@ -3,6 +3,8 @@ package rtw.entity.gererAvis.commentaire.entity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import rtw.entity.gererAvis.commentaire.interfaces.ICommentaire;
 
@@ -14,6 +16,7 @@ import rtw.entity.gererAvis.commentaire.interfaces.ICommentaire;
  * @since 13/03/2017
  *
  */
+@Entity
 public class Commentaire implements ICommentaire,Serializable {
 
 	/**
@@ -22,6 +25,8 @@ public class Commentaire implements ICommentaire,Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	private String idCommentaire;
 	@Column(length=4000,nullable=false)
 	private String contenu;
 	
