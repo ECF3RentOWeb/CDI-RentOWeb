@@ -1,7 +1,6 @@
 package rtw.entity.gererAvis.note.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import rtw.entity.gererAvis.note.interfaces.INotes;
 
@@ -10,7 +9,7 @@ import rtw.entity.gererAvis.note.interfaces.INotes;
  * @author Afpa
  *
  */
-public class Notes extends ArrayList<Note> implements INotes,Serializable{
+public class Notes implements INotes,Serializable{
 
 	/**
 	 * TODO

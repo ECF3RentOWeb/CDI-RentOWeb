@@ -1,6 +1,8 @@
 package rtw.entity.gererAvis.avis.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
@@ -15,8 +17,9 @@ import javax.persistence.OneToOne;
 import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
 import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
 import rtw.entity.gererAvis.avis.interfaces.IAvis;
-import rtw.entity.gererAvis.note.entity.Notes;
 import rtw.entity.gererAvis.commentaire.entity.Commentaire;
+import rtw.entity.gererAvis.note.entity.Note;
+
 
 /**
  * Entity {@link Avis} class mere abstraite de {@link AvisAgence} et {@link AvisAnnonce}.
@@ -120,8 +123,10 @@ public abstract class Avis implements IAvis,Serializable{
 	
 	@EmbeddedId
 	private IdAvis idAvis;
+	
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	private Notes notes;
+	private Collection<Note> notes = new ArrayList<Note>();
+	
 	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Commentaire commentaire;
 	
@@ -155,7 +160,7 @@ public abstract class Avis implements IAvis,Serializable{
 	 * 
 	 * @return note {@link Note}
 	 */
-	public Notes getNotes() {
+	public Collection<Note> getNotes() {
 		return notes;
 	}
 	
@@ -164,7 +169,7 @@ public abstract class Avis implements IAvis,Serializable{
 	 * 
 	 * @param note {@link Note}
 	 */
-	public void setNotes(Notes notes) {
+	public void setNotes(Collection<Note> notes) {
 		this.notes = notes;
 	}
 	

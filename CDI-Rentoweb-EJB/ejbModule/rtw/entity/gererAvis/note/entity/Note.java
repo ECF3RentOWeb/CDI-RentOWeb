@@ -2,6 +2,14 @@ package rtw.entity.gererAvis.note.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
+
+import org.jboss.resteasy.spi.touri.MappedBy;
+
 import rtw.entity.gererAvis.note.interfaces.INotes;
 
 
@@ -13,6 +21,8 @@ import rtw.entity.gererAvis.note.interfaces.INotes;
  * @since 15/03/2017
  *
  */
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class Note implements INotes,Serializable {
 	
 	/**
@@ -21,6 +31,8 @@ public abstract class Note implements INotes,Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	private String idNote;
 	private int valeur;
 
 	

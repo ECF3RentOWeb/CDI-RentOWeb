@@ -25,6 +25,7 @@
 <body>
 
 <!-- Formulaire de creation d'un avis utilisateur -->
+<div class="formulaire">
 	<form method="get" action="#" onsubmit="return controleAvisComplet()">
 	
 <!-- Note -->
@@ -99,5 +100,6 @@
 		</div>
 		
 	</form>
+</div>
 </body>
 </html>
