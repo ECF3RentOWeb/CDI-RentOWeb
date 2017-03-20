@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import rtw.entity.gererAgence.Agence;
+import rtw.util.ParametreCommun;
 
 /**
  * 
@@ -20,7 +21,7 @@ import rtw.entity.gererAgence.Agence;
 @LocalBean
 @Singleton
 public class DaoSearch {
-	@PersistenceContext(unitName = "RentOWeb")
+	@PersistenceContext(unitName = ParametreCommun.PERSISTENCE_UNIT_NAME)
 	private EntityManager em;
 	List<Agence> listAgences;
 
