@@ -14,13 +14,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import rtw.entity.gererAgence.Agence;
+import rtw.util.ParametreCommun;
 
 
 
 @LocalBean
 @Singleton
 public class DaoGestion {
-	@PersistenceContext(unitName=" ")
+	@PersistenceContext(unitName=ParametreCommun.PERSISTENCE_UNIT_NAME)
 	private EntityManager em;
 
 	/**

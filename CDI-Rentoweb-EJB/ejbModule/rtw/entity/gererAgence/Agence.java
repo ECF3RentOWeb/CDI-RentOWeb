@@ -27,8 +27,8 @@ public class Agence implements Serializable{
 	private String libelleAgence;
 	private String siteAgence;
 	private String numSiren;
-	@ManyToOne
-	private ChefAgence chefAgence;
+	//@ManyToOne
+	//private ChefAgence chefAgence;
 	@ManyToOne
 	private AgentImmobilier agentImmobilier;
 	/**
@@ -48,7 +48,7 @@ public class Agence implements Serializable{
 	 * @param agentImmobilier
 	 */
 	public Agence(int idAgence, String nomAgence, Adresse adresse, String numTel, String libelleAgence,
-			String siteAgence, String numSiren, ChefAgence chefAgence, AgentImmobilier agentImmobilier) {
+			String siteAgence, String numSiren,  AgentImmobilier agentImmobilier) {
 		super();
 		this.idAgence = idAgence;
 		this.nomAgence = nomAgence;
@@ -57,7 +57,7 @@ public class Agence implements Serializable{
 		this.libelleAgence = libelleAgence;
 		this.siteAgence = siteAgence;
 		this.numSiren = numSiren;
-		this.chefAgence = chefAgence;
+	//	this.chefAgence = chefAgence;
 		this.agentImmobilier = agentImmobilier;
 	}
 	/**
@@ -71,7 +71,7 @@ public class Agence implements Serializable{
 	 * @param agentImmobilier
 	 */
 	public Agence(String nomAgence, Adresse adresse, String numTel, String libelleAgence, String siteAgence,
-			String numSiren, ChefAgence chefAgence, AgentImmobilier agentImmobilier) {
+			String numSiren,  AgentImmobilier agentImmobilier) {
 		super();
 		this.nomAgence = nomAgence;
 		this.adresse = adresse;
@@ -79,7 +79,7 @@ public class Agence implements Serializable{
 		this.libelleAgence = libelleAgence;
 		this.siteAgence = siteAgence;
 		this.numSiren = numSiren;
-		this.chefAgence = chefAgence;
+		//this.chefAgence = chefAgence;
 		this.agentImmobilier = agentImmobilier;
 	}
 	/**
@@ -169,15 +169,15 @@ public class Agence implements Serializable{
 	/**
 	 * @return the chefAgence
 	 */
-	public ChefAgence getChefAgence() {
-		return chefAgence;
-	}
-	/**
-	 * @param chefAgence the chefAgence to set
-	 */
-	public void setChefAgence(ChefAgence chefAgence) {
-		this.chefAgence = chefAgence;
-	}
+//	public ChefAgence getChefAgence() {
+//		return chefAgence;
+//	}
+//	/**
+//	 * @param chefAgence the chefAgence to set
+//	 */
+//	public void setChefAgence(ChefAgence chefAgence) {
+//		this.chefAgence = chefAgence;
+//	}
 	/**
 	 * @return the agentImmobilier
 	 */
