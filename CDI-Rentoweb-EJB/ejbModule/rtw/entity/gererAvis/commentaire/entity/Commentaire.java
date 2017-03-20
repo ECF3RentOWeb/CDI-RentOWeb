@@ -29,5 +29,29 @@ public class Commentaire implements ICommentaire,Serializable {
 	private String idCommentaire;
 	@Column(length=4000,nullable=false)
 	private String contenu;
+	/**
+	 * @return the idCommentaire
+	 */
+	public String getIdCommentaire() {
+		return idCommentaire;
+	}
+	/**
+	 * @param idCommentaire the idCommentaire to set
+	 */
+	public void setIdCommentaire(String idCommentaire) {
+		this.idCommentaire = idCommentaire;
+	}
+	/**
+	 * @return the contenu
+	 */
+	public String getContenu() {
+		return contenu;
+	}
+	/**
+	 * @param contenu the contenu to set
+	 */
+	public void setContenu(String contenu) {
+		this.contenu = contenu;
+	}
 	
 }
