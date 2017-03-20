@@ -18,7 +18,7 @@ import rtw.entity.gererSite.User;
 @LocalBean
 @Singleton
 public class DaoInscription {
-	@PersistenceContext(unitName="SNHibernate")
+	@PersistenceContext(unitName="rentoweb")
 	private EntityManager em;
 	
 	public User addUser(User user) {
