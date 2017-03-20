@@ -28,7 +28,6 @@ public class Particulier extends User implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	/**
 	 * @param identifier
 	 * @param email
