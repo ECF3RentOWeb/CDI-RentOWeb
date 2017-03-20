@@ -7,15 +7,19 @@ package rtw.entity.gererAgence;
  */
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ADRESSE")
+@Table(name="adresses")
 public class Adresse implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -24,25 +28,44 @@ public class Adresse implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idAdresse;
 	
-	@Column(name="Voie", length=15, nullable=false)
+	@Column(name="numero", length=15, nullable=false)
 	private String numVoie;
 	
 	@Column(name="Voie", length=10, nullable=false)
 	private String typeVoie;
 	
-	@Column(name="Adresse", length=50, nullable=false)
+	@Column(name="libelle", length=50, nullable=false)
 	private String libelleAdresse;
 	
-	@Column(name="CP", length=5, nullable=false)
-	private String codePostal;
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name="adresses_cpId")
+	private CodePostal cp;
 	
-	@Column(name="Ville", length=50, nullable=false)		
-	private String ville;
-	
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="adresses_idVille")
+	private Ville ville;
+
 	/**
-	 * Génération des constructeurs
+	 *  Génération des accesseurs
 	 */
-	public Adresse() {	
+	public Adresse() {
+		super();
+	}
+
+	/**
+	 * @param numVoie
+	 * @param typeVoie
+	 * @param libelleAdresse
+	 * @param cp
+	 * @param ville
+	 */
+	public Adresse(String numVoie, String typeVoie, String libelleAdresse, CodePostal cp, Ville ville) {
+		super();
+		this.numVoie = numVoie;
+		this.typeVoie = typeVoie;
+		this.libelleAdresse = libelleAdresse;
+		this.cp = cp;
+		this.ville = ville;
 	}
 
 	/**
@@ -50,46 +73,31 @@ public class Adresse implements Serializable{
 	 * @param numVoie
 	 * @param typeVoie
 	 * @param libelleAdresse
-	 * @param codePostal
+	 * @param cp
 	 * @param ville
 	 */
-	public Adresse(int idAdresse, String numVoie, String typeVoie, String libelleAdresse, String codePostal,
-			String ville) {
+	public Adresse(Integer idAdresse, String numVoie, String typeVoie, String libelleAdresse, CodePostal cp,
+			Ville ville) {
+		super();
 		this.idAdresse = idAdresse;
 		this.numVoie = numVoie;
 		this.typeVoie = typeVoie;
 		this.libelleAdresse = libelleAdresse;
-		this.codePostal = codePostal;
+		this.cp = cp;
 		this.ville = ville;
 	}
-
-	/**
-	 * @param numVoie
-	 * @param typeVoie
-	 * @param libelleAdresse
-	 * @param codePostal
-	 * @param ville
-	 */
-	public Adresse(String numVoie, String typeVoie, String libelleAdresse, String codePostal, String ville) {
-		this.numVoie = numVoie;
-		this.typeVoie = typeVoie;
-		this.libelleAdresse = libelleAdresse;
-		this.codePostal = codePostal;
-		this.ville = ville;
-	}
-	//**Genération des accesseurs**
 
 	/**
 	 * @return the idAdresse
 	 */
-	public int getIdAdresse() {
+	public Integer getIdAdresse() {
 		return idAdresse;
 	}
 
 	/**
 	 * @param idAdresse the idAdresse to set
 	 */
-	public void setIdAdresse(int idAdresse) {
+	public void setIdAdresse(Integer idAdresse) {
 		this.idAdresse = idAdresse;
 	}
 
@@ -136,31 +144,34 @@ public class Adresse implements Serializable{
 	}
 
 	/**
-	 * @return the codePostal
+	 * @return the cp
 	 */
-	public String getCodePostal() {
-		return codePostal;
+	public CodePostal getCp() {
+		return cp;
 	}
 
 	/**
-	 * @param codePostal the codePostal to set
+	 * @param cp the cp to set
 	 */
-	public void setCodePostal(String codePostal) {
-		this.codePostal = codePostal;
+	public void setCp(CodePostal cp) {
+		this.cp = cp;
 	}
 
 	/**
 	 * @return the ville
 	 */
-	public String getVille() {
+	public Ville getVille() {
 		return ville;
 	}
 
 	/**
 	 * @param ville the ville to set
 	 */
-	public void setVille(String ville) {
+	public void setVille(Ville ville) {
 		this.ville = ville;
 	}
+
+	
+	
 
 }
