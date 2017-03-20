@@ -13,7 +13,7 @@
          <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:afpa"/>
          <property name="javax.persistence.jdbc.user" value="rentoweb"/>
          <property name="javax.persistence.jdbc.password" value="rentowebpw"/>
-         <property name="hibernate.hbm2ddl.auto" value="update"/> 
+         <!-- <property name="hibernate.hbm2ddl.auto" value="update"/> -->
           
          <!-- alternatively to <class> and <property> declarations, you can use a regular hibernate.cfg.xml file -->
          <!-- property name="hibernate.ejb.cfgfile" value="/org/hibernate/ejb/test/hibernate.cfg.xml"/ -->
