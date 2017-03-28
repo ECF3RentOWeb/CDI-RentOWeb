@@ -1,9 +1,9 @@
 /**
- * Contient toute les classe de la fonctionnalité gerer avis.
+ * Contient toute les class service de la fonctionnalité gérer avis.
  * 
- * @author Aurelien
+ * @author Aurélien
  * @version 1
- * @since 06/03/2017
+ * @since 27/03/2017
  *
  */
 package rtw.service.gererAvis;

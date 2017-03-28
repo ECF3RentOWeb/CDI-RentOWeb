@@ -3,14 +3,14 @@ package rtw.entity.gererAvis.note.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.SequenceGenerator;
 
-import org.jboss.resteasy.spi.touri.MappedBy;
-
-import rtw.entity.gererAvis.note.interfaces.INotes;
+import rtw.entity.gererAvis.note.interfaces.INote;
 
 
 /**
@@ -23,7 +23,7 @@ import rtw.entity.gererAvis.note.interfaces.INotes;
  */
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-public abstract class Note implements INotes,Serializable {
+public abstract class Note implements INote,Serializable {
 	
 	/**
 	 * TODO
@@ -32,16 +32,40 @@ public abstract class Note implements INotes,Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String idNote;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_idNote")
+	@SequenceGenerator(name="seq_idNote",sequenceName="seq_idNote",initialValue=1)
+	private int idNote;
+	
 	private int valeur;
 
-	
 	public int getValeur() {
 		return valeur;
 	}
 
 	public void setValeur(int valeur) {
 		this.valeur = valeur;
+	}
+
+	/**
+	 * @return the idNote
+	 */
+	public int getIdNote() {
+		return idNote;
+	}
+
+	/**
+	 * @param idNote the idNote to set
+	 */
+	public void setIdNote(int idNote) {
+		this.idNote = idNote;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[getValeur()=" + getValeur() + ", getIdNote()=" + getIdNote() + "]";
 	}
 
 }

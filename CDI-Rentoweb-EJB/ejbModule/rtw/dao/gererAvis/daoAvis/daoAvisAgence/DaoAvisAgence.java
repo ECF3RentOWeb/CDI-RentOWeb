@@ -1,84 +1,85 @@
 package rtw.dao.gererAvis.daoAvis.daoAvisAgence;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
-import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
-
 
 /**
- * Classe qui gère toute la DAO des avis agence.
+ * Classe qui gère toute la DAO des {@link AvisAgence}.
  * 
  * @author Aurélien
  * @Version 1
  * @since 13/03/2017
  *
  */
-public class DaoAvisAgence {
-	
+@LocalBean
+@Singleton
+public class DaoAvisAgence implements DaoAvisAgenceLocal {
+
+	//TODO persistence Name
 	@PersistenceContext(unitName="rentoweb")
 	EntityManager em;
-	
+
 	/**
 	 * Default constructor.
 	 */
 	public DaoAvisAgence() {
 		
 	}
+	
+	
+	/**
+	 * Persistance d'un {@link AvisAgence}
+	 * 
+	 * @param avisAgence {@link AvisAgence}
+	 */
+	public void addAvisAgence(AvisAgence avisAgence){
 
-	
-	/**
-	 * Trouve un {@link AvisAnnonce} a partir d'un {@link AvisAnnonce} 
-	 * utiliser pour refresh le context, et modification.
-	 * 
-	 * @param avisAgence{@link AvisAnnonce}
-	 * @return avisAgence{@link AvisAnnonce}
-	 */
-	public AvisAgence find(AvisAgence avisAgence){
-		
-		avisAgence= em.find(AvisAgence.class, avisAgence);
-		
-		return avisAgence;
-		
-	}
-	
-	/**
-	 * Persistance d'un {@link AvisAnnonce}
-	 * 
-	 * @param avisAgence{@link AvisAnnonce}
-	 */
-	public void addAvisAnnonce(AvisAgence avisAgence){
-		
-		//TODO Throw Exception + try catch au niveau du service
-		
-		//find pour verification de doublons
-		find(avisAgence);
-		
 		em.persist(avisAgence);
 		
 	}
+
+
+	/**
+	 * Suppression d'un {@link AvisAgence}
+	 * 
+	 * @param avisAgence {@link AvisAgence}
+	 */
+	@Override
+	public void deleteAvisAgence(AvisAgence avisAgence) {
+
+		avisAgence = findAvisAgence(avisAgence);
+		em.remove(avisAgence);
+		
+	}
+
+	/**
+	 * Recherche d'un {@link AvisAgence}
+	 * 
+	 * @param avisAgence {@link AvisAgence}
+	 * @return 
+	 */
+	@Override
+	public AvisAgence findAvisAgence(AvisAgence avisAgence) {
+
+		return em.find(AvisAgence.class, avisAgence.getId());
+		
+	}
 	
 	/**
-	 * Edition d'un {@link AvisAnnonce}
+	 * Update d'un {@link AvisAgence}
 	 * 
-	 * @param avisAgence{@link AvisAnnonce}
+	 * @param avisAgence {@link AvisAgence}
 	 */
-	public void editAvisAnnonce(AvisAgence avisAgence){
-		
+	@Override
+	public void updateAvisAgence(AvisAgence avisAgence) {
+
 		em.merge(avisAgence);
 		
 	}
 	
-	/**
-	 * Suppression d'un {@link AvisAnnonce}
-	 * 
-	 * @param avisAgence{@link AvisAnnonce}
-	 */
-	public void removeAvisAnnonce(AvisAgence avisAgence){
-		
-		em.remove(avisAgence);
-		
-	}
 	
 }

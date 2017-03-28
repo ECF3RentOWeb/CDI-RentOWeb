@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 import rtw.entity.gererAvis.commentaire.interfaces.ICommentaire;
 
@@ -26,19 +29,23 @@ public class Commentaire implements ICommentaire,Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String idCommentaire;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_idCommentaire")
+	@SequenceGenerator(name="seq_idCommentaire",sequenceName="seq_idCommentaire",initialValue=1)
+	private int idCommentaire;
+	
 	@Column(length=4000,nullable=false)
 	private String contenu;
+	
 	/**
 	 * @return the idCommentaire
 	 */
-	public String getIdCommentaire() {
+	public int getIdCommentaire() {
 		return idCommentaire;
 	}
 	/**
 	 * @param idCommentaire the idCommentaire to set
 	 */
-	public void setIdCommentaire(String idCommentaire) {
+	public void setIdCommentaire(int idCommentaire) {
 		this.idCommentaire = idCommentaire;
 	}
 	/**
@@ -52,6 +59,13 @@ public class Commentaire implements ICommentaire,Serializable {
 	 */
 	public void setContenu(String contenu) {
 		this.contenu = contenu;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[getIdCommentaire()=" + getIdCommentaire() + ", getContenu()=" + getContenu() + "]";
 	}
 	
 }

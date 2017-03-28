@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -14,15 +17,19 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.DiscriminatorOptions;
+import org.hibernate.annotations.MetaValue;
+
 import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
-import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
 import rtw.entity.gererAvis.avis.interfaces.IAvis;
 import rtw.entity.gererAvis.commentaire.entity.Commentaire;
+import rtw.entity.gererAvis.entityTest.Item;
+import rtw.entity.gererAvis.entityTest.Utilisateur;
 import rtw.entity.gererAvis.note.entity.Note;
 
 
 /**
- * Entity {@link Avis} class mere abstraite de {@link AvisAgence} et {@link AvisAnnonce}.
+ * Entity {@link Avis} class mere abstraite de {@link AvisAgence} et {@link AvisItem}.
  * 
  * @author Aurélien
  * @version 1
@@ -31,11 +38,12 @@ import rtw.entity.gererAvis.note.entity.Note;
  */
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+
 public abstract class Avis implements IAvis,Serializable{
 	
 	/**
-	 * TODO Récupération d'un utilisateur/Annonce + ID lié
-	 * IdAvis est un double ID récupéré des fonctionnalité GererSite,GererAnnonce grace a leur service respectif.
+	 * TODO Récupération d'un utilisateur/Item + ID lié
+	 * IdAvis est un double ID récupéré des fonctionnalité GererSite,GererItem grace a leur service respectif.
 	 * 
 	 * @author Aurélien
 	 * @version 1
@@ -51,21 +59,43 @@ public abstract class Avis implements IAvis,Serializable{
 			 */
 			private static final long serialVersionUID = 1L;
 			
+			@Column(unique=false)
 			private String idUtilisateur;
-			private String idAnnonce;
+			@Column(unique=false)
+			private String idItem;
+			
+			/**
+			 * Default constructor
+			 */
+			@SuppressWarnings("unused")
+			public IdAvis(){
+				
+			}
 			
 			/**
 			 * Complete constructor 
 			 * 
 			 * @param idUtilisateur
-			 * @param idAnnonce
+			 * @param idItem
 			 */
-			public IdAvis(String idUtilisateur, String idAnnonce) {
+			public IdAvis(String idUtilisateur, String idItem) {
 				
 				super();
 				this.idUtilisateur = idUtilisateur;
-				this.idAnnonce = idAnnonce;
+				this.idItem = idItem;
 				
+			}
+			
+			@Override
+			public boolean equals(Object obj) {
+			// TODO Auto-generated method stub
+				return super.equals(obj);
+			}
+			
+			@Override
+			public int hashCode() {
+			// TODO Auto-generated method stub
+			return super.hashCode();
 			}
 	
 			/**
@@ -87,20 +117,20 @@ public abstract class Avis implements IAvis,Serializable{
 			}
 			
 			/**
-			 * @return the idAnnonce
+			 * @return the idItem
 			 */
-			public String getIdAnnonce() {
+			public String getIdItem() {
 				
-				return idAnnonce;
+				return idItem;
 				
 			}
 			
 			/**
-			 * @param idAnnonce the idAnnonce to set
+			 * @param idItem the idItem to set
 			 */
-			public void setIdAnnonce(String idAnnonce) {
+			public void setIdItem(String idItem) {
 				
-				this.idAnnonce = idAnnonce;
+				this.idItem = idItem;
 				
 			}
 	
@@ -110,7 +140,7 @@ public abstract class Avis implements IAvis,Serializable{
 			@Override
 			public String toString() {
 				
-				return "IdAvis [getIdUtilisateur()=" + getIdUtilisateur() + ", getIdAnnonce()=" + getIdAnnonce() + "]";
+				return getClass().getSimpleName() + "[getIdUtilisateur()=" + getIdUtilisateur() + ", getIdItem()=" + getIdItem() + "]";
 				
 			}
 	}	
@@ -130,12 +160,36 @@ public abstract class Avis implements IAvis,Serializable{
 	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Commentaire commentaire;
 	
-	/*TODO Récupération d'un utilisateur/Annonce
-	 * 
-	 *private Utilisateur utilisateur;
-	 *private Annonce annonce;
-	 *
+	//TODO CascadeType a modifier utiliser que pour test
+	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.PERSIST)
+	private Utilisateur utilisateur;
+	
+	//TODO CascadeType a modifier utiliser que pour test
+	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.PERSIST)
+	private Item item;
+
+	/**
+	 * Default constructor
 	 */
+	public Avis() {
+		
+	}
+	
+	/**
+	 * Constructeur avec ID 
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 */
+	public Avis(Utilisateur utilisateur,Item item){
+		
+		getId().setIdItem(item.getIdItem());
+		getId().setIdUtilisateur(utilisateur.getIdUtilisateur());
+		
+		setItem(item);
+		setUtilisateur(utilisateur);
+		
+	}
 	
 	/**
 	 * Retourne l'ID de l'avis.
@@ -151,8 +205,10 @@ public abstract class Avis implements IAvis,Serializable{
 	 * 
 	 * @param idAvis {@link IdAvis}
 	 */
-	public void setId(IdAvis idAvis) {
-		this.idAvis = idAvis;
+	public void setId(Utilisateur utilisateur,Item item) {
+		
+		this.idAvis = new IdAvis(utilisateur.getIdUtilisateur(), item.getIdItem());
+		
 	}
 	
 	/**
@@ -191,12 +247,28 @@ public abstract class Avis implements IAvis,Serializable{
 		this.commentaire = commentaire;
 	}
 
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
 	/** 
 	 * Affichage de l'objet en string
 	 */
 	@Override
 	public String toString() {
-		return "Avis [getId()=" + getId() + ", getNote()=" + getNotes() + ", getCommentaire()=" + getCommentaire() + "]";
+		return getClass().getSimpleName() + "[getId()=" + getId() + ", getNote()=" + getNotes() + ", getCommentaire()=" + getCommentaire() + "]";
 	}
 	
 	

@@ -2,6 +2,8 @@ package rtw.entity.gererAvis.noteGlobal.entity;
 
 import javax.persistence.Entity;
 
+import rtw.entity.gererAvis.note.entity.Note;
+
 /**
  * Entity {@link NoteGlobalBruitInterieur} class fille de {@link Note} contient la note sur le bruit intérieur.
  * 
