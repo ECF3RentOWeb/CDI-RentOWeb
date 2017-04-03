@@ -14,6 +14,8 @@ import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
 import rtw.entity.gererAvis.avis.entity.Avis;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonce;
+import rtw.entity.gererAvis.entityTest.Item;
+import rtw.entity.gererAvis.entityTest.Utilisateur;
 import rtw.service.gererAvis.serviceAvis.serviceAvisAgence.ServiceAvisAgence;
 import rtw.service.gererAvis.serviceAvis.serviceAvisAnnonce.ServiceAvisAnnonce;
 import rtw.service.gererAvis.serviceAvisGlobal.serviceAvisGlobalAgence.ServiceAvisGlobalAgence;
@@ -47,16 +49,23 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
        
     }
 
+    /*
+     * TODO creation d'une facade optimal
+     * service(DtoAvis?,action,typeService)
+     * 
+     */
+    
     /**
 	 * Service de persistence d'un {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+     * @return true if insert OK.
 	 * @see DaoAvisAnnonce
 	 */
 	@Override
-	public void creerAvisAnnonce(AvisAnnonce avisAnnonce) {
+	public boolean creerAvisAnnonce(AvisAnnonce avisAnnonce) {
 
-		serviceAvisAnnonce.creerAvisAnnonce(avisAnnonce);
+		return serviceAvisAnnonce.creerAvisAnnonce(avisAnnonce);
 		
 	}
 
@@ -64,12 +73,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de persistence d'un {@link AvisAgence} grace a la class {@link DaoAvisAgence}
 	 * 
 	 * @param avisAgence {@link AvisAgence}
+	 * @return true if insert OK.
 	 * @see DaoAvisAgence
 	 */
 	@Override
-	public void creerAvisAgence(AvisAgence avisAgence) {
+	public boolean creerAvisAgence(AvisAgence avisAgence) {
 
-		serviceAvisAgence.creerAvisAgence(avisAgence);
+		return serviceAvisAgence.creerAvisAgence(avisAgence);
 		
 	}
 
@@ -77,12 +87,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de persistence d'un {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return true if insert OK.
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public void creerAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
+	public boolean creerAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
 
-		serviceAvisGlobalAnnonce.creerAvisGlobalAnnonce(avisGlobalAnnonce);
+		return serviceAvisGlobalAnnonce.creerAvisGlobalAnnonce(avisGlobalAnnonce);
 		
 	}
 
@@ -90,12 +101,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de persistence d'un {@link AvisGlobalAgence} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if insert OK.
 	 * @see DaoAvisAnnonce
 	 */
 	@Override
-	public void creerAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean creerAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		serviceAvisGlobalAgence.creerAvisGlobalAgence(avisGlobalAgence);
+		return serviceAvisGlobalAgence.creerAvisGlobalAgence(avisGlobalAgence);
 		
 	}
 
@@ -103,12 +115,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de suppression d'un {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * @return true if delete OK.
 	 * @see DaoAvisAnnonce
 	 */
 	@Override
-	public void supprimerAvisAnnonce(AvisAnnonce avisAnnonce) {
+	public boolean supprimerAvisAnnonce(AvisAnnonce avisAnnonce) {
 
-		serviceAvisAnnonce.supprimerAvisAnnonce(avisAnnonce);
+		return serviceAvisAnnonce.supprimerAvisAnnonce(avisAnnonce);
 		
 	}
 
@@ -116,12 +129,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de suppression d'un {@link AvisAgence} grace a la class {@link DaoAvisAgence}
 	 * 
 	 * @param avisAgence {@link AvisAgence}
+	 * @return true if delete OK.
 	 * @see DaoAvisAgence
 	 */
 	@Override
-	public void supprimerAvisAgence(AvisAgence avisAgence) {
+	public boolean supprimerAvisAgence(AvisAgence avisAgence) {
 
-		serviceAvisAgence.supprimerAvisAgence(avisAgence);
+		return serviceAvisAgence.supprimerAvisAgence(avisAgence);
 		
 	}
 
@@ -129,12 +143,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de suppression d'un {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return true if delete OK.
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public void supprimerAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
+	public boolean supprimerAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
 
-		serviceAvisGlobalAnnonce.supprimerAvisGlobalAnnonce(avisGlobalAnnonce);
+		return serviceAvisGlobalAnnonce.supprimerAvisGlobalAnnonce(avisGlobalAnnonce);
 		
 	}
 
@@ -142,12 +157,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de suppression d'un {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if delete OK.
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void supprimerAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean supprimerAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		serviceAvisGlobalAgence.supprimerAvisGlobalAgence(avisGlobalAgence);
+		return serviceAvisGlobalAgence.supprimerAvisGlobalAgence(avisGlobalAgence);
 		
 	}
 
@@ -155,12 +171,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de recherche d'un {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * @return avisAnnonce {@link AvisAnnonce} Null if not exist in db.
 	 * @see DaoAvisAnnonce
 	 */
 	@Override
-	public void rechercheAvisAnnonce(AvisAnnonce avisAnnonce) {
+	public AvisAnnonce rechercheAvisAnnonce(AvisAnnonce avisAnnonce) {
 
-		serviceAvisAnnonce.rechercheAvisAnnonce(avisAnnonce);
+		return serviceAvisAnnonce.rechercheAvisAnnonce(avisAnnonce);
 		
 	}
 
@@ -168,12 +185,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de recherche d'un {@link AvisAgence} grace a la class {@link DaoAvisAgence}
 	 * 
 	 * @param avisAgence {@link AvisAgence}
+	 * @return avisAgence {@link AvisAgence} Null if not exist in db.
 	 * @see DaoAvisAgence
 	 */
 	@Override
-	public void rechercheAvisAgence(AvisAgence avisAgence) {
+	public AvisAgence rechercheAvisAgence(AvisAgence avisAgence) {
 
-		serviceAvisAgence.rechercheAvisAgence(avisAgence);
+		return serviceAvisAgence.rechercheAvisAgence(avisAgence);
 		
 	}
 
@@ -181,12 +199,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de recherche d'un {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return avisGlobalAnnonce {@link AvisGlobalAnnonce} Null if not exist in db.
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public void rechercheAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
+	public AvisGlobalAnnonce rechercheAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
 
-		serviceAvisGlobalAnnonce.rechercheAvisGlobalAnnonce(avisGlobalAnnonce);
+		return serviceAvisGlobalAnnonce.rechercheAvisGlobalAnnonce(avisGlobalAnnonce);
 		
 	}
 
@@ -194,12 +213,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de recherche d'un {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return avisGlobalAgence {@link AvisGlobalAgence} Null if not exist in db.
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void rechercheAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public AvisGlobalAgence rechercheAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 		
-		serviceAvisGlobalAgence.rechercheAvisGlobalAgence(avisGlobalAgence);
+		return serviceAvisGlobalAgence.rechercheAvisGlobalAgence(avisGlobalAgence);
 		
 	}
 	
@@ -207,12 +227,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de modification d'un {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * @return true if update OK.
 	 * @see DaoAvisAnnonce
 	 */
 	@Override
-	public void modifierAvisAnnonce(AvisAnnonce avisAnnonce) {
+	public boolean modifierAvisAnnonce(AvisAnnonce avisAnnonce) {
 
-		serviceAvisAnnonce.modifierAvisAnnonce(avisAnnonce);
+		return serviceAvisAnnonce.modifierAvisAnnonce(avisAnnonce);
 		
 	}
 
@@ -220,12 +241,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de modification d'un {@link AvisAgence} grace a la class {@link DaoAvisAgence}
 	 * 
 	 * @param avisAgence {@link AvisAgence}
+	 * @return true if update OK.
 	 * @see DaoAvisAgence
 	 */
 	@Override
-	public void modifierAvisAgence(AvisAgence avisAgence) {
+	public boolean modifierAvisAgence(AvisAgence avisAgence) {
 
-		serviceAvisAgence.modifierAvisAgence(avisAgence);
+		return serviceAvisAgence.modifierAvisAgence(avisAgence);
 		
 	}
 
@@ -233,12 +255,13 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de modification d'un {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return true if update OK.
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public void modifierAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
+	public boolean modifierAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
 
-		serviceAvisGlobalAnnonce.modifierAvisGlobalAnnonce(avisGlobalAnnonce);
+		return serviceAvisGlobalAnnonce.modifierAvisGlobalAnnonce(avisGlobalAnnonce);
 		
 	}
 
@@ -246,13 +269,136 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * Service de modification d'un {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if update OK.
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void modifierAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean modifierAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 		
-		serviceAvisGlobalAgence.modifierAvisGlobalAgence(avisGlobalAgence);
+		return serviceAvisGlobalAgence.modifierAvisGlobalAgence(avisGlobalAgence);
 		
 	}
+
+	/**
+	 * Service de recherche d'un {@link AvisAnnonce} par son ID grace a la class {@link DaoAvisAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisAnnonce {@link AvisAnnonce} Null if not exist in db.
+	 * @see DaoAvisAnnonce
+	 */
+	@Override
+	public AvisAnnonce rechercheAvisAnnonceById(Utilisateur utilisateur, Item item) {
+		
+		return serviceAvisAnnonce.rechercheAvisAnnonceById(utilisateur,item);
+	}
+
+	/**
+	 * Service de recherche d'un {@link AvisAgence} par son ID grace a la class {@link DaoAvisAgence}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisAgence {@link AvisAgence} Null if not exist in db.
+	 * @see DaoAvisAgence
+	 */
+	@Override
+	public AvisAgence rechercheAvisAgenceById(Utilisateur utilisateur, Item item) {
+		
+		return serviceAvisAgence.rechercheAvisAgenceById(utilisateur,item);
+	}
+	
+	/**
+	 * Service de recherche d'un {@link AvisGlobalAnnonce} par son ID grace a la class {@link DaoAvisGlobalAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisAnnonce {@link AvisGlobalAnnonce} Null if not exist in db.
+	 * @see DaoAvisGlobalAnnonce
+	 */
+	@Override
+	public AvisGlobalAnnonce rechercheAvisGlobalAnnonceById(Utilisateur utilisateur, Item item) {
+		
+		return serviceAvisGlobalAnnonce.rechercheAvisGlobalAnnonceById(utilisateur,item);
+	}
+
+	/**
+	 * Service de recherche d'un {@link AvisGlobalAgence} par son ID grace a la class {@link DaoAvisGlobalAgence}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisAnnonce {@link AvisGlobalAgence} Null if not exist in db.
+	 * @see DaoAvisGlobalAgence
+	 */
+	@Override
+	public AvisGlobalAgence rechercheAvisGlobalAgenceById(Utilisateur utilisateur, Item item) {
+		
+		return serviceAvisGlobalAgence.rechercheAvisGlobalAgenceById(utilisateur,item);
+	}
+	
+	/**
+	 * Service de suppression d'un {@link AvisAnnonce} par son ID grace a la class {@link DaoAvisAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK.
+	 * @see DaoAvisAnnonce
+	 */
+	@Override
+	public boolean supprimerAvisAnnonceById(Utilisateur utilisateur, Item item) {
+		
+		return serviceAvisAnnonce.supprimerAvisAnnonceById(utilisateur, item);
+	}
+
+	/**
+	 * Service de suppression d'un {@link AvisAgence} par son ID grace a la class {@link DaoAvisAgence}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK.
+	 * @see DaoAvisAgence
+	 */
+	@Override
+	public boolean supprimerAvisAgenceById(Utilisateur utilisateur, Item item) {
+		
+		return serviceAvisAgence.supprimerAvisAgenceById(utilisateur, item);
+	}
+	
+	/**
+	 * Service de suppression d'un {@link AvisGlobalAnnonce} par son ID grace a la class {@link DaoAvisGlobalAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK.
+	 * @see DaoAvisGlobalAnnonce
+	 */
+	@Override
+	public boolean supprimerAvisGlobalAnnonceById(Utilisateur utilisateur, Item item) {
+		
+		return serviceAvisGlobalAnnonce.supprimerAvisGlobalAnnonceById(utilisateur,item);
+	}
+
+	/**
+	 * Service de suppression d'un {@link AvisGlobalAgence} par son ID grace a la class {@link DaoAvisGlobalAgence}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK.
+	 * @see DaoAvisGlobalAgence
+	 */
+	@Override
+	public boolean supprimerAvisGlobalAgenceById(Utilisateur utilisateur, Item item) {
+		
+		return serviceAvisGlobalAgence.supprimerAvisGlobalAgenceById(utilisateur,item);
+	}
+	
+	//TODO Service Factory
 
 }

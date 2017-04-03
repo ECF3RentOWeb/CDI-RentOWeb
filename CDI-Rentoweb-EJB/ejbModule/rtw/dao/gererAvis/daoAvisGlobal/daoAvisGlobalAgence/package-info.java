@@ -1,5 +1,5 @@
 /**
- * Contient toute les classe de la couche DAO Avis Global Agence.
+ * Contient toute les classe de la couche DAO DtoAvis Global Agence.
  * 
  * @author Aurélien
  * @Version 1

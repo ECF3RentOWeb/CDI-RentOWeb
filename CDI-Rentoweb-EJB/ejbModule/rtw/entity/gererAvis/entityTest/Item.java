@@ -10,10 +10,12 @@ import javax.persistence.Table;
 @Table(name="item_test_avis")
 public class Item implements Serializable{
 
+
 	/**
-	 * 
+	 * Generated ID, need to be modified if Entity is modified
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7895715350691146613L;
+	
 	@Id
 	private String idItem;
 	

@@ -1,7 +1,5 @@
 package rtw.entity.gererAvis.avis.interfaces;
 
-import rtw.entity.gererAvis.avis.entity.Avis;
-
 /**
  * Interfaces qui définit tout ce que dois contenir un {@link Avis}
  * 

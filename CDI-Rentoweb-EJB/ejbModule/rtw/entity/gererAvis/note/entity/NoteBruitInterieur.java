@@ -14,8 +14,9 @@ import javax.persistence.Entity;
 public class NoteBruitInterieur extends Note{
 
 	/**
-	 * TODO
+	 * Generated ID, need to be modified if Entity is modified
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7400211800592638804L;
+
 
 }

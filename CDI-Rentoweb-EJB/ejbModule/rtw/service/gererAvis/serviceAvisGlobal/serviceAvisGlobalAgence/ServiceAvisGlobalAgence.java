@@ -7,6 +7,9 @@ import javax.ejb.Stateless;
 import rtw.dao.gererAvis.daoAvisGlobal.daoAvisGlobalAgence.DaoAvisGlobalAgence;
 import rtw.dao.gererAvis.facade.FacadeDaoAvis;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
+import rtw.entity.gererAvis.entityTest.Item;
+import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.service.gererAvis.factory.FactoryAvisGlobal;
 
 /**
  * Facade de service pour les {@link AvisGlobalAgence}.
@@ -27,19 +30,20 @@ public class ServiceAvisGlobalAgence implements ServiceAvisGlobalAgenceLocal {
      * Default constructor. 
      */
     public ServiceAvisGlobalAgence() {
-        // TODO Auto-generated constructor stub
+        
     }
 
     /**
 	 * Service de persistence d'un {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+     * @return true if insert OK.
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void creerAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean creerAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		facadeDaoAvis.addAvisGlobalAgence(avisGlobalAgence);
+		return facadeDaoAvis.addAvisGlobalAgence(avisGlobalAgence);
 		
 	}
 
@@ -47,12 +51,13 @@ public class ServiceAvisGlobalAgence implements ServiceAvisGlobalAgenceLocal {
 	 * Service de suppression d'un {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if delete OK.
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void supprimerAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean supprimerAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		facadeDaoAvis.deleteAvisGlobalAgence(avisGlobalAgence);
+		return facadeDaoAvis.deleteAvisGlobalAgence(avisGlobalAgence);
 		
 	}
 
@@ -60,12 +65,16 @@ public class ServiceAvisGlobalAgence implements ServiceAvisGlobalAgenceLocal {
 	 * Service de recherche d'un {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return avisGlobalAgence {@link AvisGlobalAgence} Null if not exist in db.
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void rechercheAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public AvisGlobalAgence rechercheAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		facadeDaoAvis.findAvisGlobalAgence(avisGlobalAgence);
+		AvisGlobalAgence daoAvisGlobalAgence = facadeDaoAvis.findAvisGlobalAgence(avisGlobalAgence);
+		FactoryAvisGlobal factoryAvisGlobal = new FactoryAvisGlobal();
+		
+		return (AvisGlobalAgence) factoryAvisGlobal.getAvisGlobalWithoutPersistentBag(daoAvisGlobalAgence);
 		
 	}
 	
@@ -73,13 +82,47 @@ public class ServiceAvisGlobalAgence implements ServiceAvisGlobalAgenceLocal {
 	 * Service de modification d'un {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if update OK.
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void modifierAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean modifierAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		facadeDaoAvis.updateAvisGlobalAgence(avisGlobalAgence);
+		return facadeDaoAvis.updateAvisGlobalAgence(avisGlobalAgence);
 		
+	}
+
+	/**
+	 * Service de recherche d'un {@link AvisGlobalAgence} par son ID grace a la class {@link DaoAvisGlobalAgence}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisAnnonce {@link AvisGlobalAgence} Null if not exist in db.
+	 * @see DaoAvisGlobalAgence
+	 */
+	@Override
+	public AvisGlobalAgence rechercheAvisGlobalAgenceById(Utilisateur utilisateur, Item item) {
+		
+		AvisGlobalAgence daoAvisGlobalAgence = facadeDaoAvis.findAvisGlobalAgenceById(utilisateur, item);
+		FactoryAvisGlobal factoryAvisGlobal = new FactoryAvisGlobal();
+		
+		return (AvisGlobalAgence) factoryAvisGlobal.getAvisGlobalWithoutPersistentBag(daoAvisGlobalAgence);
+	}
+
+	/**
+	 * Service de suppression d'un {@link AvisGlobalAgence} par son ID grace a la class {@link DaoAvisGlobalAgence}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK.
+	 * @see DaoAvisGlobalAgence
+	 */
+	@Override
+	public boolean supprimerAvisGlobalAgenceById(Utilisateur utilisateur, Item item) {
+		// TODO Auto-generated method stub
+		return facadeDaoAvis.deleteAvisAgenceById(utilisateur, item);
 	}
 
 }

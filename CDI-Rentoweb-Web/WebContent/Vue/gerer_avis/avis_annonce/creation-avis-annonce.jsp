@@ -5,16 +5,17 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
+  	<%@ taglib prefix="s" uri="/struts-tags" %>
+  
 	<!-- IMPORT CSS/JS/FONT -->
-	<link href="../../../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-	<link href="../../../CSS/gerer_avis/avis_annonce/star-rating.css" rel="stylesheet" type="text/css"/>
-	<link href="../../../CSS/gerer_avis/avis_annonce/avis_annonce.css" rel="stylesheet" type="text/css"/>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="<s:url namespace="/gestion-avis" action="star-rating-avis-css" />" rel="stylesheet" type="text/css"/>
+	<link href="<s:url namespace="/gestion-avis" action="creation-avis-css" />" rel="stylesheet" type="text/css"/>
 	
-	<script type="text/javascript" src="../../../JQuery/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript" src="../../../bootstrap/js/bootstrap.js"></script>
-	<script type="text/javascript" src="../../../JS/gerer_avis/avis_annonce/star-rating.js"></script>
-	<script type="text/javascript" src="../../../JS/gerer_avis/avis_annonce/creation_avis_annonce.js"></script>
+	<script type="text/javascript" src="<s:url namespace="/gestion-avis" action="JQuery" />"></script>
+	<script type="text/javascript" src="<s:url namespace="/gestion-avis" action="bootstrap-js" />"></script>
+	<script type="text/javascript" src="<s:url namespace="/gestion-avis" action="star-rating-avis-js" />"></script>
+	<script type="text/javascript" src="<s:url namespace="/gestion-avis" action="creation-avis-js" />"></script>
 	
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,100,300italic' rel='stylesheet' type='text/css'>
 	
@@ -26,7 +27,7 @@
 
 <!-- Formulaire de creation d'un avis utilisateur -->
 <div class="formulaire">
-	<form method="get" action="#" onsubmit="return controleAvisComplet()">
+	<s:form method="post" namespace="/gestion-avis" action="gestion-avis-annonce-creer" onsubmit="return controleAvisComplet()" theme="simple" >
 	
 <!-- Note -->
 		<div class="note">
@@ -99,7 +100,7 @@
 			<p id="messageInformatif" ></p>
 		</div>
 		
-	</form>
+	</s:form>>
 </div>
 </body>
 </html>

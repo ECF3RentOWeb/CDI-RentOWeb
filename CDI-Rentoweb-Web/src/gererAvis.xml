@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+	<package name="gestion-avis" namespace="/gestion-avis" extends="struts-default">
+	
+		<action name="creation-avis-annonce">
+			<result>/Vue/gerer_avis/avis_annonce/creation-avis-annonce.jsp</result>
+		</action>
+		
+		<action name="gestion-avis-annonce-*" method="{1}" class="rtw.beanAction.gererAvis.ActionAvisAnnonce">
+			<result name="success">/Vue/gerer_avis/avis_annonce/creation-avis-annonce.jsp</result>
+			<allowed-methods>creer, modifier, supprimer,afficher,lister</allowed-methods>
+		</action>
+		
+		<action name="creation-avis-css">
+			<result>/CSS/gerer_avis/avis_annonce/avis_annonce.css</result>
+		</action>
+		
+		<action name="star-rating-avis-css">
+			<result>/CSS/gerer_avis/avis_annonce/star-rating.css</result>
+		</action>
+		
+		<action name="creation-avis-js">
+			<result>/JS/gerer_avis/avis_annonce/creation_avis_annonce.js</result>
+		</action>
+
+		<action name="star-rating-avis-js">
+			<result>/JS/gerer_avis/avis_annonce/star-rating.js</result>
+		</action>
+		
+		<action name="bootstrap-css">
+			<result>/bootstrap/css/bootstrap.css</result>
+		</action>
+		
+		<action name="bootstrap-js">
+			<result>/bootstrap/js/bootstrap.js</result>
+		</action>
+		
+		<action name="JQuery" >
+			<result>/JQuery/jquery-3.1.1.min.js</result>
+		</action>
+		
+	</package>
+	
+</struts>

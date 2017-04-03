@@ -3,8 +3,9 @@ package rtw.service.gererAvis.serviceAvis.serviceAvisAnnonce;
 import javax.ejb.Local;
 
 import rtw.dao.gererAvis.daoAvis.daoAvisAnnonce.DaoAvisAnnonce;
-import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
 import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
+import rtw.entity.gererAvis.entityTest.Item;
+import rtw.entity.gererAvis.entityTest.Utilisateur;
 
 /**
  * Interface de la facade de service pour les {@link AvisAnnonce}.
@@ -21,32 +22,58 @@ public interface ServiceAvisAnnonceLocal {
 	 * Service de persistence d'un {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * @return true if persit OK.
 	 * @see DaoAvisAnnonce
 	 */
-	public void creerAvisAnnonce(AvisAnnonce avisAnnonce);
+	public boolean creerAvisAnnonce(AvisAnnonce avisAnnonce);
 	
 	/**
 	 * Service de suppression d'un {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * @return true if delete OK.
 	 * @see DaoAvisAnnonce
 	 */
-	public void supprimerAvisAnnonce(AvisAnnonce avisAnnonce);
+	public boolean supprimerAvisAnnonce(AvisAnnonce avisAnnonce);
 	
 	/**
 	 * Service de recherche d'un {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * @return avisAnnonce {@link AvisAnnonce} Null if not exist in db.
 	 * @see DaoAvisAnnonce
 	 */
-	public void rechercheAvisAnnonce(AvisAnnonce avisAnnonce);
+	public AvisAnnonce rechercheAvisAnnonce(AvisAnnonce avisAnnonce);
 
 	/**
 	 * Service de modification d'un {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * @return true if persit OK.
 	 * @see DaoAvisAnnonce
 	 */
-	public void modifierAvisAnnonce(AvisAnnonce avisAnnonce);
+	public boolean modifierAvisAnnonce(AvisAnnonce avisAnnonce);
+
+	/**
+	 * Service de recherche d'un {@link AvisAnnonce} par son ID grace a la class {@link DaoAvisAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisAnnonce {@link AvisAnnonce} Null if not exist in db.
+	 * @see DaoAvisAnnonce
+	 */
+	AvisAnnonce rechercheAvisAnnonceById(Utilisateur utilisateur, Item item);
+
+	/**
+	 * Service de suppression d'un {@link AvisAnnonce} par son ID grace a la class {@link DaoAvisAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK.
+	 * @see DaoAvisAnnonce
+	 */
+	boolean supprimerAvisAnnonceById(Utilisateur utilisateur, Item item);
 	
 }

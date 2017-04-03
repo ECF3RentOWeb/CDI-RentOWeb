@@ -14,8 +14,9 @@ import javax.persistence.Entity;
 public class NoteRelationBailleur extends Note{
 
 	/**
-	 * TODO
+	 * Generated ID, need to be modified if Entity is modified
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6712298463905158534L;
+
 
 }

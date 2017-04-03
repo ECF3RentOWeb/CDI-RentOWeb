@@ -6,8 +6,11 @@
     <meta charSet="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     
-      <link href='https://fonts.googleapis.com/css?family=Lato:400,300,100,300italic' rel='stylesheet' type='text/css'>
-	<link href="CSS/style.css" rel="stylesheet" type="text/css"/>
+    <%@ taglib prefix="s" uri="/struts-tags" %>
+    
+    <link href="<s:url namespace="/accueil" action="accueil_css" />" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,300,100,300italic" rel="stylesheet" type="text/css"/>
+	
   </head>
 <body>
     <header>
@@ -16,7 +19,6 @@
 
                 <img src="IMG/logo-mrs.png" alt="RentOWeb logo" class="logo">
                 <h2>RentOweb</h2>
-
                 
                 <ul class="main-nav">
                     <li><a href="#">S'inscrire</a></li>
@@ -25,7 +27,6 @@
             </div>
         </nav>
     </header>
-    
     
     <section class="section-feature">
         <div class="hero-text-box">

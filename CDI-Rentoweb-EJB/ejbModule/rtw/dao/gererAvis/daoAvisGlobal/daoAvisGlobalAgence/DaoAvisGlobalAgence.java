@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
+import rtw.entity.gererAvis.entityTest.Item;
+import rtw.entity.gererAvis.entityTest.Utilisateur;
 
 /**
  * Classe qui gère toute la DAO des {@link AvisGlobalAgence}.
@@ -34,11 +36,28 @@ public class DaoAvisGlobalAgence implements DaoAvisGlobalAgenceLocal {
 	 * Persistance d'un {@link AvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if insert OK.
 	 */
 	@Override
-	public void addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		em.persist(avisGlobalAgence);
+	boolean retour = true;
+		
+		try {
+			
+			em.persist(avisGlobalAgence);
+			
+			
+		} catch (Exception e) {
+			
+			e.getMessage();
+			e.printStackTrace();
+			System.out.println("atcha j'ai tout cassé dans le persit :3");
+			retour = false;
+			
+		}
+		
+		return retour;
 		
 	}
 
@@ -46,12 +65,29 @@ public class DaoAvisGlobalAgence implements DaoAvisGlobalAgenceLocal {
 	 * Suppression d'un {@link AvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if delete OK.
 	 */
 	@Override
-	public void deleteAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean deleteAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+
+		boolean retour = true;
 
 		avisGlobalAgence = findAvisGlobalAgence(avisGlobalAgence);
-		em.remove(avisGlobalAgence);
+		
+		try {
+			
+			em.remove(avisGlobalAgence);
+			
+		} catch (Exception e) {
+			
+			e.getMessage();
+			e.printStackTrace();
+			System.out.println("atcha j'ai tout cassé dans le delete  :3");
+			retour = false;
+			
+		}
+		
+		return retour;
 		
 	}
 
@@ -59,12 +95,90 @@ public class DaoAvisGlobalAgence implements DaoAvisGlobalAgenceLocal {
 	 * Recherche d'un {@link AvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
-	 * @return avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return avisGlobalAgence {@link AvisGlobalAgence} Null if not exist in db.
 	 */
 	@Override
 	public AvisGlobalAgence findAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		return em.find(AvisGlobalAgence.class, avisGlobalAgence.getId());
+		AvisGlobalAgence avisGlobalAgenceRetour;
+
+		try {
+			
+			avisGlobalAgenceRetour = em.find(AvisGlobalAgence.class, avisGlobalAgence.getId());
+			
+		} catch (Exception e) {
+			
+			e.getMessage();
+			e.printStackTrace();
+			System.out.println("atcha j'ai tout cassé dans le find  :3");
+			avisGlobalAgenceRetour = null;
+		}
+
+		return avisGlobalAgenceRetour;	
+				
+	}
+	
+	/**
+	 * Recherche un {@link AvisGlobalAgence} par son ID.
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisGlobalAgence {@link AvisGlobalAgence} Null if not exist in db.
+	 * 
+	 */
+	@Override
+	public AvisGlobalAgence findAvisGlobalAgenceById(Utilisateur utilisateur,Item item) {
+
+		AvisGlobalAgence avisGlobalAgence;
+		
+		try {
+			
+			avisGlobalAgence = (AvisGlobalAgence) em.createQuery("select a from DtoAvis a where idUtilisateur = ?1 and idItem = ?2")
+				.setParameter(1, utilisateur.getIdUtilisateur())
+				.setParameter(2,item.getIdItem()).getSingleResult();
+			
+		} catch (Exception e) {
+			
+			//TODO test int
+			e.getMessage();
+			e.printStackTrace();
+			System.out.println("atcha j'ai tout cassé dans le find by id :3");
+			avisGlobalAgence = null;
+		}
+
+		return avisGlobalAgence;	
+
+	}
+	
+	/**
+	 * Suppression d'un {@link AvisGlobalAgence} par son ID.
+	 * 
+	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if delete OK.
+	 */
+	@Override
+	public boolean deleteAvisGlobalAgenceById(Utilisateur utilisateur,Item item) {
+
+		boolean retour = true;
+		
+		try {
+			
+			em.createQuery("delete from AvisGlobalAgence where idUtilisateur = ?1 and idItem = ?2")
+			.setParameter(1, utilisateur.getIdUtilisateur())
+			.setParameter(2,item.getIdItem()).executeUpdate();
+			
+		} catch (Exception e) {
+			
+			//TODO test int
+			e.getMessage();
+			e.printStackTrace();
+			System.out.println("atcha j'ai tout cassé dans le delete by id :3");
+			retour = false;
+			
+		}
+		
+		return retour;
 		
 	}
 	
@@ -72,11 +186,25 @@ public class DaoAvisGlobalAgence implements DaoAvisGlobalAgenceLocal {
 	 * Update d'un {@link AvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if update OK.
 	 */
 	@Override
-	public void updateAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean updateAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		em.merge(avisGlobalAgence);
+		boolean retour = true;
+		try {
+			
+			em.merge(avisGlobalAgence);
+			
+		} catch (Exception e) {
+			
+			e.getMessage();
+			e.printStackTrace();
+			System.out.println("atcha j'ai tout cassé dans le update  :3");
+			retour = false;
+		}
+		
+		return retour;
 		
 	}
 

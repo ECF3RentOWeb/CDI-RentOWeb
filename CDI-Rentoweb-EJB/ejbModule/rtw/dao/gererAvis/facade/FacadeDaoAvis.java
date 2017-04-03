@@ -12,6 +12,9 @@ import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
 import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonce;
+import rtw.entity.gererAvis.entityTest.Item;
+import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.exception.gererAvis.DoublonAvisException;
 
 /**
  * Session bean facade de la DAO de la fonctionnalité gérer avis.
@@ -41,16 +44,24 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
         
     }
 
+    /*
+     * TODO creation d'une facade optimal
+     * dao(DtoAvis?,action)
+     * 
+     */
+    
+    
     /**
 	 * Persistence d'un {@link AvisAgence} grace a la class {@link DaoAvisAgence}
 	 * 
 	 * @param avisAgence {@link AvisAgence}
+     * @return true if insert OK.
 	 * @see DaoAvisAgence
 	 */
 	@Override
-	public void addAvisAgence(AvisAgence avisAgence) {
+	public boolean addAvisAgence(AvisAgence avisAgence) {
 
-		daoAvisAgence.addAvisAgence(avisAgence);
+		return daoAvisAgence.addAvisAgence(avisAgence);
 		
 	}
 
@@ -58,12 +69,14 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Persistence d'un {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * @return true if insert OK.
+	 * @throws DoublonAvisException 
 	 * @see DaoAvisAnnonce
 	 */
 	@Override
-	public void addAvisAnnonce(AvisAnnonce avisAnnonce) {
+	public boolean addAvisAnnonce(AvisAnnonce avisAnnonce) throws DoublonAvisException {
 
-		daoAvisAnnonce.addAvisAnnonce(avisAnnonce);
+		return daoAvisAnnonce.addAvisAnnonce(avisAnnonce);
 		
 	}
 
@@ -71,12 +84,13 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Persistence d'un {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return true if insert OK.
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public void addAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
+	public boolean addAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
 
-		daoAvisGlobalAnnonce.addAvisGlobalAnnonce(avisGlobalAnnonce);
+		return daoAvisGlobalAnnonce.addAvisGlobalAnnonce(avisGlobalAnnonce);
 		
 	}
 
@@ -84,25 +98,28 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Persistence d'un {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if insert OK.
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		daoAvisGlobalAgence.addAvisGlobalAgence(avisGlobalAgence);
+		return daoAvisGlobalAgence.addAvisGlobalAgence(avisGlobalAgence);
 		
 	}
+	
 
 	/**
 	 * Delete {@link AvisAgence} grace a la class {@link DaoAvisAgence}
 	 * 
 	 * @param avisAgence {@link AvisAgence}
+	 * @return true if delete OK.
 	 * @see DaoAvisAgence
 	 */
 	@Override
-	public void deleteAvisAgence(AvisAgence avisAgence) {
+	public boolean deleteAvisAgence(AvisAgence avisAgence) {
 
-		daoAvisAgence.deleteAvisAgence(avisAgence);
+		return daoAvisAgence.deleteAvisAgence(avisAgence);
 		
 	}
 
@@ -110,12 +127,13 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Delete {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * @return true if delete OK.
 	 * @see DaoAvisAnnonce
 	 */
 	@Override
-	public void deleteAvisAnnonce(AvisAnnonce avisAnnonce) {
+	public boolean deleteAvisAnnonce(AvisAnnonce avisAnnonce) {
 			
-		daoAvisAnnonce.deleteAvisAnnonce(avisAnnonce);
+		return daoAvisAnnonce.deleteAvisAnnonce(avisAnnonce);
 		
 	}
 
@@ -123,12 +141,13 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Delete {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if delete OK
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void deleteAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean deleteAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		daoAvisGlobalAgence.deleteAvisGlobalAgence(avisGlobalAgence);
+		return daoAvisGlobalAgence.deleteAvisGlobalAgence(avisGlobalAgence);
 		
 	}
 
@@ -136,12 +155,77 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Delete {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return true if delete OK
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public void deleteAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
+	public boolean deleteAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
 			
-		daoAvisGlobalAnnonce.deleteAvisGlobalAnnonce(avisGlobalAnnonce);
+		return daoAvisGlobalAnnonce.deleteAvisGlobalAnnonce(avisGlobalAnnonce);
+		
+	}
+	
+	/**
+	 * Delete {@link AvisAgence} par son ID grace a la class {@link DaoAvisAgence}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK.
+	 * @see DaoAvisAgence
+	 */
+	@Override
+	public boolean deleteAvisAgenceById(Utilisateur utilisateur,Item item) {
+
+		return daoAvisAgence.deleteAvisAgenceById(utilisateur,item);
+		
+	}
+
+	/**
+	 * Delete {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK.
+	 * @see DaoAvisAnnonce
+	 */
+	@Override
+	public boolean deleteAvisAnnonceById(Utilisateur utilisateur,Item item) {
+			
+		return daoAvisAnnonce.deleteAvisAnnonceById(utilisateur,item);
+		
+	}
+
+	/**
+	 * Delete {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK
+	 * @see DaoAvisGlobalAgence
+	 */
+	@Override
+	public boolean deleteAvisGlobalAgenceById(Utilisateur utilisateur,Item item) {
+
+		return daoAvisGlobalAgence.deleteAvisGlobalAgenceById(utilisateur,item);
+		
+	}
+
+	/**
+	 * Delete {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK
+	 * @see DaoAvisGlobalAnnonce
+	 */
+	@Override
+	public boolean deleteAvisGlobalAnnonceById(Utilisateur utilisateur,Item item) {
+			
+		return daoAvisGlobalAnnonce.deleteAvisGlobalAnnonceById(utilisateur,item);
 		
 	}
 
@@ -149,12 +233,14 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Find {@link AvisAgence} grace a la class {@link DaoAvisAgence}
 	 * 
 	 * @param avisAgence {@link AvisAgence}
+	 * 
+	 * @return avisAgence {@link AvisAgence} Null if not exist in db.
 	 * @see DaoAvisAgence
 	 */
 	@Override
-	public void findAvisAgence(AvisAgence avisAgence) {
+	public AvisAgence findAvisAgence(AvisAgence avisAgence) {
 		
-		daoAvisAgence.findAvisAgence(avisAgence);
+		return daoAvisAgence.findAvisAgence(avisAgence);
 
 	}
 
@@ -162,12 +248,14 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Find {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * 
+	 * @return avisAnnonce {@link AvisAnnonce} Null if not exist in db.
 	 * @see DaoAvisAnnonce
 	 */
 	@Override
-	public void findAvisAnnonce(AvisAnnonce avisAnnonce) {
+	public AvisAnnonce findAvisAnnonce(AvisAnnonce avisAnnonce) {
 
-		daoAvisAnnonce.findAvisAnnonce(avisAnnonce);
+		return daoAvisAnnonce.findAvisAnnonce(avisAnnonce);
 		
 	}
 
@@ -175,12 +263,13 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Find {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return avisGlobalAgence {@link AvisGlobalAgence} Null if not exist in db.
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void findAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public AvisGlobalAgence findAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		daoAvisGlobalAgence.findAvisGlobalAgence(avisGlobalAgence);
+		return daoAvisGlobalAgence.findAvisGlobalAgence(avisGlobalAgence);
 		
 	}
 
@@ -188,12 +277,78 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Find {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return avisGlobalAnnonce {@link AvisGlobalAnnonce} Null if not exist in db.
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public void findAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
+	public AvisGlobalAnnonce findAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
 
-		daoAvisGlobalAnnonce.findAvisGlobalAnnonce(avisGlobalAnnonce);
+		return daoAvisGlobalAnnonce.findAvisGlobalAnnonce(avisGlobalAnnonce);
+		
+	}
+	
+
+	/**
+	 * Find {@link AvisAgence} par son ID grace a la class {@link DaoAvisAgence}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisAgence {@link AvisAgence} Null if not exist in db.
+	 * @see DaoAvisAgence
+	 */
+	@Override
+	public AvisAgence findAvisAgenceById(Utilisateur utilisateur,Item item) {
+		
+		return daoAvisAgence.findAvisAgenceById(utilisateur,item);
+
+	}
+
+	/**
+	 * Find {@link AvisAnnonce} par son ID grace a la class {@link DaoAvisAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisAnnonce {@link AvisAnnonce} Null if not exist in db.
+	 * @see DaoAvisAnnonce
+	 */
+	@Override
+	public AvisAnnonce findAvisAnnonceById(Utilisateur utilisateur,Item item) {
+
+		return daoAvisAnnonce.findAvisAnnonceById(utilisateur,item);
+		
+	}
+
+	/**
+	 * Find {@link AvisGlobalAgence} par son ID grace a la class {@link DaoAvisGlobalAgence}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisGlobalAgence {@link AvisGlobalAgence} Null if not exist in db.
+	 * @see DaoAvisGlobalAgence
+	 */
+	@Override
+	public AvisGlobalAgence findAvisGlobalAgenceById(Utilisateur utilisateur,Item item) {
+
+		return daoAvisGlobalAgence.findAvisGlobalAgenceById(utilisateur,item);
+		
+	}
+
+	/**
+	 * Find {@link AvisGlobalAnnonce} par son ID grace a la class {@link DaoAvisGlobalAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisGlobalAnnonce {@link AvisGlobalAnnonce} Null if not exist in db.
+	 * @see DaoAvisGlobalAnnonce
+	 */
+	@Override
+	public AvisGlobalAnnonce findAvisGlobalAnnonceById(Utilisateur utilisateur,Item item) {
+
+		return daoAvisGlobalAnnonce.findAvisGlobalAnnonceById(utilisateur,item);
 		
 	}
     
@@ -201,12 +356,13 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Update {@link AvisAgence} grace a la class {@link DaoAvisAgence}
 	 * 
 	 * @param avisAgence {@link AvisAgence}
+	 * @return true if update OK.
 	 * @see DaoAvisAgence
 	 */
 	@Override
-	public void updateAvisAgence(AvisAgence avisAgence) {
+	public boolean updateAvisAgence(AvisAgence avisAgence) {
 		
-		daoAvisAgence.updateAvisAgence(avisAgence);
+		return daoAvisAgence.updateAvisAgence(avisAgence);
 
 	}
 
@@ -214,12 +370,13 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Update {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
 	 * 
 	 * @param avisAnnonce {@link AvisAnnonce}
+	 * @return true if update OK.
 	 * @see DaoAvisAnnonce
 	 */
 	@Override
-	public void updateAvisAnnonce(AvisAnnonce avisAnnonce) {
+	public boolean updateAvisAnnonce(AvisAnnonce avisAnnonce) {
 
-		daoAvisAnnonce.updateAvisAnnonce(avisAnnonce);
+		return daoAvisAnnonce.updateAvisAnnonce(avisAnnonce);
 		
 	}
 
@@ -227,12 +384,13 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Update {@link AvisGlobalAgence} grace a la class {@link DaoAvisGlobalAgence}
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
+	 * @return true if update OK.
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public void updateAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean updateAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
 
-		daoAvisGlobalAgence.updateAvisGlobalAgence(avisGlobalAgence);
+		return daoAvisGlobalAgence.updateAvisGlobalAgence(avisGlobalAgence);
 		
 	}
 
@@ -240,12 +398,13 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * Update {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return true if update OK.
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public void updateAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
+	public boolean updateAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
 
-		daoAvisGlobalAnnonce.updateAvisGlobalAnnonce(avisGlobalAnnonce);
+		return daoAvisGlobalAnnonce.updateAvisGlobalAnnonce(avisGlobalAnnonce);
 		
 	}
     

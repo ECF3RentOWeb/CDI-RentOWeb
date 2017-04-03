@@ -1,9 +1,9 @@
 /**
- * Contient toute les classe de la fonctionnalité gerer avis.
+ * Package contenant toute les class business de la fonctionnalité gérer avis.
  * 
- * @author Aurelien
- * @version 1
- * @since 06/03/2017
+ * @author Aurélien
+ * @Version 1
+ * @since 30/03/2017
  *
  */
 package rtw.business.gererAvis;

@@ -4,6 +4,8 @@ import javax.ejb.Local;
 
 import rtw.dao.gererAvis.daoAvisGlobal.daoAvisGlobalAnnonce.DaoAvisGlobalAnnonce;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonce;
+import rtw.entity.gererAvis.entityTest.Item;
+import rtw.entity.gererAvis.entityTest.Utilisateur;
 
 /**
  * Interface de la facade de service pour les {@link AvisGlobalAnnonce}.
@@ -20,32 +22,58 @@ public interface ServiceAvisGlobalAnnonceLocal {
 	 * Service de persistence d'un {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return true if insert OK.
 	 * @see DaoAvisGlobalAnnonce
 	 */
-	public void creerAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce);
+	public boolean creerAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce);
 	
 	/**
 	 * Service de suppression d'un {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return true if delete OK.
 	 * @see DaoAvisGlobalAnnonce
 	 */
-	public void supprimerAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce);
+	public boolean supprimerAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce);
 	
 	/**
 	 * Service de recherche d'un {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return avisGlobalAnnonce {@link AvisGlobalAnnonce} Null if not exist.
 	 * @see DaoAvisGlobalAnnonce
 	 */
-	public void rechercheAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce);
+	public AvisGlobalAnnonce rechercheAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce);
 
 	/**
 	 * Service de modification d'un {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
+	 * @return true if update OK.
 	 * @see DaoAvisGlobalAnnonce
 	 */
-	public void modifierAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce);
+	public boolean modifierAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce);
+
+	/**
+	 * Service de recherche d'un {@link AvisGlobalAnnonce} par son ID grace a la class {@link DaoAvisGlobalAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return avisAnnonce {@link AvisGlobalAnnonce} Null if not exist in db.
+	 * @see DaoAvisGlobalAnnonce
+	 */
+	AvisGlobalAnnonce rechercheAvisGlobalAnnonceById(Utilisateur utilisateur, Item item);
+
+	/**
+	 * Service de suppression d'un {@link AvisGlobalAnnonce} par son ID grace a la class {@link DaoAvisGlobalAnnonce}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * 
+	 * @return true if delete OK.
+	 * @see DaoAvisGlobalAnnonce
+	 */
+	boolean supprimerAvisGlobalAnnonceById(Utilisateur utilisateur, Item item);
 	
 }
