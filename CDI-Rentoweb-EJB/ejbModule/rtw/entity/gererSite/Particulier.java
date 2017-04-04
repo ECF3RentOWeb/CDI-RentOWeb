@@ -9,7 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * @author Afpa
+ * @author souleymane
+ * @see: user.java
+ * @version 1
+ * Un particulier est un User
+ * voir la classe User pour plus de détails
  *
  */
 @Entity

@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author Afpa
@@ -31,12 +32,17 @@ public class Profil implements Serializable{
 	 * Numéro auto-généré
 	 */
 	private static final long serialVersionUID = 6957387217946118350L;
+	
 	@Id
 	private int id;
+	
 	@Column(name = "nomProfil",length=30, nullable = false)
 	private String nomProfil;
-	@OneToMany (mappedBy ="profil", cascade = { CascadeType.ALL }, fetch=FetchType.EAGER)
+	
+	//@OneToMany (mappedBy="profil", cascade = { CascadeType.ALL }, fetch=FetchType.EAGER)
+	@Transient
 	private Collection<Droit> droits = new ArrayList<Droit>();
+	
 	/**
 	 * 
 	 */
@@ -68,9 +74,10 @@ public class Profil implements Serializable{
 	 * @param nomProfil
 	 */
 	public Profil(int id, String nomProfil) {
-		super();
+		
 		this.id = id;
 		this.nomProfil = nomProfil;
+		
 	}
 	/**
 	 * @return the id
@@ -100,20 +107,30 @@ public class Profil implements Serializable{
 	 * @return the droits
 	 */
 	public Collection<Droit> getDroits() {
+		
 		return droits;
 	}
 	/**
 	 * @param droits the droits to set
 	 */
 	public void setDroits(Collection<Droit> droits) {
+		if (droits != null) {
+			for (Droit droit : droits) {
+				droit.setProfil(this);
+			}		
+		}
 		this.droits = droits;
 	}
+	
+	
 	/**
 	 * @return the serialversionuid
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -121,6 +138,11 @@ public class Profil implements Serializable{
 	public String toString() {
 		return "Profil [id=" + id + ", nomProfil=" + nomProfil + ", droits=" + droits + "]";
 	}
+	
+	
+
+
+
 	
 	
 	

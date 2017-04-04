@@ -44,9 +44,8 @@ public abstract class User implements Serializable{
 	@Column(name = "LastName",length=30, nullable = false)
 	private String lastName;
 	@Column(name = "phoneNumber",length=10, nullable = false)
-	private int phoneNumber;
-	
-	// RG: Un utilisateur a forcément un profil
+	private int phoneNumber;	
+	// RG: Un utilisateur a forcément un et un seul profil
 	@OneToOne( cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "idProfil", unique = true, nullable = false)
 	private Profil profil;
@@ -167,6 +166,19 @@ public abstract class User implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	/**
+	 * @return the profil
+	 */
+	public Profil getProfil() {
+		return profil;
+	}
+	/**
+	 * @param profil the profil to set
+	 */
+	public void setProfil(Profil profil) {
+		this.profil = profil;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -176,5 +188,6 @@ public abstract class User implements Serializable{
 				+ resetPassword + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber
 				+ "]";
 	}
-
+	
+	
 }
