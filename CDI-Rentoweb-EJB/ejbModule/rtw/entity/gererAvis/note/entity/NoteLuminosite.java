@@ -3,7 +3,7 @@ package rtw.entity.gererAvis.note.entity;
 import javax.persistence.Entity;
 
 /**
- * Entity {@link NoteGlobalBruitInterieur} class fille de {@link Note} contient la note sur le bruit intérieur.
+ * Entity {@link NoteLuminosite} class fille de {@link Note} contient la note sur l'humidite.
  * 
  * @author Aurélien
  * @version 1
@@ -11,12 +11,12 @@ import javax.persistence.Entity;
  *
  */
 @Entity
-public class NoteBruitInterieur extends Note{
+public class NoteLuminosite extends Note{
 
 	/**
 	 * Generated ID, need to be modified if Entity is modified
 	 */
-	private static final long serialVersionUID = -7400211800592638804L;
+	private static final long serialVersionUID = 8305628520712931430L;
 
 
 }

@@ -10,5 +10,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/httpd/Jar/Serveur-TestDaoRentowebV1.35.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

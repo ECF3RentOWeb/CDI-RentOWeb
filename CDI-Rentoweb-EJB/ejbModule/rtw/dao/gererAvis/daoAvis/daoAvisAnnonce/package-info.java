@@ -1,5 +1,5 @@
 /**
- * Contient toute les classe de la couche DAO Avis Annonce.
+ * Contient toute les classe de la couche DAO DtoAvis Annonce.
  * 
  * @author Aurélien
  * @Version 1
