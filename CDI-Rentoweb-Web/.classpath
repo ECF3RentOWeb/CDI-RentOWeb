@@ -10,6 +10,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/httpd/Jar/GererAvisV1.36.jar"/>
+	<classpathentry kind="var" path="JAR_GERER_AVIS"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
