@@ -3,21 +3,27 @@
  */
 package rtw.entity.gererSite;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * @author Afpa
+ * @author Souleymane
+ * @version 1
+ * @see User.java
+ * Voir la classe User.java pour plus de détails
  *
  */
 @Entity
 @Table(name="professionnel")
-public class Professionnel extends User{
+public class Professionnel extends User implements Serializable{
 
 	/**
-	 * @serial auto généré
+	 * 
 	 */
-	private static final long serialVersionUID = 4148300080304626778L;
+	private static final long serialVersionUID = 7333784320205328620L;
+
 
 	/**
 	 * 
@@ -42,6 +48,7 @@ public class Professionnel extends User{
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	/**
 	 * @return the serialversionuid
 	 */
