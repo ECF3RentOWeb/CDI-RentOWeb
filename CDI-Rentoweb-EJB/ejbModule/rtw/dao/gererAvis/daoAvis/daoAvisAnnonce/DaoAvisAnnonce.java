@@ -12,6 +12,7 @@ import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
 import rtw.exception.gererAvis.DoublonAvisException;
+import rtw.util.ParametreCommun;
 
 /**
  * Classe qui gère toute la DAO des {@link AvisAnnonce}.
@@ -26,7 +27,7 @@ import rtw.exception.gererAvis.DoublonAvisException;
 public class DaoAvisAnnonce implements DaoAvisAnnonceLocal {
 	
 	//TODO persistence Name
-	@PersistenceContext(unitName="rentoweb")
+	@PersistenceContext(unitName=ParametreCommun.PERSISTENCE_UNIT_NAME)
 	EntityManager em;
 	
 	/**

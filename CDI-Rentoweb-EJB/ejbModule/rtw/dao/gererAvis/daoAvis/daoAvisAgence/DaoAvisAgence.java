@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.util.ParametreCommun;
 
 /**
  * Classe qui gère toute la DAO des {@link AvisAgence}.
@@ -22,7 +23,7 @@ import rtw.entity.gererAvis.entityTest.Utilisateur;
 public class DaoAvisAgence implements DaoAvisAgenceLocal {
 
 	//TODO persistence Name
-	@PersistenceContext(unitName="rentoweb")
+	@PersistenceContext(unitName=ParametreCommun.PERSISTENCE_UNIT_NAME)
 	EntityManager em;
 
 	/**

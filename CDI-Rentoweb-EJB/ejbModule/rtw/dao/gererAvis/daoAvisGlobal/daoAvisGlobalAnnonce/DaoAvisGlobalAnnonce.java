@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonce;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.util.ParametreCommun;
 
 
 
@@ -24,7 +25,7 @@ import rtw.entity.gererAvis.entityTest.Utilisateur;
 public class DaoAvisGlobalAnnonce implements DaoAvisGlobalAnnonceLocal {
 	
 	//TODO persistence Name
-	@PersistenceContext(unitName="rentoweb")
+	@PersistenceContext(unitName=ParametreCommun.PERSISTENCE_UNIT_NAME)
 	EntityManager em;
 	
 	/**
