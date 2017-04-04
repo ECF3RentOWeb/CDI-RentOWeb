@@ -121,8 +121,23 @@ public class ServiceAvisGlobalAgence implements ServiceAvisGlobalAgenceLocal {
 	 */
 	@Override
 	public boolean supprimerAvisGlobalAgenceById(Utilisateur utilisateur, Item item) {
-		// TODO Auto-generated method stub
+	
 		return facadeDaoAvis.deleteAvisAgenceById(utilisateur, item);
+	}
+	
+	/**
+	 * Service d'instanciation d'un {@link AvisGlobalAgence} utilise la class {@link FactoryAvisGlobal}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * @return {@link AvisGlobalAgence}
+	 */
+	@Override
+	public AvisGlobalAgence getAvisGlobalAgence(Utilisateur utilisateur,Item item) {
+		
+		FactoryAvisGlobal factoryAvisGlobal = new FactoryAvisGlobal();
+		
+		return factoryAvisGlobal.getAvisGlobalAgence(utilisateur,item);
 	}
 
 }

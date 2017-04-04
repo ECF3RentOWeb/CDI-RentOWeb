@@ -16,6 +16,8 @@ import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonce;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.service.gererAvis.factory.FactoryAvis;
+import rtw.service.gererAvis.factory.FactoryAvisGlobal;
 import rtw.service.gererAvis.serviceAvis.serviceAvisAgence.ServiceAvisAgence;
 import rtw.service.gererAvis.serviceAvis.serviceAvisAnnonce.ServiceAvisAnnonce;
 import rtw.service.gererAvis.serviceAvisGlobal.serviceAvisGlobalAgence.ServiceAvisGlobalAgence;
@@ -399,6 +401,57 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 		return serviceAvisGlobalAgence.supprimerAvisGlobalAgenceById(utilisateur,item);
 	}
 	
-	//TODO Service Factory
+	/**
+	 * Service d'instanciation d'un {@link AvisAnnonce} utilise la class {@link FactoryAvis}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @Param item {@link Item}
+	 * @return {@link AvisAnnonce}
+	 */
+	@Override
+	public AvisAnnonce getAvisAnnonce(Utilisateur utilisateur,Item item) {
+		
+		return serviceAvisAnnonce.getAvisAnnonce(utilisateur,item);
+	}
+
+	/**
+	 * Service d'instanciation d'un {@link AvisAgence} utilise la class {@link FactoryAvis}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @Param item {@link Item}
+	 * @return {@link AvisAgence}
+	 */
+	@Override
+	public AvisAgence getAvisAgence(Utilisateur utilisateur,Item item) {
+		
+		return serviceAvisAgence.getAvisAgence(utilisateur,item);
+	}
+
+	/**
+	 * Service d'instanciation d'un {@link AvisGlobalAgence} utilise la class {@link FactoryAvisGlobal}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @Param item {@link Item}
+	 * @return {@link AvisGlobalAgence}
+	 */
+	@Override
+	public AvisGlobalAgence getAvisGlobalAgence(Utilisateur utilisateur,Item item) {
+		
+		return serviceAvisGlobalAgence.getAvisGlobalAgence(utilisateur,item);	
+	
+	}
+
+	/**
+	 * Service d'instanciation d'un {@link AvisGlobalAnnonce} utilise la class {@link FactoryAvisGlobal}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @Param item {@link Item}
+	 * @return {@link AvisGlobalAnnonce}
+	 */
+	@Override
+	public AvisGlobalAnnonce getAvisGlobalAnnonce(Utilisateur utilisateur,Item item) {
+		
+		return serviceAvisGlobalAnnonce.getAvisGlobalAnnonce(utilisateur,item);
+	}
 
 }

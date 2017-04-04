@@ -126,5 +126,16 @@ public class ServiceAvisAgence implements ServiceAvisAgenceLocal {
 		return facadeDaoAvis.deleteAvisAnnonceById(utilisateur, item);
 		
 	}
+	
+	/**
+	 * Service d'instanciation d'un {@link AvisAgence} utilise la class {@link FactoryAvis}
+	 * 
+	 * @return {@link AvisAgence}
+	 */
+	@Override
+	public AvisAgence getAvisAgence(Utilisateur utilisateur,Item item) {
+		FactoryAvis factoryAvis = new FactoryAvis();
+		return factoryAvis.getAvisAgence(utilisateur,item);
+	}
 
 }

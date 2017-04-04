@@ -12,6 +12,8 @@ import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonce;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.service.gererAvis.factory.FactoryAvis;
+import rtw.service.gererAvis.factory.FactoryAvisGlobal;
 
 /**
  * Interface de la facade service de la fonctionnalité gérer avis.
@@ -256,5 +258,45 @@ public interface FacadeServiceAvisRemote {
 	 * @see DaoAvisGlobalAgence
 	 */
 	public boolean supprimerAvisGlobalAgenceById(Utilisateur utilisateur,Item item);
+	
+	/**
+	 * Service d'instanciation d'un {@link AvisAnnonce} utilise la class {@link FactoryAvis}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @Param item {@link Item}
+	 * @return {@link AvisAnnonce}
+	 */
+	public AvisAnnonce getAvisAnnonce(Utilisateur utilisateur, Item item);
+	
+	/**
+	 * Service d'instanciation d'un {@link AvisAgence} utilise la class {@link FactoryAvis}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @Param item {@link Item}
+	 * @return {@link AvisAgence}
+	 */
+	public AvisAgence getAvisAgence(Utilisateur utilisateur, Item item);
+	
+	/**
+	 * Service d'instanciation d'un {@link AvisGlobalAgence} utilise la class {@link FactoryAvisGlobal}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @Param item {@link Item}
+	 * @return {@link AvisGlobalAgence}
+	 */
+	public AvisGlobalAgence getAvisGlobalAgence(Utilisateur utilisateur, Item item);
+	
+	/**
+	 * Service d'instanciation d'un {@link AvisGlobalAnnonce} utilise la class {@link FactoryAvisGlobal}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @Param item {@link Item}
+	 * @return {@link AvisGlobalAnnonce}
+	 */
+	public AvisGlobalAnnonce getAvisGlobalAnnonce(Utilisateur utilisateur, Item item);
+
+	
+
+	
 	
 }

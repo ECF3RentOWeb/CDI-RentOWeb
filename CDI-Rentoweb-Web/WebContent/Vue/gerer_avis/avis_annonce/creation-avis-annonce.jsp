@@ -27,7 +27,7 @@
 
 <!-- Formulaire de creation d'un avis utilisateur -->
 <div class="formulaire">
-	<s:form method="post" namespace="/gestion-avis" action="gestion-avis-annonce-creer" onsubmit="return controleAvisComplet()" theme="simple" >
+	<s:form method="get" namespace="/gestion-avis" action="gestion-avis-annonce-creer" onsubmit="return controleAvisComplet()" theme="simple" >
 	
 <!-- Note -->
 		<div class="note">

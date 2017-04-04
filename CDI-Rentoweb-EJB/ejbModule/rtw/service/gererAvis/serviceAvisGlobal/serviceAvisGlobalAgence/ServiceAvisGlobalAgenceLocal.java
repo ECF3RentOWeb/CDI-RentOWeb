@@ -6,6 +6,7 @@ import rtw.dao.gererAvis.daoAvisGlobal.daoAvisGlobalAgence.DaoAvisGlobalAgence;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.service.gererAvis.factory.FactoryAvisGlobal;
 
 /**
  * Interface de la facade de service pour les {@link AvisGlobalAgence}.
@@ -75,5 +76,16 @@ public interface ServiceAvisGlobalAgenceLocal {
 	 * @see DaoAvisGlobalAgence
 	 */
 	boolean supprimerAvisGlobalAgenceById(Utilisateur utilisateur, Item item);
+
+	/**
+	 * Service d'instanciation d'un {@link AvisGlobalAgence} utilise la class {@link FactoryAvisGlobal}
+	 * 
+	 * @param utilisateur {@link Utilisateur}
+	 * @param item {@link Item}
+	 * @return {@link AvisGlobalAgence}
+	 */
+	AvisGlobalAgence getAvisGlobalAgence(Utilisateur utilisateur, Item item);
+
+	
 	
 }
