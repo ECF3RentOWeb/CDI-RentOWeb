@@ -35,6 +35,8 @@ import rtw.entity.gererAvis.note.entity.NoteIsolationChaud;
 import rtw.entity.gererAvis.note.entity.NoteIsolationFroid;
 import rtw.entity.gererAvis.note.entity.NoteLuminosite;
 import rtw.entity.gererAvis.note.entity.NoteRelationBailleur;
+import rtw.technique.gererAvis.ListeAvisAgence;
+import rtw.technique.gererAvis.ListeAvisAnnonce;
 import rtw.util.gererAvis.Param;
 
 
