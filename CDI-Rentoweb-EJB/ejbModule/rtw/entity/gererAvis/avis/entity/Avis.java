@@ -24,7 +24,7 @@ import rtw.entity.gererAvis.note.entity.Note;
 
 
 /**
- * Entity {@link DtoAvis} class mere abstraite de {@link AvisAgence} et {@link AvisItem}.
+ * Entity {@link Avis} class mere abstraite de {@link AvisAgence} et {@link AvisItem}.
  * 
  * @author Aurélien
  * @version 1
