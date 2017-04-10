@@ -1,5 +1,7 @@
 package rtw.service.gererAvis.facade;
 
+import java.util.ArrayList;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -22,6 +24,8 @@ import rtw.service.gererAvis.serviceAvis.serviceAvisAgence.ServiceAvisAgence;
 import rtw.service.gererAvis.serviceAvis.serviceAvisAnnonce.ServiceAvisAnnonce;
 import rtw.service.gererAvis.serviceAvisGlobal.serviceAvisGlobalAgence.ServiceAvisGlobalAgence;
 import rtw.service.gererAvis.serviceAvisGlobal.serviceAvisGlobalAnnonce.ServiceAvisGlobalAnnonce;
+import rtw.technique.gererAvis.ListeAvisAgence;
+import rtw.technique.gererAvis.ListeAvisAnnonce;
 
 /**
  * Facade des service de la fonctionnalité gérer {@link Avis}.
@@ -321,9 +325,9 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public AvisGlobalAnnonce rechercheAvisGlobalAnnonceById(Utilisateur utilisateur, Item item) {
+	public AvisGlobalAnnonce rechercheAvisGlobalAnnonceById(Item item) {
 		
-		return serviceAvisGlobalAnnonce.rechercheAvisGlobalAnnonceById(utilisateur,item);
+		return serviceAvisGlobalAnnonce.rechercheAvisGlobalAnnonceById(item);
 	}
 
 	/**
@@ -336,9 +340,9 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public AvisGlobalAgence rechercheAvisGlobalAgenceById(Utilisateur utilisateur, Item item) {
+	public AvisGlobalAgence rechercheAvisGlobalAgenceById(Item item) {
 		
-		return serviceAvisGlobalAgence.rechercheAvisGlobalAgenceById(utilisateur,item);
+		return serviceAvisGlobalAgence.rechercheAvisGlobalAgenceById(item);
 	}
 	
 	/**
@@ -381,9 +385,9 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public boolean supprimerAvisGlobalAnnonceById(Utilisateur utilisateur, Item item) {
+	public boolean supprimerAvisGlobalAnnonceById(Item item) {
 		
-		return serviceAvisGlobalAnnonce.supprimerAvisGlobalAnnonceById(utilisateur,item);
+		return serviceAvisGlobalAnnonce.supprimerAvisGlobalAnnonceById(item);
 	}
 
 	/**
@@ -396,9 +400,9 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public boolean supprimerAvisGlobalAgenceById(Utilisateur utilisateur, Item item) {
+	public boolean supprimerAvisGlobalAgenceById(Item item) {
 		
-		return serviceAvisGlobalAgence.supprimerAvisGlobalAgenceById(utilisateur,item);
+		return serviceAvisGlobalAgence.supprimerAvisGlobalAgenceById(item);
 	}
 	
 	/**
@@ -435,9 +439,9 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * @return {@link AvisGlobalAgence}
 	 */
 	@Override
-	public AvisGlobalAgence getAvisGlobalAgence(Utilisateur utilisateur,Item item) {
+	public AvisGlobalAgence getAvisGlobalAgence(Item item) {
 		
-		return serviceAvisGlobalAgence.getAvisGlobalAgence(utilisateur,item);	
+		return serviceAvisGlobalAgence.getAvisGlobalAgence(item);	
 	
 	}
 
@@ -449,9 +453,33 @@ public class FacadeServiceAvis implements FacadeServiceAvisRemote {
 	 * @return {@link AvisGlobalAnnonce}
 	 */
 	@Override
-	public AvisGlobalAnnonce getAvisGlobalAnnonce(Utilisateur utilisateur,Item item) {
+	public AvisGlobalAnnonce getAvisGlobalAnnonce(Item item) {
 		
-		return serviceAvisGlobalAnnonce.getAvisGlobalAnnonce(utilisateur,item);
+		return serviceAvisGlobalAnnonce.getAvisGlobalAnnonce(item);
+	}
+
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link AvisAnnonce} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAnnonce {@link ArrayList} {@link AvisAnnonce}
+	 */
+	@Override
+	public ListeAvisAnnonce rechercheListeAvisAnnonce(Item item) {
+		
+		return serviceAvisAnnonce.rechercheListeAvisAnnonce(item);
+	}
+
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link AvisAgence} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAgence {@link ArrayList} {@link AvisAgence}
+	 */
+	@Override
+	public ListeAvisAgence rechercheListeAvisAgence(Item item) {
+		
+		return serviceAvisAgence.rechercheListeAvisAgence(item);
 	}
 
 }

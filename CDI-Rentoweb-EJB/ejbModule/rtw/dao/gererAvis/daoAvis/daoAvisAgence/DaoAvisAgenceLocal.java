@@ -1,10 +1,14 @@
 package rtw.dao.gererAvis.daoAvis.daoAvisAgence;
 
+import java.util.ArrayList;
+
 import javax.ejb.Local;
 
 import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.exception.gererAvis.DoublonAvisException;
+import rtw.technique.gererAvis.ListeAvisAgence;
 
 /**
  * Interface de la facade de la DAO {@link AvisAgence}.
@@ -22,8 +26,9 @@ public interface DaoAvisAgenceLocal {
 	 * 
 	 * @param avisAgence {@link AvisAgence}
 	 * @return true if persit OK.
+	 * @throws DoublonAvisException 
 	 */
-	public boolean addAvisAgence(AvisAgence avisAgence);
+	public boolean addAvisAgence(AvisAgence avisAgence) throws DoublonAvisException;
 	
 	/**
 	 * Suppression d'un {@link AvisAgence}
@@ -68,6 +73,14 @@ public interface DaoAvisAgenceLocal {
 	 * @return true if delete OK.
 	 */
 	boolean deleteAvisAgenceById(Utilisateur utilisateur, Item item);
+
+	/**
+	 * Récupération d'une liste d' {@link AvisAgence} en {@link ArrayList}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAgence {@link ArrayList}
+	 */
+	ListeAvisAgence listeAvisAgenceByIdItem(Item item);
 
 	
 	

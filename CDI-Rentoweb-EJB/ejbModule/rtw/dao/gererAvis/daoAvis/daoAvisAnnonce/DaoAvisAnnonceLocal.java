@@ -1,11 +1,14 @@
 package rtw.dao.gererAvis.daoAvis.daoAvisAnnonce;
 
+import java.util.ArrayList;
+
 import javax.ejb.Local;
 
 import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
 import rtw.exception.gererAvis.DoublonAvisException;
+import rtw.technique.gererAvis.ListeAvisAnnonce;
 
 /** 
  * Interface de la facade de la DAO {@link AvisAnnonce}.
@@ -70,5 +73,14 @@ public interface DaoAvisAnnonceLocal {
 	 * @return true if delete OK.
 	 */
 	boolean deleteAvisAnnonceById(Utilisateur utilisateur, Item item);
+
+	/**
+	 * Récupération d'une liste d' {@link AvisAnnonce} en {@link ArrayList}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAnnonce {@link ArrayList}
+	 */
+	ListeAvisAnnonce listeAvisAnnonceByIdItem(Item item);
+
 
 }

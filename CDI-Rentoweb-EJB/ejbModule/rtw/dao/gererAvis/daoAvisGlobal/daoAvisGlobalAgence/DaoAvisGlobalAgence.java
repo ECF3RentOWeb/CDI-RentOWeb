@@ -1,13 +1,17 @@
 package rtw.dao.gererAvis.daoAvisGlobal.daoAvisGlobalAgence;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.exception.gererAvis.DoublonAvisException;
 import rtw.util.ParametreCommun;
 
 /**
@@ -38,26 +42,44 @@ public class DaoAvisGlobalAgence implements DaoAvisGlobalAgenceLocal {
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
 	 * @return true if insert OK.
+	 * @throws DoublonAvisException 
 	 */
 	@Override
-	public boolean addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) throws DoublonAvisException {
 
-	boolean retour = true;
+		boolean retour = true;
 		
 		try {
 			
-			em.persist(avisGlobalAgence);
+			//TODO DELETE USED FOR TEST
+			em.persist(avisGlobalAgence.getItem());
 			
+			em.persist(avisGlobalAgence);			
+			em.flush();
 			
-		} catch (Exception e) {
+		}catch (PersistenceException eee) {
 			
-			e.getMessage();
-			e.printStackTrace();
-			System.out.println("atcha j'ai tout cassé dans le persit :3");
 			retour = false;
-			
-		}
+			eee.printStackTrace();
 		
+			retour = false;
+			eee.getMessage();
+			eee.printStackTrace();
+			
+			Throwable t = eee.getCause();
+			
+			
+			
+			while ((t != null) && !(t instanceof SQLIntegrityConstraintViolationException)) {
+				t = t.getCause();
+			}
+			
+			if(t instanceof SQLIntegrityConstraintViolationException){
+
+				throw new DoublonAvisException();
+				
+			}
+		}
 		return retour;
 		
 	}
@@ -78,10 +100,10 @@ public class DaoAvisGlobalAgence implements DaoAvisGlobalAgenceLocal {
 		try {
 			
 			em.remove(avisGlobalAgence);
+			em.flush();
 			
 		} catch (Exception e) {
-			
-			e.getMessage();
+
 			e.printStackTrace();
 			System.out.println("atcha j'ai tout cassé dans le delete  :3");
 			retour = false;
@@ -105,7 +127,7 @@ public class DaoAvisGlobalAgence implements DaoAvisGlobalAgenceLocal {
 
 		try {
 			
-			avisGlobalAgenceRetour = em.find(AvisGlobalAgence.class, avisGlobalAgence.getId());
+			avisGlobalAgenceRetour = em.find(AvisGlobalAgence.class, avisGlobalAgence.getItem().getIdItem());
 			
 		} catch (Exception e) {
 			
@@ -129,15 +151,14 @@ public class DaoAvisGlobalAgence implements DaoAvisGlobalAgenceLocal {
 	 * 
 	 */
 	@Override
-	public AvisGlobalAgence findAvisGlobalAgenceById(Utilisateur utilisateur,Item item) {
+	public AvisGlobalAgence findAvisGlobalAgenceById(Item item) {
 
 		AvisGlobalAgence avisGlobalAgence;
 		
 		try {
 			
-			avisGlobalAgence = (AvisGlobalAgence) em.createQuery("select a from DtoAvis a where idUtilisateur = ?1 and idItem = ?2")
-				.setParameter(1, utilisateur.getIdUtilisateur())
-				.setParameter(2,item.getIdItem()).getSingleResult();
+			avisGlobalAgence = (AvisGlobalAgence) em.createQuery("select a from Avis a where idItem = ?1")
+			.setParameter(1,item.getIdItem()).getSingleResult();
 			
 		} catch (Exception e) {
 			
@@ -159,15 +180,16 @@ public class DaoAvisGlobalAgence implements DaoAvisGlobalAgenceLocal {
 	 * @return true if delete OK.
 	 */
 	@Override
-	public boolean deleteAvisGlobalAgenceById(Utilisateur utilisateur,Item item) {
+	public boolean deleteAvisGlobalAgenceById(Item item) {
 
 		boolean retour = true;
 		
 		try {
 			
-			em.createQuery("delete from AvisGlobalAgence where idUtilisateur = ?1 and idItem = ?2")
-			.setParameter(1, utilisateur.getIdUtilisateur())
-			.setParameter(2,item.getIdItem()).executeUpdate();
+			em.createQuery("delete from AvisGlobalAgence where idItem = ?1")
+			.setParameter(1,item.getIdItem()).executeUpdate();
+			
+			em.flush();
 			
 		} catch (Exception e) {
 			
@@ -196,6 +218,7 @@ public class DaoAvisGlobalAgence implements DaoAvisGlobalAgenceLocal {
 		try {
 			
 			em.merge(avisGlobalAgence);
+			em.flush();
 			
 		} catch (Exception e) {
 			

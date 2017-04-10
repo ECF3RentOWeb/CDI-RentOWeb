@@ -5,6 +5,7 @@ import javax.ejb.Local;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.exception.gererAvis.DoublonAvisException;
 
 /**
  * Interface de la facade de la DAO {@link AvisGlobalAgence}.
@@ -22,8 +23,9 @@ public interface DaoAvisGlobalAgenceLocal {
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
 	 * @return true if insert OK.
+	 * @throws DoublonAvisException 
 	 */
-	public boolean addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence);
+	public boolean addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) throws DoublonAvisException;
 	
 	/**
 	 * Suppression d'un {@link AvisGlobalAgence}
@@ -57,7 +59,7 @@ public interface DaoAvisGlobalAgenceLocal {
 	 * 
 	 * @return true if delete OK.
 	 */
-	public boolean deleteAvisGlobalAgenceById(Utilisateur utilisateur, Item item);
+	public boolean deleteAvisGlobalAgenceById(Item item);
 
 	/**
 	 * Recherche d'un {@link AvisGlobalAgence} par son ID.
@@ -67,6 +69,6 @@ public interface DaoAvisGlobalAgenceLocal {
 	 * 
 	 * @return AvisGlobalAgence {@link AvisGlobalAgence} Null if not exist in db.
 	 */
-	public AvisGlobalAgence findAvisGlobalAgenceById(Utilisateur utilisateur, Item item);
+	public AvisGlobalAgence findAvisGlobalAgenceById(Item item);
 	
 }

@@ -1,15 +1,21 @@
 package rtw.service.gererAvis.serviceAvis.serviceAvisAgence;
 
+import java.util.ArrayList;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import rtw.business.gererAvis.BusinessGererAvis;
 import rtw.dao.gererAvis.daoAvis.daoAvisAgence.DaoAvisAgence;
 import rtw.dao.gererAvis.facade.FacadeDaoAvis;
 import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.exception.gererAvis.DoublonAvisException;
+import rtw.exception.gererAvis.NullAvisException;
 import rtw.service.gererAvis.factory.FactoryAvis;
+import rtw.technique.gererAvis.ListeAvisAgence;
 
 /**
  * Facade de service pour les {@link AvisAgence}.
@@ -42,9 +48,29 @@ public class ServiceAvisAgence implements ServiceAvisAgenceLocal {
 	 */
 	@Override
 	public boolean creerAvisAgence(AvisAgence avisAgence) {
-
-		return facadeDaoAvis.addAvisAgence(avisAgence);
 		
+		BusinessGererAvis businessGererAvis = new BusinessGererAvis();
+		
+		boolean retour;
+		
+		try {
+			
+			businessGererAvis.controleAvis(avisAgence);
+			retour = facadeDaoAvis.addAvisAgence(avisAgence);
+			
+		} catch (DoublonAvisException dae) {
+						
+			dae.getMessage();
+			
+			retour = false;
+			
+		}catch (NullAvisException nae) {
+
+			nae.getMessage();
+			retour = false;
+			
+		}
+		return retour;
 	}
 
 	/**
@@ -136,6 +162,24 @@ public class ServiceAvisAgence implements ServiceAvisAgenceLocal {
 	public AvisAgence getAvisAgence(Utilisateur utilisateur,Item item) {
 		FactoryAvis factoryAvis = new FactoryAvis();
 		return factoryAvis.getAvisAgence(utilisateur,item);
+	}
+
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link AvisAgence} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAgence {@link ArrayList} {@link AvisAgence}
+	 */
+	@Override
+	public ListeAvisAgence rechercheListeAvisAgence(Item item) {
+		
+		ListeAvisAgence listeAvisAgence = facadeDaoAvis.listeAvisAgenceByIdItem(item);
+
+		FactoryAvis factoryAvis = new FactoryAvis();
+		
+		
+		return factoryAvis.getListeAvisAgenceWithoutPersistentBag(listeAvisAgence);
+		
 	}
 
 }

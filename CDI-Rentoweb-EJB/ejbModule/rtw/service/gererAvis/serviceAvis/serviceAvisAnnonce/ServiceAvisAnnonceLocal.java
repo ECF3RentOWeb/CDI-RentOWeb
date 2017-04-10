@@ -1,5 +1,7 @@
 package rtw.service.gererAvis.serviceAvis.serviceAvisAnnonce;
 
+import java.util.ArrayList;
+
 import javax.ejb.Local;
 
 import rtw.dao.gererAvis.daoAvis.daoAvisAnnonce.DaoAvisAnnonce;
@@ -7,6 +9,7 @@ import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
 import rtw.service.gererAvis.factory.FactoryAvis;
+import rtw.technique.gererAvis.ListeAvisAnnonce;
 
 /**
  * Interface de la facade de service pour les {@link AvisAnnonce}.
@@ -86,6 +89,12 @@ public interface ServiceAvisAnnonceLocal {
 	 */
 	AvisAnnonce getAvisAnnonce(Utilisateur utilisateur, Item item);
 
-	
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link AvisAnnonce} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAnnonce {@link ArrayList} {@link AvisAnnonce}
+	 */
+	public ListeAvisAnnonce rechercheListeAvisAnnonce(Item item);
 	
 }

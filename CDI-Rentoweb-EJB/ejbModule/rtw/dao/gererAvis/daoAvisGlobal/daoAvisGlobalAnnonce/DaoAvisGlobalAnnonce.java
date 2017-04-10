@@ -1,13 +1,17 @@
 package rtw.dao.gererAvis.daoAvisGlobal.daoAvisGlobalAnnonce;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonce;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.exception.gererAvis.DoublonAvisException;
 import rtw.util.ParametreCommun;
 
 
@@ -40,26 +44,44 @@ public class DaoAvisGlobalAnnonce implements DaoAvisGlobalAnnonceLocal {
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
 	 * @return true if insert OK.
+	 * @throws DoublonAvisException 
 	 */
 	@Override
-	public boolean addAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
+	public boolean addAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) throws DoublonAvisException {
 
 		boolean retour = true;
 		
 		try {
 			
-			em.persist(avisGlobalAnnonce);
+			//TODO DELETE USED FOR TEST
+			em.persist(avisGlobalAnnonce.getItem());
 			
+			em.persist(avisGlobalAnnonce);			
+			em.flush();
 			
-		} catch (Exception e) {
+		}catch (PersistenceException eee) {
 			
-			e.getMessage();
-			e.printStackTrace();
-			System.out.println("atcha j'ai tout cassé dans le persit :3");
 			retour = false;
-			
-		}
+			eee.printStackTrace();
 		
+			retour = false;
+			eee.getMessage();
+			eee.printStackTrace();
+			
+			Throwable t = eee.getCause();
+			
+			
+			
+			while ((t != null) && !(t instanceof SQLIntegrityConstraintViolationException)) {
+				t = t.getCause();
+			}
+			
+			if(t instanceof SQLIntegrityConstraintViolationException){
+
+				throw new DoublonAvisException();
+				
+			}
+		}
 		return retour;
 		
 	}
@@ -80,10 +102,10 @@ public class DaoAvisGlobalAnnonce implements DaoAvisGlobalAnnonceLocal {
 		try {
 			
 			em.remove(avisGlobalAnnonce);
+			em.flush();
 			
 		} catch (Exception e) {
 			
-			e.getMessage();
 			e.printStackTrace();
 			System.out.println("atcha j'ai tout cassé dans le delete  :3");
 			retour = false;
@@ -107,7 +129,7 @@ public class DaoAvisGlobalAnnonce implements DaoAvisGlobalAnnonceLocal {
 		
 		try {
 			
-			avisGlobalAnnonceRetour = em.find(AvisGlobalAnnonce.class, avisGlobalAnnonce.getId());
+			avisGlobalAnnonceRetour = em.find(AvisGlobalAnnonce.class, avisGlobalAnnonce.getItem().getIdItem());
 			
 		} catch (Exception e) {
 			
@@ -131,15 +153,14 @@ public class DaoAvisGlobalAnnonce implements DaoAvisGlobalAnnonceLocal {
 	 * 
 	 */
 	@Override
-	public AvisGlobalAnnonce findAvisGlobalAnnonceById(Utilisateur utilisateur,Item item) {
+	public AvisGlobalAnnonce findAvisGlobalAnnonceById(Item item) {
 
 		AvisGlobalAnnonce avisGlobalAnnonce;
 		
 		try {
 			
-			avisGlobalAnnonce = (AvisGlobalAnnonce) em.createQuery("select a from DtoAvis a where idUtilisateur = ?1 and idItem = ?2")
-				.setParameter(1, utilisateur.getIdUtilisateur())
-				.setParameter(2,item.getIdItem()).getSingleResult();
+			avisGlobalAnnonce = (AvisGlobalAnnonce) em.createQuery("select a from Avis a where idItem = ?1")
+			.setParameter(1,item.getIdItem()).getSingleResult();
 			
 		} catch (Exception e) {
 			
@@ -161,15 +182,15 @@ public class DaoAvisGlobalAnnonce implements DaoAvisGlobalAnnonceLocal {
 	 * @return true if delete OK.
 	 */
 	@Override
-	public boolean deleteAvisGlobalAnnonceById(Utilisateur utilisateur,Item item) {
+	public boolean deleteAvisGlobalAnnonceById(Item item) {
 
 		boolean retour = true;
 		
 		try {
 			
-			em.createQuery("delete from AvisGlobalAnnonce where idUtilisateur = ?1 and idItem = ?2")
-			.setParameter(1, utilisateur.getIdUtilisateur())
-			.setParameter(2,item.getIdItem()).executeUpdate();
+			em.createQuery("delete from AvisGlobalAnnonce where idItem = ?1")
+			.setParameter(1,item.getIdItem()).executeUpdate();
+			em.flush();
 			
 		} catch (Exception e) {
 			
@@ -198,6 +219,7 @@ public class DaoAvisGlobalAnnonce implements DaoAvisGlobalAnnonceLocal {
 		try {
 			
 			em.merge(avisGlobalAnnonce);
+			em.flush();
 			
 		} catch (Exception e) {
 			

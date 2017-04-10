@@ -21,9 +21,12 @@ import rtw.entity.gererAvis.note.entity.NoteIsolationChaud;
 import rtw.entity.gererAvis.note.entity.NoteIsolationFroid;
 import rtw.entity.gererAvis.note.entity.NoteLuminosite;
 import rtw.entity.gererAvis.note.entity.NoteRelationBailleur;
+import rtw.technique.gererAvis.ListeAvis;
+import rtw.technique.gererAvis.ListeAvisAgence;
+import rtw.technique.gererAvis.ListeAvisAnnonce;
 
 /**
- * Factory qui creer des {@link Avis}
+ * Factory de creation d' {@link Avis} et de {@link ListeAvis}
  * @author Aurélien Harlé
  * @version 1
  * @since 30/03/2017
@@ -31,25 +34,33 @@ import rtw.entity.gererAvis.note.entity.NoteRelationBailleur;
  */
 public class FactoryAvis {
 
+	/**
+	 * Creation d'un {@link Avis} sans {@link PersistentBag}.
+	 * 
+	 * @param avisDao {@link Avis}
+	 * @return {@link Avis}
+	 */
 	public Avis getAvisWithoutPersistentBag(Avis avisDao) {
 		
 		BusinessGererAvis businessGererAvis = new BusinessGererAvis();
 		Avis avis = null; 
 		
-		if(avisDao instanceof AvisAnnonce){
-			avis = new AvisAnnonce();
-		}else if(avisDao instanceof AvisAgence){
-			avis = new AvisAgence();
-		}
+		if(avisDao != null){
+			
+			 //Impossible d'instancier un Avis
+			if(avisDao instanceof AvisAnnonce){
+				avis = new AvisAnnonce();
+			}else if(avisDao instanceof AvisAgence){
+				avis = new AvisAgence();
+			}
 
-		avis.setId(avisDao.getUtilisateur(), avisDao.getItem());
-		avis.setCommentaire(avisDao.getCommentaire());
-		avis.setItem(avisDao.getItem());
-		avis.setUtilisateur(avisDao.getUtilisateur());
-		avis.setNotes(businessGererAvis.convertNotePersistenceBagToNoteCollection((PersistentBag) avisDao.getNotes()));
+			avis.setCommentaire(avisDao.getCommentaire());
+			avis.setItem(avisDao.getItem());
+			avis.setUtilisateur(avisDao.getUtilisateur());
+			avis.setNotes(businessGererAvis.convertNotePersistenceBagToNoteCollection((PersistentBag) avisDao.getNotes()));
 		
+		}
 		return avis;
-		
 	}
 
 	/**
@@ -64,36 +75,18 @@ public class FactoryAvis {
 		AvisAnnonce avisAnnonce = new AvisAnnonce();
 		
 		Commentaire commentaire = new Commentaire();
-		
-		NoteBruitExterieur noteBruitExterieur = new NoteBruitExterieur();
-		NoteBruitInterieur noteBruitInterieur = new NoteBruitInterieur();
-		NoteEtatGeneral noteEtatGeneral = new NoteEtatGeneral();
-		NoteHumidite noteHumidite = new NoteHumidite();
-		NoteIsolationChaud noteIsolationChaud = new NoteIsolationChaud();
-		NoteIsolationFroid noteIsolationFroid = new NoteIsolationFroid();
-		NoteLuminosite noteLuminite = new NoteLuminosite();
-		NoteRelationBailleur noteRelationBailleur = new NoteRelationBailleur();
-		
+
 		Collection<Note> notes = new ArrayList<Note>();
-		
-		notes.add(noteBruitExterieur);
-		notes.add(noteBruitInterieur);
-		notes.add(noteEtatGeneral);
-		notes.add(noteHumidite);
-		notes.add(noteIsolationChaud);
-		notes.add(noteIsolationFroid);
-		notes.add(noteLuminite);
-		notes.add(noteRelationBailleur);
 		
 		avisAnnonce.setCommentaire(commentaire);
 		avisAnnonce.setNotes(notes);
 		
-		avisAnnonce.setId(utilisateur, item);
 		avisAnnonce.setUtilisateur(utilisateur);
 		avisAnnonce.setItem(item);
 		
 		return avisAnnonce;
 	}
+	
 	/**
 	 * Creation d'un {@link AvisAgence} avec son ID et toute les valeurs vide.
 	 * 
@@ -129,14 +122,59 @@ public class FactoryAvis {
 		
 		avisAgence.setCommentaire(commentaire);
 		avisAgence.setNotes(notes);
-		
-		avisAgence.setId(utilisateur, item);
+
 		avisAgence.setItem(item);
 		avisAgence.setUtilisateur(utilisateur);
 		
 		return avisAgence;
 		
 	}
-	
+	/**
+	 * Creation d'une {@link ListeAvisAgence} sans {@link PersistentBag}.
+	 * 
+	 * @param listeAvisAgenceDao {@link ListeAvisAgence}
+	 * @return {@link ListeAvisAgence}
+	 */
+	public ListeAvisAgence getListeAvisAgenceWithoutPersistentBag(ListeAvisAgence listeAvisAgenceDao) {
+		
+		ListeAvisAgence listeAvisAgence = null;
+		
+		if(listeAvisAgenceDao != null && !listeAvisAgenceDao.isEmpty()){
 
+			listeAvisAgence = new ListeAvisAgence();
+				
+				for (Avis avis : listeAvisAgenceDao) {
+					
+					listeAvisAgence.add((AvisAgence) getAvisWithoutPersistentBag(avis));
+
+				}
+			
+		}		
+		return listeAvisAgence;
+	}
+
+	/**
+	 * Creation d'une {@link ListeAvisAnnonce} sans {@link PersistentBag}
+	 * 
+	 * @param listeAvisAnnonceDao {@link ListeAvisAnnonce}
+	 * @return {@link ListeAvisAnnonce}
+	 */
+	public ListeAvisAnnonce getListeAvisAnnonceWithoutPersistentBag(ListeAvisAnnonce listeAvisAnnonceDao) {
+
+		ListeAvisAnnonce listeAvisAnnonce = null;
+		
+		if(listeAvisAnnonceDao != null && !listeAvisAnnonceDao.isEmpty()){
+
+			listeAvisAnnonce = new ListeAvisAnnonce();
+				
+				for (Avis avis : listeAvisAnnonceDao) {
+					
+					listeAvisAnnonce.add((AvisAnnonce) getAvisWithoutPersistentBag(avis));
+
+				}
+
+		}	
+		return listeAvisAnnonce;
+	}
+	
 }

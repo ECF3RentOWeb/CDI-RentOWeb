@@ -1,32 +1,33 @@
-<link href="../../../CSS/menu.css" rel="stylesheet" type="text/css"/>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<link href="<s:url namespace='/gestion-avis' action='menu-ccs' />" rel="stylesheet" type="text/css"/>
 
 <nav id="mainMenu">
 	<ul>
 		<li class="current-menu-item"><a href="#">Accueil</a></li>
-		<li><a href="#">Menu 1</a>
+		<li><a href="#">Annonces</a>
 			<ul>
-			<li><a href="#">Sous menu 1</a></li>
-			<li><a href="#">Sous menu 1</a></li>
-			<li><a href="#">Sous menu 1</a></li>	
+			<li><a href="#">Consulter les annonces</a></li>
+			<li><a href="#">Créer une annonce</a></li>
+			<li><a href="#">Modifier ses annonces</a></li>	
 			</ul>
 		</li>
-		<li><a href="#">Menu 2</a>
+		<li><a href="#">Agence</a>
 			<ul>
-			<li><a href="#">Sous menu 2</a></li>
-			<li><a href="#">Sous menu 2</a></li>
-			<li><a href="#">Sous menu 2</a></li>
+			<li><a href="#">Trouver une agence</a></li>
+			</ul>
+		<li><a href="#">Favoris</a>
+			<ul>
+			<li><a href="#">Consulter ses favoris</a></li>
+			<li><a href="#">modifier ses favoris</a></li>
+			<li><a href="#">supprimer sesfavoris</a></li>
 			</ul>
 		</li>
-		<li><a href="#">Menu 3</a>
-		</li>
-		<li><a href="#">Menu 4</a>
+		<li><a href="#">Avis</a>
 			<ul>
-			<li><a href="#">Sous menu 4</a></li>
-			</ul>
-		</li>
-		<li><a href="#">Menu 5</a>
-			<ul>
-			<li><a href="#">Sous menu 5</a></li>
+			<li><a href="<s:url namespace='/gestion-avis' action='creation-avis-annonce' />" >Creation avis</a></li>
+			<li><a href="<s:url namespace='/gestion-avis' action='modification-avis-annonce' />">Modification avis</a></li>
+			<li><a href="<s:url namespace='/gestion-avis' action='listage-avis-annonce' />">Lister avis</a></li>
+			<li><a href="<s:url namespace='/gestion-avis' action='affichage-avis-annonce' />">Affichage avis</a></li>
 			</ul>
 		</li>
 		<li><a href="#">Aide</a>

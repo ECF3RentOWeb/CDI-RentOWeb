@@ -29,5 +29,13 @@ public class Utilisateur implements Serializable{
 	public void setIdUtilisateur(String idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Utilisateur [getIdUtilisateur()=" + getIdUtilisateur() + "]";
+	}
 	
 }

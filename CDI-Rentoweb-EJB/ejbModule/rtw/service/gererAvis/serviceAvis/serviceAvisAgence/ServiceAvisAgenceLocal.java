@@ -1,5 +1,7 @@
 package rtw.service.gererAvis.serviceAvis.serviceAvisAgence;
 
+import java.util.ArrayList;
+
 import javax.ejb.Local;
 
 import rtw.dao.gererAvis.daoAvis.daoAvisAgence.DaoAvisAgence;
@@ -7,6 +9,7 @@ import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
 import rtw.service.gererAvis.factory.FactoryAvis;
+import rtw.technique.gererAvis.ListeAvisAgence;
 
 
 /**
@@ -88,4 +91,11 @@ public interface ServiceAvisAgenceLocal {
 	 */
 	AvisAgence getAvisAgence(Utilisateur utilisateur, Item item);
 	
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link AvisAgence} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAgence {@link ArrayList} {@link AvisAgence}
+	 */
+	public ListeAvisAgence rechercheListeAvisAgence(Item item);
 }

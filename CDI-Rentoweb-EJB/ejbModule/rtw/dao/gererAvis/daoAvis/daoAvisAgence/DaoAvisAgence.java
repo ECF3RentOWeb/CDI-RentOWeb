@@ -1,13 +1,19 @@
 package rtw.dao.gererAvis.daoAvis.daoAvisAgence;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.exception.gererAvis.DoublonAvisException;
+import rtw.technique.gererAvis.ListeAvisAgence;
 import rtw.util.ParametreCommun;
 
 /**
@@ -22,7 +28,6 @@ import rtw.util.ParametreCommun;
 @Singleton
 public class DaoAvisAgence implements DaoAvisAgenceLocal {
 
-	//TODO persistence Name
 	@PersistenceContext(unitName=ParametreCommun.PERSISTENCE_UNIT_NAME)
 	EntityManager em;
 
@@ -33,31 +38,49 @@ public class DaoAvisAgence implements DaoAvisAgenceLocal {
 		
 	}
 	
-	
 	/**
 	 * Persistance d'un {@link AvisAgence}
 	 * 
 	 * @param avisAgence {@link AvisAgence}
 	 * @return true if insert OK.
+	 * @throws DoublonAvisException 
 	 */
-	public boolean addAvisAgence(AvisAgence avisAgence){
+	public boolean addAvisAgence(AvisAgence avisAgence) throws DoublonAvisException{
 
 		boolean retour = true;
 		
 		try {
 			
-			em.persist(avisAgence);
+			//TODO DELETE USED FOR TEST
+			em.persist(avisAgence.getItem());
+			em.persist(avisAgence.getUtilisateur());
 			
+			em.persist(avisAgence);			
+			em.flush();
 			
-		} catch (Exception e) {
+		}catch (PersistenceException eee) {
 			
-			e.getMessage();
-			e.printStackTrace();
-			System.out.println("atcha j'ai tout cassé dans le persit :3");
 			retour = false;
-			
-		}
+			eee.printStackTrace();
 		
+			retour = false;
+			eee.getMessage();
+			eee.printStackTrace();
+			
+			Throwable t = eee.getCause();
+			
+			
+			
+			while ((t != null) && !(t instanceof SQLIntegrityConstraintViolationException)) {
+				t = t.getCause();
+			}
+			
+			if(t instanceof SQLIntegrityConstraintViolationException){
+
+				throw new DoublonAvisException();
+				
+			}
+		}
 		return retour;
 		
 	}
@@ -73,16 +96,16 @@ public class DaoAvisAgence implements DaoAvisAgenceLocal {
 	public boolean deleteAvisAgence(AvisAgence avisAgence) {
 
 		boolean retour = true;
-
+		
 		avisAgence = findAvisAgence(avisAgence);
 		
 		try {
-			
+
 			em.remove(avisAgence);
+			em.flush();
 			
 		} catch (Exception e) {
 			
-			e.getMessage();
 			e.printStackTrace();
 			System.out.println("atcha j'ai tout cassé dans le delete  :3");
 			retour = false;
@@ -107,7 +130,7 @@ public class DaoAvisAgence implements DaoAvisAgenceLocal {
 		
 		try {
 			
-			avisAgenceRetour = em.find(AvisAgence.class, avisAgence.getId());
+			avisAgenceRetour = em.find(AvisAgence.class, avisAgence.getUtilisateur().getIdUtilisateur());
 			
 		} catch (Exception e) {
 			
@@ -122,7 +145,7 @@ public class DaoAvisAgence implements DaoAvisAgenceLocal {
 	}
 	
 	/**
-	 * Recherche un {@link AvisAgence} par son ID.
+	 * Recherche un {@link AvisAgence} par son ID et par l'ID de l'utilisateur.
 	 * 
 	 * @param utilisateur {@link Utilisateur}
 	 * @param item {@link Item}
@@ -137,7 +160,7 @@ public class DaoAvisAgence implements DaoAvisAgenceLocal {
 		
 		try {
 			
-			avisAgence = (AvisAgence) em.createQuery("select a from DtoAvis a where idUtilisateur = ?1 and idItem = ?2")
+			avisAgence = (AvisAgence) em.createQuery("select a from Avis a where idUtilisateur = ?1 and idItem = ?2")
 				.setParameter(1, utilisateur.getIdUtilisateur())
 				.setParameter(2,item.getIdItem()).getSingleResult();
 			
@@ -171,6 +194,8 @@ public class DaoAvisAgence implements DaoAvisAgenceLocal {
 			.setParameter(1, utilisateur.getIdUtilisateur())
 			.setParameter(2,item.getIdItem()).executeUpdate();
 			
+			em.flush();
+			
 		} catch (Exception e) {
 			
 			//TODO test int
@@ -195,9 +220,11 @@ public class DaoAvisAgence implements DaoAvisAgenceLocal {
 	public boolean updateAvisAgence(AvisAgence avisAgence) {
 
 		boolean retour = true;
+		
 		try {
 			
 			em.merge(avisAgence);
+			em.flush();
 			
 		} catch (Exception e) {
 			
@@ -208,6 +235,30 @@ public class DaoAvisAgence implements DaoAvisAgenceLocal {
 		}
 		
 		return retour;
+		
+	}
+
+	/**
+	 * Récupération d'une liste d' {@link AvisAgence} en {@link ArrayList}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAgence {@link ArrayList}
+	 */
+	@Override
+	public ListeAvisAgence listeAvisAgenceByIdItem(Item item) {
+		
+		ListeAvisAgence listeAvisAgence = new ListeAvisAgence();
+		
+		 for (Object result : em.createQuery("select a from AvisAgence a where idItem = ?1")
+					.setParameter(1, item.getIdItem()).getResultList()) {
+			 if(result instanceof AvisAgence){
+				 
+				 listeAvisAgence.add((AvisAgence) result);
+			 }
+			
+		}
+	
+		return listeAvisAgence;
 		
 	}
 	

@@ -4,11 +4,14 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import rtw.business.gererAvis.BusinessGererAvis;
 import rtw.dao.gererAvis.daoAvisGlobal.daoAvisGlobalAnnonce.DaoAvisGlobalAnnonce;
 import rtw.dao.gererAvis.facade.FacadeDaoAvis;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonce;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.exception.gererAvis.DoublonAvisException;
+import rtw.exception.gererAvis.NullAvisException;
 import rtw.service.gererAvis.factory.FactoryAvisGlobal;
 
 /**
@@ -43,7 +46,29 @@ public class ServiceAvisGlobalAnnonce implements ServiceAvisGlobalAnnonceLocal {
 	@Override
 	public boolean creerAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
 		
-		return facadeDaoAvis.addAvisGlobalAnnonce(avisGlobalAnnonce);
+		BusinessGererAvis businessGererAvis = new BusinessGererAvis();
+		
+		boolean retour;
+		
+		try {
+			
+			businessGererAvis.controleAvisGlobal(avisGlobalAnnonce);
+			retour = facadeDaoAvis.addAvisGlobalAnnonce(avisGlobalAnnonce);
+			
+		} catch (DoublonAvisException dae) {
+						
+			dae.printStackTrace();
+			//TODO /Redirection vers edition/Instantiation message communication?/
+			retour = false;
+			
+		}catch (NullAvisException nae) {
+
+			nae.printStackTrace();
+			retour = false;
+			
+		}
+		
+		return retour;
 		
 	}
 
@@ -102,9 +127,9 @@ public class ServiceAvisGlobalAnnonce implements ServiceAvisGlobalAnnonceLocal {
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public AvisGlobalAnnonce rechercheAvisGlobalAnnonceById(Utilisateur utilisateur, Item item) {
+	public AvisGlobalAnnonce rechercheAvisGlobalAnnonceById(Item item) {
 
-		AvisGlobalAnnonce daoAvisGlobalAnnonce = facadeDaoAvis.findAvisGlobalAnnonceById(utilisateur, item);
+		AvisGlobalAnnonce daoAvisGlobalAnnonce = facadeDaoAvis.findAvisGlobalAnnonceById(item);
 		FactoryAvisGlobal factoryAvisGlobal = new FactoryAvisGlobal();
 		
 		return (AvisGlobalAnnonce) factoryAvisGlobal.getAvisGlobalWithoutPersistentBag(daoAvisGlobalAnnonce);
@@ -120,9 +145,9 @@ public class ServiceAvisGlobalAnnonce implements ServiceAvisGlobalAnnonceLocal {
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public boolean supprimerAvisGlobalAnnonceById(Utilisateur utilisateur, Item item) {
+	public boolean supprimerAvisGlobalAnnonceById(Item item) {
 		// TODO Auto-generated method stub
-		return facadeDaoAvis.deleteAvisAnnonceById(utilisateur, item);
+		return facadeDaoAvis.deleteAvisGlobalAnnonceById(item);
 	}
 
 	/**
@@ -133,10 +158,10 @@ public class ServiceAvisGlobalAnnonce implements ServiceAvisGlobalAnnonceLocal {
 	 * @return {@link AvisGlobalAnnonce}
 	 */
 	@Override
-	public AvisGlobalAnnonce getAvisGlobalAnnonce(Utilisateur utilisateur,Item item) {
+	public AvisGlobalAnnonce getAvisGlobalAnnonce(Item item) {
 		
 		FactoryAvisGlobal factoryAvisGlobal = new FactoryAvisGlobal();
-		return factoryAvisGlobal.getAvisGlobalAnnonce(utilisateur,item);
+		return factoryAvisGlobal.getAvisGlobalAnnonce(item);
 		
 	}
 

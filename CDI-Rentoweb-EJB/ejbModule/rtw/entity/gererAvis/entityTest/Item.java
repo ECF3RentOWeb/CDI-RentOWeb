@@ -30,5 +30,13 @@ public class Item implements Serializable{
 	public void setIdItem(String idItem) {
 		this.idItem = idItem;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Item [getIdItem()=" + getIdItem() + "]";
+	}
 	
 }

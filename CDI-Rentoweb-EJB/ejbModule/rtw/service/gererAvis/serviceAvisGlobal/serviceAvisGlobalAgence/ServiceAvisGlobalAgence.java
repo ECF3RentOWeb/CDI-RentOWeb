@@ -4,11 +4,14 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import rtw.business.gererAvis.BusinessGererAvis;
 import rtw.dao.gererAvis.daoAvisGlobal.daoAvisGlobalAgence.DaoAvisGlobalAgence;
 import rtw.dao.gererAvis.facade.FacadeDaoAvis;
 import rtw.entity.gererAvis.avisGlobal.avisGlobalAgence.entity.AvisGlobalAgence;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.exception.gererAvis.DoublonAvisException;
+import rtw.exception.gererAvis.NullAvisException;
 import rtw.service.gererAvis.factory.FactoryAvisGlobal;
 
 /**
@@ -42,8 +45,29 @@ public class ServiceAvisGlobalAgence implements ServiceAvisGlobalAgenceLocal {
 	 */
 	@Override
 	public boolean creerAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+		BusinessGererAvis businessGererAvis = new BusinessGererAvis();
+		
+		boolean retour;
+		
+		try {
+			
+			businessGererAvis.controleAvisGlobal(avisGlobalAgence);
+			retour = facadeDaoAvis.addAvisGlobalAgence(avisGlobalAgence);
+			
+		} catch (DoublonAvisException dae) {
+						
+			dae.printStackTrace();
+			//TODO /Redirection vers edition/Instantiation message communication?/
+			retour = false;
+			
+		}catch (NullAvisException nae) {
 
-		return facadeDaoAvis.addAvisGlobalAgence(avisGlobalAgence);
+			nae.printStackTrace();
+			retour = false;
+			
+		}
+		
+		return retour;
 		
 	}
 
@@ -102,9 +126,9 @@ public class ServiceAvisGlobalAgence implements ServiceAvisGlobalAgenceLocal {
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public AvisGlobalAgence rechercheAvisGlobalAgenceById(Utilisateur utilisateur, Item item) {
+	public AvisGlobalAgence rechercheAvisGlobalAgenceById(Item item) {
 		
-		AvisGlobalAgence daoAvisGlobalAgence = facadeDaoAvis.findAvisGlobalAgenceById(utilisateur, item);
+		AvisGlobalAgence daoAvisGlobalAgence = facadeDaoAvis.findAvisGlobalAgenceById(item);
 		FactoryAvisGlobal factoryAvisGlobal = new FactoryAvisGlobal();
 		
 		return (AvisGlobalAgence) factoryAvisGlobal.getAvisGlobalWithoutPersistentBag(daoAvisGlobalAgence);
@@ -120,9 +144,9 @@ public class ServiceAvisGlobalAgence implements ServiceAvisGlobalAgenceLocal {
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public boolean supprimerAvisGlobalAgenceById(Utilisateur utilisateur, Item item) {
+	public boolean supprimerAvisGlobalAgenceById(Item item) {
 	
-		return facadeDaoAvis.deleteAvisAgenceById(utilisateur, item);
+		return facadeDaoAvis.deleteAvisGlobalAgenceById(item);
 	}
 	
 	/**
@@ -133,11 +157,11 @@ public class ServiceAvisGlobalAgence implements ServiceAvisGlobalAgenceLocal {
 	 * @return {@link AvisGlobalAgence}
 	 */
 	@Override
-	public AvisGlobalAgence getAvisGlobalAgence(Utilisateur utilisateur,Item item) {
+	public AvisGlobalAgence getAvisGlobalAgence(Item item) {
 		
 		FactoryAvisGlobal factoryAvisGlobal = new FactoryAvisGlobal();
 		
-		return factoryAvisGlobal.getAvisGlobalAgence(utilisateur,item);
+		return factoryAvisGlobal.getAvisGlobalAgence(item);
 	}
 
 }

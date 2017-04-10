@@ -1,5 +1,7 @@
 package rtw.clientServer.gererAvis;
 
+import java.util.ArrayList;
+
 import javax.ejb.Remote;
 
 import rtw.dao.gererAvis.daoAvis.daoAvisAgence.DaoAvisAgence;
@@ -14,6 +16,8 @@ import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
 import rtw.service.gererAvis.factory.FactoryAvis;
 import rtw.service.gererAvis.factory.FactoryAvisGlobal;
+import rtw.technique.gererAvis.ListeAvisAgence;
+import rtw.technique.gererAvis.ListeAvisAnnonce;
 
 /**
  * Interface de la facade service de la fonctionnalité gérer avis.
@@ -183,7 +187,7 @@ public interface FacadeServiceAvisRemote {
 	public AvisAnnonce rechercheAvisAnnonceById(Utilisateur utilisateur,Item item);
 	
 	/**
-	 * Service de recherche d'un {@link AvisAgence} par son ID grace a la class {@link DaoAvisAgence}
+	 * Service de recherche d'un {@link AvisAgence} par son ID/Utilisateur grace a la class {@link DaoAvisAgence}
 	 * 
 	 * @param utilisateur {@link Utilisateur}
 	 * @param item {@link Item}
@@ -194,7 +198,7 @@ public interface FacadeServiceAvisRemote {
 	public AvisAgence rechercheAvisAgenceById(Utilisateur utilisateur,Item item);
 	
 	/**
-	 * Service de recherche d'un {@link AvisGlobalAnnonce} par son ID grace a la class {@link DaoAvisGlobalAnnonce}
+	 * Service de recherche d'un {@link AvisGlobalAnnonce} par son ID/Utilisateur grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param utilisateur {@link Utilisateur}
 	 * @param item {@link Item}
@@ -202,7 +206,7 @@ public interface FacadeServiceAvisRemote {
 	 * @return avisAnnonce {@link AvisGlobalAnnonce} Null if not exist in db.
 	 * @see DaoAvisGlobalAnnonce
 	 */
-	public AvisGlobalAnnonce rechercheAvisGlobalAnnonceById(Utilisateur utilisateur,Item item);
+	public AvisGlobalAnnonce rechercheAvisGlobalAnnonceById(Item item);
 	
 	/**
 	 * Service de recherche d'un {@link AvisGlobalAgence} par son ID grace a la class {@link DaoAvisGlobalAgence}
@@ -213,7 +217,7 @@ public interface FacadeServiceAvisRemote {
 	 * @return avisAnnonce {@link AvisGlobalAgence} Null if not exist in db.
 	 * @see DaoAvisGlobalAgence
 	 */
-	public AvisGlobalAgence rechercheAvisGlobalAgenceById(Utilisateur utilisateur,Item item);
+	public AvisGlobalAgence rechercheAvisGlobalAgenceById(Item item);
 	
 	/**
 	 * Service de suppression d'un {@link AvisAnnonce} par son ID grace a la class {@link DaoAvisAnnonce}
@@ -246,7 +250,7 @@ public interface FacadeServiceAvisRemote {
 	 * @return true if delete OK.
 	 * @see DaoAvisGlobalAnnonce
 	 */
-	public boolean supprimerAvisGlobalAnnonceById(Utilisateur utilisateur,Item item);
+	public boolean supprimerAvisGlobalAnnonceById(Item item);
 	
 	/**
 	 * Service de suppression d'un {@link AvisGlobalAgence} par son ID grace a la class {@link DaoAvisGlobalAgence}
@@ -257,7 +261,7 @@ public interface FacadeServiceAvisRemote {
 	 * @return true if delete OK.
 	 * @see DaoAvisGlobalAgence
 	 */
-	public boolean supprimerAvisGlobalAgenceById(Utilisateur utilisateur,Item item);
+	public boolean supprimerAvisGlobalAgenceById(Item item);
 	
 	/**
 	 * Service d'instanciation d'un {@link AvisAnnonce} utilise la class {@link FactoryAvis}
@@ -266,7 +270,7 @@ public interface FacadeServiceAvisRemote {
 	 * @Param item {@link Item}
 	 * @return {@link AvisAnnonce}
 	 */
-	public AvisAnnonce getAvisAnnonce(Utilisateur utilisateur, Item item);
+	public AvisAnnonce getAvisAnnonce(Utilisateur utilisateur,Item item);
 	
 	/**
 	 * Service d'instanciation d'un {@link AvisAgence} utilise la class {@link FactoryAvis}
@@ -284,7 +288,7 @@ public interface FacadeServiceAvisRemote {
 	 * @Param item {@link Item}
 	 * @return {@link AvisGlobalAgence}
 	 */
-	public AvisGlobalAgence getAvisGlobalAgence(Utilisateur utilisateur, Item item);
+	public AvisGlobalAgence getAvisGlobalAgence(Item item);
 	
 	/**
 	 * Service d'instanciation d'un {@link AvisGlobalAnnonce} utilise la class {@link FactoryAvisGlobal}
@@ -293,10 +297,22 @@ public interface FacadeServiceAvisRemote {
 	 * @Param item {@link Item}
 	 * @return {@link AvisGlobalAnnonce}
 	 */
-	public AvisGlobalAnnonce getAvisGlobalAnnonce(Utilisateur utilisateur, Item item);
+	public AvisGlobalAnnonce getAvisGlobalAnnonce(Item item);
+	
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link AvisAnnonce} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAnnonce {@link ArrayList} {@link AvisAnnonce}
+	 */
+	public ListeAvisAnnonce rechercheListeAvisAnnonce(Item item);
+	
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link AvisAgence} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAgence {@link ArrayList} {@link AvisAgence}
+	 */
+	public ListeAvisAgence rechercheListeAvisAgence(Item item);
 
-	
-
-	
-	
 }

@@ -42,10 +42,7 @@ public class FactoryAvisGlobal {
 			avisGlobal = new AvisGlobalAgence();
 		}
 
-		avisGlobal.setId(avisGlobalDao.getUtilisateur(), avisGlobalDao.getItem());
-
 		avisGlobal.setItem(avisGlobalDao.getItem());
-		avisGlobal.setUtilisateur(avisGlobalDao.getUtilisateur());
 		avisGlobal.setNotes(businessGererAvis.convertNotePersistenceBagToNoteCollection((PersistentBag) avisGlobalDao.getNotes()));
 		
 		return avisGlobal;
@@ -59,7 +56,7 @@ public class FactoryAvisGlobal {
 	 * @param item {@link Item}
 	 * @return avisAnnonce {@link AvisGlobalAgence}
 	 */
-	public AvisGlobalAgence getAvisGlobalAgence(Utilisateur utilisateur, Item item) {
+	public AvisGlobalAgence getAvisGlobalAgence(Item item) {
 		
 		AvisGlobalAgence avisGlobalAgence = new AvisGlobalAgence();
 		
@@ -86,8 +83,6 @@ public class FactoryAvisGlobal {
 		
 		avisGlobalAgence.setNotes(notes);
 		
-		avisGlobalAgence.setId(utilisateur, item);
-		avisGlobalAgence.setUtilisateur(utilisateur);
 		avisGlobalAgence.setItem(item);
 		
 		return avisGlobalAgence;
@@ -100,7 +95,7 @@ public class FactoryAvisGlobal {
 	 * @param item {@link Item}
 	 * @return avisAnnonce {@link AvisGlobalAnnonce}
 	 */
-	public AvisGlobalAnnonce getAvisGlobalAnnonce(Utilisateur utilisateur, Item item) {
+	public AvisGlobalAnnonce getAvisGlobalAnnonce(Item item) {
 		
 		AvisGlobalAnnonce avisGlobalAnnonce = new AvisGlobalAnnonce();
 		
@@ -126,9 +121,6 @@ public class FactoryAvisGlobal {
 		notes.add(noteRelationBailleur);
 		
 		avisGlobalAnnonce.setNotes(notes);
-		
-		avisGlobalAnnonce.setId(utilisateur, item);
-		avisGlobalAnnonce.setUtilisateur(utilisateur);
 		avisGlobalAnnonce.setItem(item);
 		
 		return avisGlobalAnnonce;

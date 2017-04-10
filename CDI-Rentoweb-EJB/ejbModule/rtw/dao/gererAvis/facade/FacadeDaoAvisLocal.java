@@ -1,5 +1,7 @@
 package rtw.dao.gererAvis.facade;
 
+import java.util.ArrayList;
+
 import javax.ejb.Local;
 
 import rtw.dao.gererAvis.daoAvis.daoAvisAgence.DaoAvisAgence;
@@ -13,6 +15,8 @@ import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonc
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
 import rtw.exception.gererAvis.DoublonAvisException;
+import rtw.technique.gererAvis.ListeAvisAgence;
+import rtw.technique.gererAvis.ListeAvisAnnonce;
 
 /**
  * Interface de la facade de la DAO de la fonctionnalité gérer avis.
@@ -30,9 +34,10 @@ public interface FacadeDaoAvisLocal {
 	 * 
 	 * @param avisAgence {@link AvisAgence}
 	 * @return true if insert OK.
+	 * @throws DoublonAvisException 
 	 * @see DaoAvisAgence
 	 */
-	public boolean addAvisAgence(AvisAgence avisAgence);
+	public boolean addAvisAgence(AvisAgence avisAgence) throws DoublonAvisException;
 	
 	/**
 	 * Persistence d'un {@link AvisAnnonce} grace a la class {@link DaoAvisAnnonce}
@@ -49,18 +54,20 @@ public interface FacadeDaoAvisLocal {
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
 	 * @return true if insert OK.
+	 * @throws DoublonAvisException 
 	 * @see DaoAvisGlobalAgence
 	 */
-	public boolean addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence);
+	public boolean addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) throws DoublonAvisException;
 	
 	/**
 	 * Persistence d'un {@link AvisGlobalAnnonce} grace a la class {@link DaoAvisGlobalAnnonce}
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
 	 * @return true if insert OK.
+	 * @throws DoublonAvisException 
 	 * @see DaoAvisGlobalAnnonce
 	 */
-	public boolean addAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce);
+	public boolean addAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) throws DoublonAvisException;
 	
 	/**
 	 * Delete {@link AvisAgence} grace a la class {@link DaoAvisAgence}
@@ -179,7 +186,7 @@ public interface FacadeDaoAvisLocal {
 	 * @return true if delete OK. 
 	 * @see DaoAvisGlobalAnnonce
 	 */
-	boolean deleteAvisGlobalAnnonceById(Utilisateur utilisateur, Item item);
+	boolean deleteAvisGlobalAnnonceById(Item item);
 
 	/**
 	 * Delete {@link AvisGlobalAgence} par son ID grace a la class {@link DaoAvisGlobalAgence}
@@ -190,7 +197,7 @@ public interface FacadeDaoAvisLocal {
 	 * @return true if delete OK. 
 	 * @see DaoAvisGlobalAgence
 	 */
-	boolean deleteAvisGlobalAgenceById(Utilisateur utilisateur, Item item);
+	boolean deleteAvisGlobalAgenceById(Item item);
 
 	/**
 	 * Delete {@link AvisAnnonce} par son ID grace a la class {@link DaoAvisAnnonce}
@@ -245,7 +252,7 @@ public interface FacadeDaoAvisLocal {
 	 * @return avisGlobalAgence {@link AvisGlobalAgence} Null if not exist in db.
 	 * @see DaoAvisGlobalAnnonce
 	 */
-	AvisGlobalAgence findAvisGlobalAgenceById(Utilisateur utilisateur, Item item);
+	AvisGlobalAgence findAvisGlobalAgenceById(Item item);
 
 	/**
 	 * Find {@link AvisGlobalAnnonce} par son ID grace a la class {@link DaoAvisGlobalAnnonce}
@@ -256,7 +263,22 @@ public interface FacadeDaoAvisLocal {
 	 * @return avisGlobalAnnonce {@link AvisGlobalAnnonce} Null if not exist in db.
 	 * @see DaoAvisGlobalAnnonce
 	 */
-	AvisGlobalAnnonce findAvisGlobalAnnonceById(Utilisateur utilisateur, Item item);
-	
-	
+	AvisGlobalAnnonce findAvisGlobalAnnonceById(Item item);
+
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link ListeAvisAgence} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAgence {@link ArrayList} {@link ListeAvisAgence}
+	 */
+	ListeAvisAgence listeAvisAgenceByIdItem(Item item);
+
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link ListeAvisAnnonce} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAnnonce {@link ArrayList} {@link ListeAvisAnnonce}
+	 */
+	ListeAvisAnnonce listeAvisAnnonceByIdItem(Item item);
+
 }

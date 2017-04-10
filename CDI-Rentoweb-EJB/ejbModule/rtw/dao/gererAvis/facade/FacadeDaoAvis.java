@@ -1,8 +1,12 @@
 package rtw.dao.gererAvis.facade;
 
+import java.util.ArrayList;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import rtw.dao.gererAvis.daoAvis.daoAvisAgence.DaoAvisAgence;
 import rtw.dao.gererAvis.daoAvis.daoAvisAnnonce.DaoAvisAnnonce;
@@ -15,6 +19,9 @@ import rtw.entity.gererAvis.avisGlobal.avisGlobalAnnonce.entity.AvisGlobalAnnonc
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
 import rtw.exception.gererAvis.DoublonAvisException;
+import rtw.technique.gererAvis.ListeAvisAgence;
+import rtw.technique.gererAvis.ListeAvisAnnonce;
+import rtw.util.ParametreCommun;
 
 /**
  * Session bean facade de la DAO de la fonctionnalité gérer avis.
@@ -28,6 +35,10 @@ import rtw.exception.gererAvis.DoublonAvisException;
 @LocalBean
 public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 
+	//TODO DELETE USED FOR TEST
+	@PersistenceContext(unitName=ParametreCommun.PERSISTENCE_UNIT_NAME)
+	EntityManager em;
+	
 	@EJB
 	DaoAvisAgence daoAvisAgence;
 	@EJB
@@ -56,10 +67,11 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * 
 	 * @param avisAgence {@link AvisAgence}
      * @return true if insert OK.
+     * @throws DoublonAvisException 
 	 * @see DaoAvisAgence
 	 */
 	@Override
-	public boolean addAvisAgence(AvisAgence avisAgence) {
+	public boolean addAvisAgence(AvisAgence avisAgence) throws DoublonAvisException {
 
 		return daoAvisAgence.addAvisAgence(avisAgence);
 		
@@ -85,10 +97,11 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * 
 	 * @param avisGlobalAnnonce {@link AvisGlobalAnnonce}
 	 * @return true if insert OK.
+	 * @throws DoublonAvisException 
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public boolean addAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) {
+	public boolean addAvisGlobalAnnonce(AvisGlobalAnnonce avisGlobalAnnonce) throws DoublonAvisException {
 
 		return daoAvisGlobalAnnonce.addAvisGlobalAnnonce(avisGlobalAnnonce);
 		
@@ -99,10 +112,11 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * 
 	 * @param avisGlobalAgence {@link AvisGlobalAgence}
 	 * @return true if insert OK.
+	 * @throws DoublonAvisException 
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public boolean addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) {
+	public boolean addAvisGlobalAgence(AvisGlobalAgence avisGlobalAgence) throws DoublonAvisException {
 
 		return daoAvisGlobalAgence.addAvisGlobalAgence(avisGlobalAgence);
 		
@@ -207,9 +221,9 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public boolean deleteAvisGlobalAgenceById(Utilisateur utilisateur,Item item) {
+	public boolean deleteAvisGlobalAgenceById(Item item) {
 
-		return daoAvisGlobalAgence.deleteAvisGlobalAgenceById(utilisateur,item);
+		return daoAvisGlobalAgence.deleteAvisGlobalAgenceById(item);
 		
 	}
 
@@ -223,9 +237,9 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public boolean deleteAvisGlobalAnnonceById(Utilisateur utilisateur,Item item) {
+	public boolean deleteAvisGlobalAnnonceById(Item item) {
 			
-		return daoAvisGlobalAnnonce.deleteAvisGlobalAnnonceById(utilisateur,item);
+		return daoAvisGlobalAnnonce.deleteAvisGlobalAnnonceById(item);
 		
 	}
 
@@ -330,9 +344,9 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * @see DaoAvisGlobalAgence
 	 */
 	@Override
-	public AvisGlobalAgence findAvisGlobalAgenceById(Utilisateur utilisateur,Item item) {
+	public AvisGlobalAgence findAvisGlobalAgenceById(Item item) {
 
-		return daoAvisGlobalAgence.findAvisGlobalAgenceById(utilisateur,item);
+		return daoAvisGlobalAgence.findAvisGlobalAgenceById(item);
 		
 	}
 
@@ -346,9 +360,9 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 	 * @see DaoAvisGlobalAnnonce
 	 */
 	@Override
-	public AvisGlobalAnnonce findAvisGlobalAnnonceById(Utilisateur utilisateur,Item item) {
+	public AvisGlobalAnnonce findAvisGlobalAnnonceById(Item item) {
 
-		return daoAvisGlobalAnnonce.findAvisGlobalAnnonceById(utilisateur,item);
+		return daoAvisGlobalAnnonce.findAvisGlobalAnnonceById(item);
 		
 	}
     
@@ -406,6 +420,30 @@ public class FacadeDaoAvis implements FacadeDaoAvisLocal {
 
 		return daoAvisGlobalAnnonce.updateAvisGlobalAnnonce(avisGlobalAnnonce);
 		
+	}
+	
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link ListeAvisAgence} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAgence {@link ArrayList} {@link ListeAvisAgence}
+	 */
+	@Override
+	public ListeAvisAgence listeAvisAgenceByIdItem(Item item) {
+		
+		return daoAvisAgence.listeAvisAgenceByIdItem(item);
+	}
+
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link ListeAvisAnnonce} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAnnonce {@link ArrayList} {@link ListeAvisAnnonce}
+	 */
+	@Override
+	public ListeAvisAnnonce listeAvisAnnonceByIdItem(Item item) {
+		
+		return daoAvisAnnonce.listeAvisAnnonceByIdItem(item);
 	}
     
 

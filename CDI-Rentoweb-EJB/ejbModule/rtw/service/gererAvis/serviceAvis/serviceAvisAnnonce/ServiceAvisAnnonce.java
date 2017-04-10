@@ -1,16 +1,21 @@
 package rtw.service.gererAvis.serviceAvis.serviceAvisAnnonce;
 
+import java.util.ArrayList;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import rtw.business.gererAvis.BusinessGererAvis;
 import rtw.dao.gererAvis.daoAvis.daoAvisAnnonce.DaoAvisAnnonce;
 import rtw.dao.gererAvis.facade.FacadeDaoAvis;
 import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
 import rtw.exception.gererAvis.DoublonAvisException;
+import rtw.exception.gererAvis.NullAvisException;
 import rtw.service.gererAvis.factory.FactoryAvis;
+import rtw.technique.gererAvis.ListeAvisAnnonce;
 
 /**
  * Facade de service pour les {@link AvisAnnonce}.
@@ -44,18 +49,28 @@ public class ServiceAvisAnnonce implements ServiceAvisAnnonceLocal {
 	@Override
 	public boolean creerAvisAnnonce(AvisAnnonce avisAnnonce) {
 		
-		boolean retour = true;
+		BusinessGererAvis businessGererAvis = new BusinessGererAvis();
+		
+		boolean retour;
 		
 		try {
 			
-			return facadeDaoAvis.addAvisAnnonce(avisAnnonce);
+			businessGererAvis.controleAvis(avisAnnonce);
+			retour = facadeDaoAvis.addAvisAnnonce(avisAnnonce);
 			
-		} catch (DoublonAvisException e) {
+		} catch (DoublonAvisException dae) {
+						
+			dae.printStackTrace();
+			//TODO /Redirection vers edition/Instantiation message communication?/
+			retour = false;
 			
-			e.printStackTrace();
+		}catch (NullAvisException nae) {
+
+			nae.printStackTrace();
 			retour = false;
 			
 		}
+		
 		return retour;
 	}
 
@@ -152,6 +167,24 @@ public class ServiceAvisAnnonce implements ServiceAvisAnnonceLocal {
 		FactoryAvis factoryAvis = new FactoryAvis();
 		
 		return factoryAvis.getAvisAnnonce(utilisateur,item);
+	}
+
+	/**
+	 * Service de recherche d'une {@link ArrayList} d' {@link AvisAnnonce} lié a un {@link Item}
+	 * 
+	 * @param item {@link Item}
+	 * @return listeAvisAnnonce {@link ArrayList} {@link AvisAnnonce}
+	 */
+	@Override
+	public ListeAvisAnnonce rechercheListeAvisAnnonce(Item item) {
+		
+		ListeAvisAnnonce listeAvisAnnonce = facadeDaoAvis.listeAvisAnnonceByIdItem(item);
+
+		FactoryAvis factoryAvis = new FactoryAvis();
+		
+		
+		return factoryAvis.getListeAvisAnnonceWithoutPersistentBag(listeAvisAnnonce);
+		
 	}
 	
 

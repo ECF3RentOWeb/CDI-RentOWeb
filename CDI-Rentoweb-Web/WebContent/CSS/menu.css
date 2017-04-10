@@ -2,13 +2,15 @@
 
 #mainMenu
 {
-	position: fixed;
+	/*position: fixed;*/
 	display: block;
 	top: 0px;
 	left: 0px;
-	margin-top:0px;
+	margin-top: 0px;
+	margin-bottom: 10px;
 	width: 100%;
-	z-index: 99;
+	height: 48px;
+
 }
 
 #mainMenu ul
