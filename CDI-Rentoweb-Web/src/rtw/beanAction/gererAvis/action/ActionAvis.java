@@ -1,4 +1,6 @@
-package rtw.beanAction.gererAvis;
+package rtw.beanAction.gererAvis.action;
+
+import rtw.beanAction.gererAvis.ApplicationSupport;
 
 public class ActionAvis extends ApplicationSupport {
 

@@ -3,7 +3,9 @@
  */
 package rtw.test.gererAvis;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,8 +15,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.junit.*;
-
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import rtw.clientServer.gererAvis.FacadeServiceAvisRemote;
 import rtw.entity.gererAvis.avis.avisAgence.entity.AvisAgence;
@@ -38,7 +41,6 @@ import rtw.entity.gererAvis.note.entity.NoteRelationBailleur;
 import rtw.technique.gererAvis.ListeAvisAgence;
 import rtw.technique.gererAvis.ListeAvisAnnonce;
 import rtw.util.gererAvis.Param;
-
 
 /**
  * Classe de test JUnit pour la DAO de la fonctionnalité Gérer Avis.
@@ -71,7 +73,7 @@ public class JUnitDaoAvis {
 	 * 
 	 * @throws NamingException
 	 */
-	//@AfterClass
+	@AfterClass
 	public static void finalizeur() throws NamingException{
 		
 		AvisAnnonce avisAnnonce = createAvisAnnonce("1","1");
@@ -79,50 +81,25 @@ public class JUnitDaoAvis {
 		AvisGlobalAgence avisGlobalAgence = createAvisGlobalAgence("3","3");
 		AvisGlobalAnnonce avisGlobalAnnonce = createAvisGlobalAnnonce("4","4");
 		
-		AvisAnnonce avisAnnonce2 = createAvisAnnonce("5","5");
-		AvisAgence avisAgence2 = createAvisAgence("6","6");
-		AvisGlobalAgence avisGlobalAgence2 = createAvisGlobalAgence("7","7");
-		AvisGlobalAnnonce avisGlobalAnnonce2 = createAvisGlobalAnnonce("8","8");
+		AvisAnnonce avisAnnonce1 = createAvisAnnonce("5","5");
+		AvisAgence avisAgence1 = createAvisAgence("6","6");
+		AvisGlobalAgence avisGlobalAgence1 = createAvisGlobalAgence("7","7");
+		AvisGlobalAnnonce avisGlobalAnnonce1 = createAvisGlobalAnnonce("8","8");
 		
-		AvisAnnonce avisAnnonce3 = createAvisAnnonce("13","13");
-		AvisAgence avisAgence3 = createAvisAgence("14","14");
-		AvisGlobalAgence avisGlobalAgence3 = createAvisGlobalAgence("15","15");
-		AvisGlobalAnnonce avisGlobalAnnonce3 = createAvisGlobalAnnonce("16","16");
+		AvisAnnonce avisAnnonce2 = createAvisAnnonce("13","13");
+		AvisAgence avisAgence2 = createAvisAgence("14","14");
+		AvisGlobalAgence avisGlobalAgence2 = createAvisGlobalAgence("15","15");
+		AvisGlobalAnnonce avisGlobalAnnonce2 = createAvisGlobalAnnonce("16","16");
 		
-		AvisAnnonce avisAnnonce4 = createAvisAnnonce("17","17");
-		AvisAnnonce avisAnnonce5 = createAvisAnnonce("18","18");
-		AvisAnnonce avisAnnonce6 = createAvisAnnonce("19","19");
-		AvisAnnonce avisAnnonce7 = createAvisAnnonce("20","20");
+		AvisAnnonce avisAnnonce3 = createAvisAnnonce("17", "17");
+		AvisAnnonce avisAnnonce4 = createAvisAnnonce("18", "17");
+		AvisAnnonce avisAnnonce5 = createAvisAnnonce("19", "17");
+		AvisAnnonce avisAnnonce6 = createAvisAnnonce("20", "17");
 		
-		AvisAgence avisAgence4 = createAvisAgence("21","21");
-		AvisAgence avisAgence5 = createAvisAgence("22","22");
-		AvisAgence avisAgence6 = createAvisAgence("23","23");
-		AvisAgence avisAgence7 = createAvisAgence("24","24");
-		
-		facadeServiceAvisRemote.supprimerAvisAnnonce(avisAnnonce);
-		facadeServiceAvisRemote.supprimerAvisAgence(avisAgence);
-		facadeServiceAvisRemote.supprimerAvisGlobalAgence(avisGlobalAgence);
-		facadeServiceAvisRemote.supprimerAvisGlobalAnnonce(avisGlobalAnnonce);
-
-		facadeServiceAvisRemote.supprimerAvisAnnonce(avisAnnonce2);
-		facadeServiceAvisRemote.supprimerAvisAgence(avisAgence2);
-		facadeServiceAvisRemote.supprimerAvisGlobalAgence(avisGlobalAgence2);
-		facadeServiceAvisRemote.supprimerAvisGlobalAnnonce(avisGlobalAnnonce2);
-		
-		facadeServiceAvisRemote.supprimerAvisAnnonce(avisAnnonce3);
-		facadeServiceAvisRemote.supprimerAvisAgence(avisAgence3);
-		facadeServiceAvisRemote.supprimerAvisGlobalAgence(avisGlobalAgence3);
-		facadeServiceAvisRemote.supprimerAvisGlobalAnnonce(avisGlobalAnnonce3);
-		
-		facadeServiceAvisRemote.supprimerAvisAnnonce(avisAnnonce4);
-		facadeServiceAvisRemote.supprimerAvisAnnonce(avisAnnonce5);
-		facadeServiceAvisRemote.supprimerAvisAnnonce(avisAnnonce6);
-		facadeServiceAvisRemote.supprimerAvisAnnonce(avisAnnonce7);
-		
-		facadeServiceAvisRemote.supprimerAvisAgence(avisAgence4);
-		facadeServiceAvisRemote.supprimerAvisAgence(avisAgence5);
-		facadeServiceAvisRemote.supprimerAvisAgence(avisAgence6);
-		facadeServiceAvisRemote.supprimerAvisAgence(avisAgence7);
+		AvisAgence avisAgence3 = createAvisAgence("21", "21");
+		AvisAgence avisAgence4 = createAvisAgence("22", "21");
+		AvisAgence avisAgence5 = createAvisAgence("23", "21");
+		AvisAgence avisAgence6 = createAvisAgence("24", "21");
 		
 		context.close();
 		
@@ -568,7 +545,7 @@ public class JUnitDaoAvis {
 	public void testFindListAvisAnnonce() {
 		
 		Item item = new Item();
-		item.setIdItem("1");
+		item.setIdItem("17");
 		
 		AvisAnnonce avisAnnonce1 = createAvisAnnonce("17", "17");
 		AvisAnnonce avisAnnonce2 = createAvisAnnonce("18", "18");
@@ -590,18 +567,43 @@ public class JUnitDaoAvis {
 		facadeServiceAvisRemote.modifierAvisAnnonce(avisAnnonce3);
 		facadeServiceAvisRemote.modifierAvisAnnonce(avisAnnonce4);
 		
-		ListeAvisAnnonce listeAvisAnnonceTest = new ListeAvisAnnonce();
+		ListeAvisAnnonce listeAvisAnnonceExcepted = new ListeAvisAnnonce();
 		
-		listeAvisAnnonceTest.add(avisAnnonce1);
-		listeAvisAnnonceTest.add(avisAnnonce2);
-		listeAvisAnnonceTest.add(avisAnnonce3);
-		listeAvisAnnonceTest.add(avisAnnonce4);
+		listeAvisAnnonceExcepted.add(facadeServiceAvisRemote.rechercheAvisAnnonce(avisAnnonce1));
+		listeAvisAnnonceExcepted.add(facadeServiceAvisRemote.rechercheAvisAnnonce(avisAnnonce2));
+		listeAvisAnnonceExcepted.add(facadeServiceAvisRemote.rechercheAvisAnnonce(avisAnnonce3));
+		listeAvisAnnonceExcepted.add(facadeServiceAvisRemote.rechercheAvisAnnonce(avisAnnonce4));
 		
 		ListeAvisAnnonce listeAvisAnnonceDao = facadeServiceAvisRemote.rechercheListeAvisAnnonce(item);
 		
-		//TODO vrais test de contenu pour contenu
-		assertEquals(listeAvisAnnonceTest, listeAvisAnnonceDao);
+		Iterator<AvisAnnonce> iteratorDao = listeAvisAnnonceDao.iterator();
+		Iterator<AvisAnnonce> iteratorExcepted = listeAvisAnnonceExcepted.iterator();
 		
+		while(iteratorDao.hasNext() && iteratorExcepted.hasNext()){
+			
+			AvisAnnonce avisAnnonce = iteratorDao.next();
+			AvisAnnonce avisAnnonceExcepted = iteratorExcepted.next();
+			
+			assertEquals(avisAnnonce.getItem().getIdItem(), avisAnnonceExcepted.getItem().getIdItem());
+			assertEquals(avisAnnonce.getUtilisateur().getIdUtilisateur(), avisAnnonceExcepted.getUtilisateur().getIdUtilisateur());
+			assertEquals(avisAnnonce.getCommentaire().getContenu(), avisAnnonceExcepted.getCommentaire().getContenu());
+			
+			Collection<Note> notesExcepted = avisAnnonceExcepted.getNotes();
+			Collection<Note> notes = avisAnnonceExcepted.getNotes();
+			
+			Iterator<Note> notesIterator = notes.iterator();
+			Iterator<Note> notesExceptedIterator = notesExcepted.iterator();
+			
+			while (notesExceptedIterator.hasNext() && notesIterator.hasNext()) {
+				
+				Note noteExcepted = (Note) notesExceptedIterator.next();
+				Note note = (Note) notesIterator.next();
+				
+				assertEquals(note.getIdNote(),noteExcepted.getIdNote());
+				assertEquals(note.getValeur(),noteExcepted.getValeur());
+				
+			}
+		}
 	}
 	
 	/**
@@ -611,7 +613,7 @@ public class JUnitDaoAvis {
 	public void testFindListAvisAgence() {
 		
 		Item item = new Item();
-		item.setIdItem("2");
+		item.setIdItem("21");
 		
 		AvisAgence avisAgence1 = createAvisAgence("21", "21");
 		AvisAgence avisAgence2 = createAvisAgence("22", "22");
@@ -633,59 +635,126 @@ public class JUnitDaoAvis {
 		facadeServiceAvisRemote.modifierAvisAgence(avisAgence3);
 		facadeServiceAvisRemote.modifierAvisAgence(avisAgence4);
 		
-		ListeAvisAgence listeAvisAgenceTest = new ListeAvisAgence();
+		ListeAvisAgence listeAvisAgenceExcepted = new ListeAvisAgence();
 		
-		listeAvisAgenceTest.add(avisAgence1);
-		listeAvisAgenceTest.add(avisAgence2);
-		listeAvisAgenceTest.add(avisAgence3);
-		listeAvisAgenceTest.add(avisAgence4);
+		listeAvisAgenceExcepted.add(facadeServiceAvisRemote.rechercheAvisAgence(avisAgence1));
+		listeAvisAgenceExcepted.add(facadeServiceAvisRemote.rechercheAvisAgence(avisAgence2));
+		listeAvisAgenceExcepted.add(facadeServiceAvisRemote.rechercheAvisAgence(avisAgence3));
+		listeAvisAgenceExcepted.add(facadeServiceAvisRemote.rechercheAvisAgence(avisAgence4));
 		
 		ListeAvisAgence listeAvisAgenceDao = facadeServiceAvisRemote.rechercheListeAvisAgence(item);
 		
-		//TODO vrais test de contenu pour contenu
-		assertEquals(listeAvisAgenceTest, listeAvisAgenceDao);
+		Iterator<AvisAgence> iteratorDao = listeAvisAgenceDao.iterator();
+		Iterator<AvisAgence> iteratorExcepted = listeAvisAgenceExcepted.iterator();
+		
+		while(iteratorDao.hasNext() && iteratorExcepted.hasNext()){
+			
+			AvisAgence avisAgence = iteratorDao.next();
+			AvisAgence avisAgenceExcepted = iteratorExcepted.next();
+			
+			assertEquals(avisAgence.getItem().getIdItem(), avisAgenceExcepted.getItem().getIdItem());
+			assertEquals(avisAgence.getUtilisateur().getIdUtilisateur(), avisAgenceExcepted.getUtilisateur().getIdUtilisateur());
+			assertEquals(avisAgence.getCommentaire().getContenu(), avisAgenceExcepted.getCommentaire().getContenu());
+			
+			Collection<Note> notesExcepted = avisAgenceExcepted.getNotes();
+			Collection<Note> notes = avisAgenceExcepted.getNotes();
+			
+			Iterator<Note> notesIterator = notes.iterator();
+			Iterator<Note> notesExceptedIterator = notesExcepted.iterator();
+			
+			while (notesExceptedIterator.hasNext() && notesIterator.hasNext()) {
+				
+				Note noteExcepted = (Note) notesExceptedIterator.next();
+				Note note = (Note) notesIterator.next();
+				
+				assertEquals(note.getIdNote(),noteExcepted.getIdNote());
+				assertEquals(note.getValeur(),noteExcepted.getValeur());
+				
+			}
+		}
 		
 	}
 	
-//	/**
-//	 * Test d'insertion d'un {@link AvisAnnonce} en doublon BDD.
-//	 */
-//	@Test
-//	public void testInsertDoublonAvisAnnonce() {
-//		
-//		AvisAnnonce avisAnnonce1 = createAvisAnnonce("17","17");
-//		AvisAnnonce avisAnnonce2 = createAvisAnnonce("17","17");
-//		
-//		boolean retour1 = facadeServiceAvisRemote.creerAvisAnnonce(avisAnnonce1);
-//		boolean retour2 = facadeServiceAvisRemote.creerAvisAnnonce(avisAnnonce2);
-//		
-//		assertTrue(retour1);
-//		assertFalse(retour2);
-//		
-//	}	
-//	
-//	
-//	
-//	
 	/**
-	 * TODO A decouper en X methode
-	 * Test d'insertion d'un {@link AvisAnnonce} avec une propriété null en BDD.
+	 * Test d'insertion d'un {@link AvisAnnonce} en doublon BDD.
 	 */
 	@Test
-	public void testInsertNullAvisAnnonce() {
+	public void testInsertDoublonAvisAnnonce() {
+		
+		AvisAnnonce avisAnnonce1 = createAvisAnnonce("17","17");
+		AvisAnnonce avisAnnonce2 = createAvisAnnonce("17","17");
+		
+		boolean retour1 = facadeServiceAvisRemote.creerAvisAnnonce(avisAnnonce1);
+		boolean retour2 = facadeServiceAvisRemote.creerAvisAnnonce(avisAnnonce2);
+		
+		assertTrue(retour1);
+		assertTrue(!retour2);
+		
+	}	
+
+	/**
+	 *  Test d'insertion d'un {@link AvisAnnonce} avec un Commentaire null en BDD.
+	 */
+	@Test
+	public void testInsertCommentaireNullAvisAnnonce() {
 		
 		AvisAnnonce avisAnnonce = createAvisAnnonce("25","25");
 		
 		avisAnnonce.setCommentaire(null);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisAnnonce(avisAnnonce);
+		
+		assertTrue(!retour);
+		
+	}
+	
+	/**
+	 *  Test d'insertion d'un {@link AvisAnnonce} avec une Notes null en BDD.
+	 */
+	@Test
+	public void testInsertNotesNullAvisAnnonce() {
+		
+		AvisAnnonce avisAnnonce = createAvisAnnonce("26","26");
+
 		avisAnnonce.setNotes(null);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisAnnonce(avisAnnonce);
+		
+		assertTrue(!retour);
+		
+	}
+	
+	/**
+	 *  Test d'insertion d'un {@link AvisAnnonce} avec une Notes null en BDD.
+	 */
+	@Test
+	public void testInsertContenuCommentaireNullAvisAnnonce() {
+		
+		AvisAnnonce avisAnnonce = createAvisAnnonce("27","27");
+
 		avisAnnonce.getCommentaire().setContenu(null);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisAnnonce(avisAnnonce);
+		
+		assertTrue(!retour);
+		
+	}
+	
+	/**
+	 *  Test d'insertion d'un {@link AvisAnnonce} avec une Note null en BDD.
+	 */
+	@Test
+	public void testInsertNoteNullAvisAnnonce() {
+		
+		AvisAnnonce avisAnnonce = createAvisAnnonce("28","28");
 		
 		Collection<Note> notes = new ArrayList<Note>();
 		
 		for (Note note : avisAnnonce.getNotes()) {
+			
 			note = null;
-			note.setValeur(0);
 			notes.add(note);  
+			
 		}
 		
 		avisAnnonce.setNotes(notes);
@@ -696,22 +765,289 @@ public class JUnitDaoAvis {
 		
 	}
 	
+	/**
+	 *  Test d'insertion d'un {@link AvisAnnonce} avec une Notes null en BDD.
+	 */
+	@Test
+	public void testInsertValeurNoteNullAvisAnnonce() {
+		
+		AvisAnnonce avisAnnonce = createAvisAnnonce("29","29");
+		
+		Collection<Note> notes = new ArrayList<Note>();
+		
+		for (Note note : avisAnnonce.getNotes()) {
+
+			note.setValeur(0);
+			notes.add(note);  
+			
+		}
+		
+		avisAnnonce.setNotes(notes);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisAnnonce(avisAnnonce);
+		
+		assertTrue(!retour);
+		
+	}
+	
+	/**
+	 *  Test d'insertion d'un {@link AvisAgence} avec un Commentaire null en BDD.
+	 */
+	@Test
+	public void testInsertCommentaireNullAvisAgence() {
+		
+		AvisAgence avisAgence = createAvisAgence("25","25");
+		
+		avisAgence.setCommentaire(null);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisAgence(avisAgence);
+		
+		assertTrue(!retour);
+		
+	}
+
+	/**
+	 *  Test d'insertion d'un {@link AvisAgence} avec une Notes null en BDD.
+	 */
+	@Test
+	public void testInsertNotesNullAvisAgence() {
+		
+		AvisAgence avisAgence = createAvisAgence("26","26");
+	
+		avisAgence.setNotes(null);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisAgence(avisAgence);
+		
+		assertTrue(!retour);
+		
+	}
+
+	/**
+	 *  Test d'insertion d'un {@link AvisAgence} avec une Notes null en BDD.
+	 */
+	@Test
+	public void testInsertContenuCommentaireNullAvisAgence() {
+		
+		AvisAgence avisAgence = createAvisAgence("27","27");
+	
+		avisAgence.getCommentaire().setContenu(null);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisAgence(avisAgence);
+		
+		assertTrue(!retour);
+		
+	}
+
+	/**
+	 *  Test d'insertion d'un {@link AvisAgence} avec une Note null en BDD.
+	 */
+	@Test
+	public void testInsertNoteNullAvisAgence() {
+		
+		AvisAgence avisAgence = createAvisAgence("28","28");
+		
+		Collection<Note> notes = new ArrayList<Note>();
+		
+		for (Note note : avisAgence.getNotes()) {
+			
+			note = null;
+			notes.add(note);  
+			
+		}
+		
+		avisAgence.setNotes(notes);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisAgence(avisAgence);
+		
+		assertTrue(!retour);
+		
+	}
+
+	/**
+	 *  Test d'insertion d'un {@link AvisAgence} avec une Notes null en BDD.
+	 */
+	@Test
+	public void testInsertValeurNoteNullAvisAgence() {
+		
+		AvisAgence avisAgence = createAvisAgence("29","29");
+		
+		Collection<Note> notes = new ArrayList<Note>();
+		
+		for (Note note : avisAgence.getNotes()) {
+	
+			note.setValeur(0);
+			notes.add(note);  
+			
+		}
+		
+		avisAgence.setNotes(notes);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisAgence(avisAgence);
+		
+		assertTrue(!retour);
+		
+	}
+
+	/**
+	 *  Test d'insertion d'un {@link AvisGlobalAnnonce} avec une Notes null en BDD.
+	 */
+	@Test
+	public void testInsertNotesNullAvisGlobalAnnonce() {
+		
+		AvisGlobalAnnonce avisGlobalAnnonce = createAvisGlobalAnnonce("26","26");
+	
+		avisGlobalAnnonce.setNotes(null);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisGlobalAnnonce(avisGlobalAnnonce);
+		
+		assertTrue(!retour);
+		
+	}
+
+	/**
+	 *  Test d'insertion d'un {@link AvisGlobalAnnonce} avec une Note null en BDD.
+	 */
+	@Test
+	public void testInsertNoteNullAvisGlobalAnnonce() {
+		
+		AvisGlobalAnnonce avisGlobalAnnonce = createAvisGlobalAnnonce("28","28");
+		
+		Collection<Note> notes = new ArrayList<Note>();
+		
+		for (Note note : avisGlobalAnnonce.getNotes()) {
+			
+			note = null;
+			notes.add(note);  
+			
+		}
+		
+		avisGlobalAnnonce.setNotes(notes);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisGlobalAnnonce(avisGlobalAnnonce);
+		
+		assertTrue(!retour);
+		
+	}
+
+	/**
+	 *  Test d'insertion d'un {@link AvisGlobalAnnonce} avec une Notes null en BDD.
+	 */
+	@Test
+	public void testInsertValeurNoteNullAvisGlobalAnnonce() {
+		
+		AvisGlobalAnnonce avisGlobalAnnonce = createAvisGlobalAnnonce("29","29");
+		
+		Collection<Note> notes = new ArrayList<Note>();
+		
+		for (Note note : avisGlobalAnnonce.getNotes()) {
+	
+			note.setValeur(0);
+			notes.add(note);  
+			
+		}
+		
+		avisGlobalAnnonce.setNotes(notes);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisGlobalAnnonce(avisGlobalAnnonce);
+		
+		assertTrue(!retour);
+		
+	}
+	
+	/**
+	 *  Test d'insertion d'un {@link AvisGlobalAgence} avec une Notes null en BDD.
+	 */
+	@Test
+	public void testInsertNotesNullAvisGlobalAgence() {
+		
+		AvisGlobalAgence avisGlobalAgence = createAvisGlobalAgence("26","26");
+	
+		avisGlobalAgence.setNotes(null);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisGlobalAgence(avisGlobalAgence);
+		
+		assertTrue(!retour);
+		
+	}
+
+	/**
+	 *  Test d'insertion d'un {@link AvisGlobalAgence} avec une Note null en BDD.
+	 */
+	@Test
+	public void testInsertNoteNullAvisGlobalAgence() {
+		
+		AvisGlobalAgence avisGlobalAgence = createAvisGlobalAgence("28","28");
+		
+		Collection<Note> notes = new ArrayList<Note>();
+		
+		for (Note note : avisGlobalAgence.getNotes()) {
+			
+			note = null;
+			notes.add(note);  
+			
+		}
+		
+		avisGlobalAgence.setNotes(notes);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisGlobalAgence(avisGlobalAgence);
+		
+		assertTrue(!retour);
+		
+	}
+
+	/**
+	 *  Test d'insertion d'un {@link AvisGlobalAgence} avec une Notes null en BDD.
+	 */
+	@Test
+	public void testInsertValeurNoteNullAvisGlobalAgence() {
+		
+		AvisGlobalAgence avisGlobalAgence = createAvisGlobalAgence("29","29");
+		
+		Collection<Note> notes = new ArrayList<Note>();
+		
+		for (Note note : avisGlobalAgence.getNotes()) {
+	
+			note.setValeur(0);
+			notes.add(note);  
+			
+		}
+		
+		avisGlobalAgence.setNotes(notes);
+		
+		boolean retour = facadeServiceAvisRemote.creerAvisGlobalAgence(avisGlobalAgence);
+		
+		assertTrue(!retour);
+		
+	}
+	
 //	/**
-//	 * Test d'insertion d'un {@link AvisAnnonce} avec une propriété null en BDD.
+//	 *  Test d'insertion d'un {@link AvisAnnonce} avec une Notes null en BDD.
 //	 */
 //	@Test
-//	public void testInsertDoublonAvisAnnonce() {
+//	public void testInsertNullAvisAnnonce() {
 //		
-//		AvisAnnonce avisAnnonce = createAvisAnnonce("1","1");
+//		AvisAnnonce avisAnnonce = createAvisAnnonce("25","25");
 //		
 //		avisAnnonce.setCommentaire(null);
 //		avisAnnonce.setNotes(null);
+//		avisAnnonce.getCommentaire().setContenu(null);
+//		
+//		Collection<Note> notes = new ArrayList<Note>();
+//		
+//		for (Note note : avisAnnonce.getNotes()) {
+//			note = null;
+//			note.setValeur(0);
+//			notes.add(note);  
+//		}
+//		
+//		avisAnnonce.setNotes(notes);
 //		
 //		boolean retour = facadeServiceAvisRemote.creerAvisAnnonce(avisAnnonce);
 //		
-//		assertTrue(retour);
+//		assertTrue(!retour);
 //		
 //	}
+
 
 	/**
 	 * Creer un {@link AvisAnnonce} avec tout son contenu.
@@ -947,5 +1283,7 @@ public class JUnitDaoAvis {
 		
 		return avisGlobal;
 	}
+
+
 	
 }

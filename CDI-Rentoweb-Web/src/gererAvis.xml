@@ -3,19 +3,60 @@
 
 <struts>
 
-	<package name="gestion-avis" namespace="/gestion-avis" extends="struts-default">
-	
-		<action name="creation-avis-annonce">
-			<result>/Vue/gerer_avis/avis_annonce/creation-avis-annonce.jsp</result>
+	<package name="ajax" namespace="/ajax" extends="json-default">
+		
+		<action name="ajax" method="ajax" class="rtw.beanAction.gererAvis.navigation.NavigationAvisAnnonce">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="json">
+			  	<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result name="success" type="json"></result>
+			<allowed-methods>ajax</allowed-methods>
 		</action>
 		
-		<action name="gestion-avis-annonce-*" method="{1}" class="rtw.beanAction.gererAvis.ActionAvisAnnonce">
+	</package>
+
+	<package name="gestion-avis" namespace="/gestion-avis" extends="struts-default">
+			
+		<action name="*-avis-annonce" method="{1}" class="rtw.beanAction.gererAvis.navigation.NavigationAvisAnnonce">
+			<result name="success">/Vue/gerer_avis/avis_annonce/{1}-avis-annonce.jsp</result>
+			<result name="modification">/Vue/gerer_avis/avis_annonce/{1}-avis-annonce.jsp</result>
+			<result name="error">/Vue/gerer_avis/error.jsp</result>
+			<allowed-methods>creation,modification,suppression,affichage,listage</allowed-methods>
+		</action>
+		
+		<action name="gestion-avis-annonce-*" method="{1}" class="rtw.beanAction.gererAvis.action.ActionAvisAnnonce">
+			<interceptor-ref name="defaultStack" >
+	 			<param name="validation.excludeMethods">modifier, supprimer,afficher,lister</param>
+			</interceptor-ref>
 			<result name="success">/Vue/gerer_avis/avis_annonce/creation-avis-annonce.jsp</result>
+			<result name="input">/Vue/gerer_avis/avis_annonce/creation-avis-annonce.jsp</result>
+			<result name="error">/Vue/gerer_avis/error.jsp</result>
 			<allowed-methods>creer, modifier, supprimer,afficher,lister</allowed-methods>
+		</action>
+		
+		<action name="blue-delete-icon">
+			<result>/IMG/blue-delete-icon-24x24.png</result>
+		</action>
+		
+		<action name="blue-edit-icon">
+			<result>/IMG/blue-edit-icon-24x24.png</result>
+		</action>
+		
+		<action name="grey-information-icon">
+			<result>/IMG/grey-information-icon-24x24.png</result>
+		</action>
+		
+		<action name="menu-ccs">
+			<result>/CSS/menu.css</result>
 		</action>
 		
 		<action name="creation-avis-css">
 			<result>/CSS/gerer_avis/avis_annonce/avis_annonce.css</result>
+		</action>
+		
+		<action name="affichage-avis-css">
+			<result>/CSS/gerer_avis/avis_annonce/affichage_avis_annonce.css</result>
 		</action>
 		
 		<action name="star-rating-avis-css">

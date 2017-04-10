@@ -1,4 +1,4 @@
-package rtw.beanAction.gererAvis;
+package rtw.beanAction.gererAvis.action;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -8,6 +8,7 @@ import rtw.clientServer.gererAvis.FacadeServiceAvisRemote;
 import rtw.entity.gererAvis.avis.avisAnnonce.entity.AvisAnnonce;
 import rtw.entity.gererAvis.entityTest.Item;
 import rtw.entity.gererAvis.entityTest.Utilisateur;
+import rtw.entity.gererAvis.note.entity.Note;
 import rtw.entity.gererAvis.note.entity.NoteBruitExterieur;
 import rtw.entity.gererAvis.note.entity.NoteBruitInterieur;
 import rtw.entity.gererAvis.note.entity.NoteEtatGeneral;
@@ -16,8 +17,9 @@ import rtw.entity.gererAvis.note.entity.NoteIsolationChaud;
 import rtw.entity.gererAvis.note.entity.NoteIsolationFroid;
 import rtw.entity.gererAvis.note.entity.NoteLuminosite;
 import rtw.entity.gererAvis.note.entity.NoteRelationBailleur;
+import rtw.util.gererAvis.Param;
 
-public class ActionAvisAnnonce extends ApplicationSupport {
+public class ActionAvisAgence extends ActionAvis {
 
 	/**
 	 * 
@@ -35,12 +37,15 @@ public class ActionAvisAnnonce extends ApplicationSupport {
 	private String etat_gene;
 	private String relation_bailleur;
 	private String commentaire;
+	private String valider;
 	
 	private void init() {
 
 		try {
+			
 			context = new InitialContext();
-			facadeServiceAvisRemote = (FacadeServiceAvisRemote) context.lookup("ejb:/testDaoServeur/FacadeServiceAvis!rtw.clientServeur.gererAvis.FacadeServiceAvisRemote");
+			facadeServiceAvisRemote = (FacadeServiceAvisRemote) context.lookup(Param.FACADE_EJB);
+		
 		} catch (NamingException e) {
 			
 			e.printStackTrace();
@@ -132,6 +137,50 @@ public class ActionAvisAnnonce extends ApplicationSupport {
 		System.out.println("Methode lister");
 		return SUCCESS;
 
+	}
+	
+	public String modification(){
+		
+		System.out.println("Methode modification");
+		
+		Utilisateur utilisateur = new Utilisateur();
+		Item item = new Item();
+		
+		utilisateur.setIdUtilisateur("1");
+		item.setIdItem("1");
+		
+		AvisAnnonce avisAnnonce = facadeServiceAvisRemote.rechercheAvisAnnonceById(utilisateur, item);
+		
+		if(avisAnnonce != null){
+		
+			setCommentaire(avisAnnonce.getCommentaire().getContenu());
+			
+			for (Note note : avisAnnonce.getNotes()) {
+				
+				if(note instanceof NoteBruitExterieur){
+					setBruit_ext(String.valueOf(note.getValeur()));
+				}else if(note instanceof NoteBruitInterieur){
+					setBruit_int(String.valueOf(note.getValeur()));
+				}else if(note instanceof NoteIsolationChaud){
+					setIsole_chaud(String.valueOf(note.getValeur()));
+				}else if(note instanceof NoteIsolationFroid){
+					setIsole_froid(String.valueOf(note.getValeur()));
+				}else if(note instanceof NoteHumidite){
+					setHumidite(String.valueOf(note.getValeur()));
+				}else if(note instanceof NoteLuminosite){
+					setLuminosite(String.valueOf(note.getValeur()));
+				}else if(note instanceof NoteEtatGeneral){
+					setEtat_gene(String.valueOf(note.getValeur()));
+				}else if(note instanceof NoteRelationBailleur){
+					setRelation_bailleur(String.valueOf(note.getValeur()));
+				}
+			}
+			
+			return SUCCESS;
+			
+		}else{
+			return ERROR;
+		}
 	}
 
 
@@ -276,6 +325,14 @@ public class ActionAvisAnnonce extends ApplicationSupport {
 	 */
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
+	}
+
+	public String getValider() {
+		return valider;
+	}
+
+	public void setValider(String valider) {
+		this.valider = valider;
 	}
 
 }
