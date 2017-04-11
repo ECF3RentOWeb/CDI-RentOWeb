@@ -12,6 +12,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JUnit"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/GSon"/>
-	<classpathentry kind="var" path="GERER_AVIS"/>
+	<classpathentry kind="lib" path="C:/httpd/Jar/GererAvisV1.45.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
